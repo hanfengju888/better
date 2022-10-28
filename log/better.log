@@ -1,0 +1,31 @@
+[2022-10-27 08:43:09.527601] INFO: hello world 专用: 有人访问了
+[2022-10-27 08:49:54.391881] INFO: hello world 专用: 有人访问了
+[2022-10-27 08:49:56.631736] INFO: hello world 专用: 有人访问了
+[2022-10-27 08:49:57.348350] INFO: hello world 专用: 有人访问了
+[2022-10-27 16:58:14.687467] INFO: hello world 专用: 有人访问了
+[2022-10-27 17:19:41.007958] INFO: hello world 专用: 有人访问了
+[2022-10-27 17:20:51.709261] INFO: hello world 专用: 有人访问了
+[2022-10-28 14:19:55.890067] ERROR: userDao: 用户注册失败:(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.name AS user_name, user.password AS user_password, user.email AS user_email, user.`role` AS user_role, user.created_at AS user_created_at, user.updated_at AS user_updated_at, user.deleted_at AS user_deleted_at, user.last_login_at AS user_last_login_at 
+FROM user 
+WHERE user.username = %s OR user.email = %s OR user.name = %s OR user.password = %s]
+[parameters: ('hanfengju', '17600007601@163.com', '韩凤举', 'hanfengju1992')]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-10-28 14:21:07.786465] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
+[2022-10-28 14:21:14.554682] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
+[2022-10-28 14:21:27.037285] ERROR: userDao: 用户注册失败:(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.name AS user_name, user.password AS user_password, user.email AS user_email, user.`role` AS user_role, user.created_at AS user_created_at, user.updated_at AS user_updated_at, user.deleted_at AS user_deleted_at, user.last_login_at AS user_last_login_at 
+FROM user 
+WHERE user.username = %s OR user.email = %s OR user.name = %s OR user.password = %s]
+[parameters: ('hanfengju', '17600007601@163.com', '韩凤举', 'hanfengju1992')]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-10-28 14:21:38.705439] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
+[2022-10-28 14:23:24.894599] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
+[2022-10-28 14:24:04.745965] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
+[2022-10-28 14:24:55.813952] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
+[2022-10-28 14:25:18.536397] ERROR: userDao: 用户注册失败:Unicode-objects must be encoded before hashing
+[2022-10-28 14:27:23.092686] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
+[2022-10-28 14:45:30.145620] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
+[2022-10-28 14:53:00.409976] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
+[2022-10-28 14:57:16.107894] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
+[2022-10-28 15:05:21.586074] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
