@@ -29,3 +29,4 @@ WHERE user.username = %s OR user.email = %s OR user.name = %s OR user.password =
 [2022-10-28 14:53:00.409976] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
 [2022-10-28 14:57:16.107894] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
 [2022-10-28 15:05:21.586074] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
+[2022-10-28 16:23:10.514078] ERROR: userDao: 用户hanfengju登录失败:filter() got an unexpected keyword argument 'username'
