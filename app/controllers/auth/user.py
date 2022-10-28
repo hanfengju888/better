@@ -4,7 +4,7 @@ from app.dao.auth.UserDao import UserDao
 
 auth = Blueprint("auth",__name__,url_prefix='/auth')
 
-#这里以auth.route注册的函数都会自带/auth,所以url是/auth/register11
+#这里以auth.route注册的函数都会自带/auth,所以url是/auth/register12321321312
 @auth.route("/register",methods=["POST"])
 def register():
     #获取request请求数据
