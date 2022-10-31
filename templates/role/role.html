@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block mainbody %}
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        角色管理
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">角色中心</a></li>
+        <li><a href="#">角色管理</a></li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="tpl-block">
+            <div class="am-g">
+                <div class="am-u-sm-12 am-u-md-6">
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <button type="button" onclick="window.location.href='/role/to_add'" class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span> 新增</button>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                                <tr>
+                                    <th class="table-title">角色编号</th>
+                                    <th class="table-type">角色名称</th>
+                                    <th class="table-set">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for role in roles %}
+                                <tr>
+                                    <td>{{role.role_code}}</td>
+                                    <td>{{role.role_name}}</td>
+                                    <td>
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span><a href="/role/to_edit?id={{role.id}}">编辑</a></button>
+
+
+                                                <button id="aa" onclick="del('{{role.id}}')"
+                                                  type="button"
+                                                  class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                  ><span class="am-icon-trash-o" ></span>
+                                                  <a href="#">删除</a>
+                                                </button>
+
+                                                    <div class="am-modal am-modal-confirm" tabindex="-1" id="s">
+                                                      <div class="am-modal-dialog">
+                                                        <div class="am-modal-hd">删除用户</div>
+                                                        <div class="am-modal-bd">
+                                                          你，确定要删除这条记录吗？
+                                                        </div>
+                                                        <div class="am-modal-footer">
+                                                          <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                                                          <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                                                      
+                                </tr>
+                                {% endfor %}
+                                
+                            </tbody>
+                        </table>
+
+                        <hr>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="tpl-alert"></div>
+    </div>
+</div>
+
+<script>
+    function del(id){
+        $('#s').modal({
+            onConfirm: function(options) {
+              window.location.href = "/role/delete?id="+id
+            },
+            onCancel: function() {
+            }
+          });
+    }
+
+</script>
+
+
+{% endblock %}

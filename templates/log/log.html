@@ -1,0 +1,116 @@
+{% extends "static/base.html" %}
+{% load static %}
+{% block mainbody %}
+
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        IP管理
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">设备中心</a></li>
+        <li><a href="#">IP管理</a></li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="tpl-block">
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                                <tr>
+                                    <th class="table-title">操作用户</th>
+                                    <th class="table-type">操作日志</th>
+                                    <th class="table-type">操作时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for device in data %}
+                                    <tr>
+                                        <td>{{device.username}}</td>
+                                        <td>{{device.user_log}}</td>
+                                        <td>{{device.create_time}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="am-cf">
+
+                            <div class="am-fr">
+                                  <ul data-am-widget="pagination" class="am-pagination tpl-pagination">
+
+								      <li class="am-pagination-prev">
+								      	{% if page_info != 1 %}
+								        	<a href="/log/page?page={{page_info|add:-1}}">上一页</a>
+								      	{% else %}
+							        		<a disabled="disabled">上一页</a>
+								      	{% endif %}
+								      </li>
+
+
+								        <li class="am-pagination-select">
+								          <select id="page_id" onchange="page(this)">
+								          	{% for i in all_page_list %}
+		                                        {% if page_info == i %}
+		                                            <option value="{{i}}" selected>{{i}} / {{all_num}}</option>
+		                                        {% else %}
+								          			<option value="{{i}}">{{i}} / {{all_num}}</option>
+		                                        {% endif %}
+		                                    {% endfor %}
+								              
+								          </select>
+								        </li>
+
+
+								      <li class="am-pagination-next ">
+									      	{% if page_info != all_num %}
+									        	<a href="/log/page?page={{page_info|add:1}}">下一页</a>
+									      	{% else %}
+								        		<a disabled="disabled">下一页</a>
+									      	{% endif %}
+								      </li>
+
+								  </ul>
+								  <script>
+								  	function page(obj){
+								  		var v = $(obj).val()
+								  		window.location.href="/log/page?page=" + v
+								  	}
+								  </script>
+
+                            </div>
+                        </div>
+                        <hr>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="tpl-alert"></div>
+    </div>
+
+</div>
+
+<!-- </div> -->
+
+<script>
+    function search(si){
+
+        if( si == 'ip_no'){
+            ip_no = $('#ip_no').val()
+            window.location.href = "/ip_table/search?ip_no=" + ip_no
+        }
+    }
+
+    function del(id){
+        $('#s').modal({
+            onConfirm: function(options) {
+              window.location.href = "/ip_table/delete?id="+id
+            },
+            onCancel: function() {
+            }
+          });
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block mainbody %}
+
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        任务中心
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home"></a></li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="tpl-block">
+            <div class="am-g">
+                <div class="am-u-sm-12 am-u-md-2">
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                                <tr>
+                                    <th class="table-type">序号</th>
+                                    <th class="table-type">任务名称</th>
+                                    <th class="table-title">用例数量</th>
+                                    <th class="table-date am-hide-sm-only">开始时间</th>
+<!--                                    <th class="table-date am-hide-sm-only">结束时间</th>-->
+                                    <th class="table-type">状态</th>
+                                    <th class="table-type">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                {% for job in jobs %}
+                                    <tr>
+                                    <td>{{loop.index}}</td>
+                                    <td>{{job.job_name}}</a></td>
+                                    <td>{{job.case_count}}</td>
+                                    <td>{{job.create_time}}</td>
+<!--                                    <td>{{job.end_time}}</td>-->
+                                    {% if job.state == '1' %}
+                                        <td>运行中</td>
+                                    {% elif job.state == '2' %}
+                                        <td>运行完成</td>
+                                    {% else %}
+                                        <td>运行失败</td>
+                                    {% endif %}
+
+                                    <td>
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-eye"></span><a href="/subjob/list?job_id={{job.id}}"> 查看</a></button>
+<!--                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span><a href="/job/to_edit?id={{job.id}}"> 查看</a></button>-->
+                                            </div>
+                                        </div>
+                                    </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <hr>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="tpl-alert"></div>
+    </div>
+
+</div>
+
+
+<script>
+    function del(id){
+        $('#s').modal({
+            onConfirm: function(options) {
+              window.location.href = "/job/delete?id="+id
+            },
+            onCancel: function() {
+            }
+          });
+    }
+
+    //部分选择
+    function multi_start(){
+        var obj = document.getElementsByName("wait_start_id")
+        var value_list = []
+
+        for(var i in obj){
+            if(obj[i].checked){
+                value_list.push(obj[i].value) ;
+            }
+        }
+        if(value_list.length == 0){
+            alert("至少选择一个用例！")
+        }else{
+            //进入到后台
+        }
+    }
+
+    //批量选择
+    function select_all(){
+        var select_btn = document.getElementsByName("select_all_btn")
+        var obj = document.getElementsByName("wait_start_id")
+        if(select_btn[0].checked){
+            for(var i in obj){
+                obj[i].checked = true;
+            }
+        }else{
+            for(var i in obj){
+                obj[i].checked = false;
+            }
+        }
+    }
+
+
+</script>
+
+
+
+{% endblock %}

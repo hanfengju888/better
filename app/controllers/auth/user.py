@@ -3,6 +3,7 @@ from flask import jsonify
 from app.dao.auth.UserDao import UserDao
 from handler.factory import ResponseFactory
 from app.middleware.Jwt import UserToken
+from flask import render_template
 
 auth = Blueprint("auth",__name__,url_prefix='/auth')
 
@@ -28,8 +29,18 @@ def register():
 
 @auth.route("/login",methods=["POST"])
 def login():
+    #标识通过什么登录，0为页面，1为接口
+    flag = 0
+    username, password = "",""
+    #通过接口登录
     data = request.get_json()
-    username,password = data.get("username"),data.get("password")
+    if data is not None:
+        username,password = data.get("username"),data.get("password")
+        flag = 1
+    else:
+        #通过 前端页面登录
+        username,password = request.form["username"],request.form["password"]
+    print(username,password)
     if not username or not password:
         return jsonify(dict(code=101,msg="用户名或密码不能为空"))
     user,err = UserDao.login(username,password)
@@ -41,4 +52,7 @@ def login():
     token = UserToken.get_token(user)
     if err is not None:
         return jsonify(dict(code=110,msg=err))
-    return jsonify(dict(code=0,msg="登录成功",data=dict(token=token,user=user)))
+    if flag == 1:
+        return jsonify(dict(code=0,msg="登录成功",data=dict(token=token,user=user)))
+    else:
+        return render_template("index.html")

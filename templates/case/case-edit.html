@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block mainbody %}
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        用例编辑
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">用例中心</a></li>
+        <li><a href="#">用例管理</a></li>
+        <li class="am-active">修改</li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 用例修改
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tpl-block ">
+
+            <div class="am-g tpl-amazeui-form">
+
+
+                <div class="am-u-sm-12 am-u-md-9">
+                    <form id="edit_form" class="am-form am-form-horizontal" method="POST" action="/case/edit">
+                       <input type="hidden" name="id" value="{{case.id}}">
+                       <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">用例名称</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="user-name" name="case_name" value="{{case.case_name}}" placeholder="用例名称" required>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="case_detail_label" class="am-u-sm-3 am-form-label">用例描述</label>
+                            <div class="am-u-sm-9">
+                                <pre id="case_detail_pre" style="padding: 5px; background-color: #EEE; border: 2px solid #6495ED;" hidden="hidden"></pre>
+<!--                                <input id="case_detail" name="case_detail" value="{{case.case_detail}}" hidden="hidden"/>-->
+                                <textarea class="" name="case_detail" rows="5" id="case_detail" onblur="change()" placeholder="用例描述">{{case.case_detail}}</textarea>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="expect_type_label" class="am-u-sm-3 am-form-label">断言类型</label>
+                            <div class="am-u-sm-9">
+                                <select name="expect_type" data-am-selected="{btnSize: 'sm'}">
+                                    {% if case.expect_type == '0' %}
+                                    <option value="0" selected="selected">数量</option>
+                                    {% else %}
+                                     <option value="0">数量</option>
+                                    {% endif %}
+
+                                    {% if case.expect_type == '1' %}
+                                    <option value="1" selected="selected">范围</option>
+                                    {% else %}
+                                     <option value="1">范围</option>
+                                    {% endif %}
+
+                                    {% if case.expect_type == '2' %}
+                                    <option value="2" selected="selected">MD5加密</option>
+                                    {% else %}
+                                     <option value="2">MD5加密</option>
+                                    {% endif %}
+
+                                    {% if case.expect_type == '3' %}
+                                    <option value="3" selected="selected">源文件</option>
+                                    {% else %}
+                                     <option value="3">源文件</option>
+                                    {% endif %}
+
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="expect_result_label" class="am-u-sm-3 am-form-label">断言结果</label>
+                            <div class="am-u-sm-9">
+                                <textarea class="" name="expect_result" rows="5" id="expect_result_label" placeholder="用例描述">{{case.expect_result}}</textarea>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="user-intro" class="am-u-sm-3 am-form-label">备注</label>
+                            <div class="am-u-sm-9">
+                                <textarea class="" name="remark" rows="5" id="user-intro" placeholder="请输入备注">{{case.remark}}</textarea>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="button" class="am-btn am-btn-primary" onclick="toSumbmit()">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<script type="text/javascript">
+    function change(){
+        var case_detail = $("#case_detail").val()
+        try {
+            json = new JSONFormat(case_detail, 4).toString();
+            $("#case_detail_pre").html(json);
+            $("#case_detail").hide()
+            $("#case_detail_pre").show()
+        }catch(e) {
+        }
+    }
+
+    $(document).ready(function(){
+        var case_detail = $("#case_detail").val()
+
+        case_detail = case_detail.replace(/\s*/g,'')
+        try {
+            json = new JSONFormat(case_detail, 4).toString();
+            $("#case_detail_pre").html(json);
+            $("#case_detail").hide()
+            $("#case_detail_pre").removeAttr("hidden")
+        }catch(e) {
+<!--            alert("json")-->
+        }
+    });
+
+    function toSumbmit(){
+        var case_detail_content = $("#case_detail_pre").text()
+        var case_detail_chuli = case_detail_content.replace(/\s*/g,'')
+        $("#case_detail").val(case_detail_chuli);
+        $("#edit_form").submit();
+    }
+
+
+
+</script>
+</div>
+
+
+{% endblock %}

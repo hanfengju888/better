@@ -30,3 +30,17 @@ WHERE user.username = %s OR user.email = %s OR user.name = %s OR user.password =
 [2022-10-28 14:57:16.107894] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
 [2022-10-28 15:05:21.586074] ERROR: userDao: 用户注册失败:用户名或邮箱已存在
 [2022-10-28 16:23:10.514078] ERROR: userDao: 用户hanfengju登录失败:filter() got an unexpected keyword argument 'username'
+[2022-10-28 18:04:00.918754] INFO: userDao: 有人访问了
+[2022-10-31 07:16:20.349339] INFO: userDao: 有人访问了
+[2022-10-31 07:16:25.450956] INFO: userDao: 有人访问了
+[2022-10-31 07:16:26.225345] INFO: userDao: 有人访问了
+[2022-10-31 07:16:43.901115] INFO: userDao: 有人访问了
+[2022-10-31 07:17:29.205161] INFO: userDao: 有人访问了
+[2022-10-31 07:18:26.766692] INFO: userDao: 有人访问了
+[2022-10-31 07:20:19.209035] INFO: userDao: 有人访问了
+[2022-10-31 07:20:22.203487] INFO: userDao: 有人访问了
+[2022-10-31 07:20:42.945365] INFO: userDao: 有人访问了
+[2022-10-31 07:21:34.407597] INFO: userDao: 有人访问了登录页面
+[2022-10-31 07:24:33.429249] INFO: userDao: 有人访问了登录页面
+[2022-10-31 07:25:55.639755] INFO: userDao: 有人访问了登录页面
+[2022-10-31 07:31:06.025078] INFO: userDao: 有人访问了登录页面

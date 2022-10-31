@@ -1,0 +1,157 @@
+{% extends "static/base.html" %}
+{% load static %}
+{% block mainbody %}
+
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        测试报告
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">测试报告</a></li>
+        <li><a href="#">测试报告</a></li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="tpl-block">
+            <!-- <div class="am-g">
+                <div class="am-u-sm-12 am-u-md-6">
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                            {% if request.session.role == '1' %}
+                            <button type="button" onclick="window.location.href='/ip_table/to_add'" class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span> 新增</button>
+                            {% else %}
+                            <button type="button" disabled="disabled" class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span> 新增</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                 <div class="am-u-sm-12 am-u-md-3">
+                            <div class="am-input-group am-input-group-sm">
+                                <input type="text" id="ip_no" class="am-form-field" placeholder="输入IP地址">
+                                <span class="am-input-group-btn">
+            <button onclick="search('ip_no')" class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search" type="button"></button>
+          </span>
+                    </div>
+                </div>
+            </div> -->
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                                <tr>
+                                    <th class="table-type">操作人</th>
+                                    <th class="table-type">服务名称</th>
+                                    <th class="table-type">报告路径</th>
+                                    <th class="table-type">创建时间</th>
+                                    <!-- <th class="table-type">状态</th> -->
+                                    <th class="table-set">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for report in data %}
+                                <tr>
+                                    <td>{{report.user_name}}</td>
+                                    <td>{{report.service_name}}</td>
+                                    <td>{{report.report_path_zip}}</td>
+                                    <td>{{report.create_time}}</td>
+                                    <!-- <td>{{report.state}}</td> -->
+                                    <td>
+	                                    <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                {% if report.state == '1' %}
+                                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-arrow-down"></span><a href="/api_test/download?path={{report.report_path_zip}}&name={{report.service_name}}">下载报告</a></button>
+                                                    {% if report.service_name == 'uams' or report.service_name == 'eams' or report.service_name == 'uams_p' or report.service_name == 'test' %}
+                                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-eye"></span><a href="/api_test/jmx_view?path={{report.report_path_zip}}" target="_blank">查看报告</a></button>
+                                                	{% endif %}
+                                                {% else %}
+                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-spinner"></span><a href="#">测试中</a></button>
+
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="am-cf">
+
+                            <div class="am-fr">
+                                <ul data-am-widget="pagination" class="am-pagination tpl-pagination">
+
+                                      <li class="am-pagination-prev">
+                                        {% if page_info != 1 %}
+                                            <a href="/api_test/page?parent_id={{parent_id}}&page={{page_info|add:-1}}">上一页</a>
+                                        {% else %}
+                                            <a disabled="disabled">上一页</a>
+                                        {% endif %}
+                                      </li>
+
+
+                                        <li class="am-pagination-select">
+                                          <select id="page_id" onchange="page(this)">
+                                            {% for i in all_page_list %}
+                                                {% if page_info == i %}
+                                                    <option value="{{i}}" selected>{{i}} / {{all_num}}</option>
+                                                {% else %}
+                                                    <option value="{{i}}">{{i}} / {{all_num}}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                              
+                                          </select>
+                                        </li>
+
+
+                                      <li class="am-pagination-next ">
+                                            {% if page_info != all_num %}
+                                                <a href="/api_test/page?parent_id={{parent_id}}&page={{page_info|add:1}}">下一页</a>
+                                            {% else %}
+                                                <a disabled="disabled">下一页</a>
+                                            {% endif %}
+                                      </li>
+
+                                  </ul>
+                                  <script>
+                                    function page(obj){
+                                        var v = $(obj).val()
+                                        window.location.href="/api_test/page?parent_id={{parent_id}}&page=" + v
+                                    }
+                                  </script>
+                                
+                            </div>
+                        </div>
+                        <hr>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="tpl-alert"></div>
+    </div>
+
+</div>
+
+<!-- </div> -->
+
+<script>
+    function search(si){
+
+        if( si == 'ip_no'){
+            ip_no = $('#ip_no').val()
+            window.location.href = "/ip_table/search?ip_no=" + ip_no
+        }
+    }
+
+    function del(id){
+        $('#s').modal({
+            onConfirm: function(options) {
+              window.location.href = "/ip_table/delete?id="+id
+            },
+            onCancel: function() {
+            }
+          });
+    }
+</script>
+
+{% endblock %}

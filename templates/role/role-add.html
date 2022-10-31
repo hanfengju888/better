@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block mainbody %}
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        角色添加
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">角色中心</a></li>
+        <li><a href="#">角色管理</a></li>
+        <li class="am-active">添加</li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 角色添加
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tpl-block ">
+
+            <div class="am-g tpl-amazeui-form">
+
+
+                <div class="am-u-sm-12 am-u-md-9">
+                    <form class="am-form am-form-horizontal" method="POST" action="/role/add">
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">角色编号</label>
+                            <div class="am-u-sm-9">
+                                <input type="number" id="user-name" name="role_code" placeholder="请输入角色编号" required>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-email" class="am-u-sm-3 am-form-label">角色名称</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="role_name" id="user-email" placeholder="请输入角色名称" requeired>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-intro" class="am-u-sm-3 am-form-label">备注</label>
+                            <div class="am-u-sm-9">
+                                <textarea class="" name="remark" rows="5" id="user-intro" placeholder="请输入备注"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

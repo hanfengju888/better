@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block mainbody %}
+
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        父任务 - {{job.job_name}}
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home"></a></li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="tpl-block">
+            <div class="am-g">
+                <div class="am-u-sm-12 am-u-md-2">
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <button type="button" onclick="window.location.href='/job/list?sign=job'" class="am-btn am-btn-default"> 返回</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                                <tr>
+                                    <th class="table-type">序号</th>
+                                    <th class="table-type">模块名称</th>
+                                    <th class="table-type">用例名称</th>
+                                    <th class="table-type">执行状态</th>
+                                    <th class="table-type">执行结果</th>
+                                    <th class="table-type">执行信息</th>
+                                    <th class="table-date am-hide-sm-only">开始时间</th>
+                                    <th class="table-date am-hide-sm-only">结束时间</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                {% for subjob in subjobs %}
+                                    <tr>
+                                    <td>{{loop.index}}</td>
+                                    <td>{{subjob.module_name}}</a></td>
+                                    <td>{{subjob.case_name}}</td>
+
+                                    {% if subjob.perform_status == 0 %}
+                                        <td>执行中</td>
+                                    {% elif subjob.perform_status == 1 %}
+                                        <td>执行失败</td>
+                                    {% else %}
+                                        <td>运行成功</td>
+                                    {% endif %}
+                                    {% if subjob.assert_status == 0 %}
+                                        <td>未断言</td>
+                                    {% elif subjob.assert_status == 1 %}
+                                        <td>断言失败</td>
+                                    {% else %}
+                                        <td>断言成功</td>
+                                    {% endif %}
+                                    <td>{{subjob.message}}</td>
+                                    <td>{{subjob.create_time}}</td>
+                                    <td>{{subjob.end_time}}</td>
+
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <hr>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="tpl-alert"></div>
+    </div>
+</div>
+
+{% endblock %}

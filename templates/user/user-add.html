@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block mainbody %}
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        用户添加
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">用户中心</a></li>
+        <li><a href="#">用户管理</a></li>
+        <li class="am-active">添加</li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 用户添加
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tpl-block ">
+
+            <div class="am-g tpl-amazeui-form">
+                <div class="am-u-sm-12 am-u-md-9">
+                    <form class="am-form am-form-horizontal" method="POST" action="/user/add">
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">姓名</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="user-name" name="username" placeholder="请输入姓名" maxlength="16"  required>
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
+                            <label for="user-email" class="am-u-sm-3 am-form-label">电子邮件</label>
+                            <div class="am-u-sm-9">
+                                <input type="email" name="email" id="user-email" placeholder="请输入电子邮件">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-phone" class="am-u-sm-3 am-form-label">电话</label>
+                            <div class="am-u-sm-9">
+                                <input type="tel" name="phoneNumber" id="user-phone" placeholder="请输入电话号码" pattern="^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-phone" class="am-u-sm-3 am-form-label">部门</label>
+                            <div class="am-u-sm-9">
+                                <select name="department" data-am-selected="{btnSize: 'sm'}">
+                                  <option value="0">请输入</option>
+                                  <option value="1">测试部</option>
+                                  <option value="2">研发部门</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-phone" class="am-u-sm-3 am-form-label">角色</label>
+                            <div class="am-u-sm-9">
+                                <select name="role" data-am-selected="{btnSize: 'sm'}">
+                                  <option value="0">请输入</option>
+                                  {% for role in roles %}
+                                    <option value="{{role.role_code}}">{{role.role_name}}</option>
+                                  {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-QQ" class="am-u-sm-3 am-form-label">登录名</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="account" id="user-QQ" placeholder="请输入登录名" maxlength="16" required>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-weibo" class="am-u-sm-3 am-form-label">密码</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="password" id="user-weibo" placeholder="请输入密码" pattern="\S+" required>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-intro" class="am-u-sm-3 am-form-label">备注</label>
+                            <div class="am-u-sm-9">
+                                <textarea class="" name="remark" rows="5" id="user-intro" placeholder="请输入备注" maxlength="80"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

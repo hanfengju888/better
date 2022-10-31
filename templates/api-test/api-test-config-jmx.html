@@ -1,0 +1,63 @@
+{% extends "static/base.html" %}
+{% block mainbody %}
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        编辑{{service_name}}
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">{{service_name}}</a></li>
+        <li><a href="#">{{service_name}}</a></li>
+        <li class="am-active">修改</li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 编辑{{file_name}}
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tpl-block ">
+
+            <div class="am-g tpl-amazeui-form">
+
+
+                <div class="am-u-sm-12 am-u-md-9">
+                    <form class="am-form am-form-horizontal" method="POST" action="/api_test/save_config">
+                        <input type="hidden" name="file_path" value="{{file_path}}">
+                        <input type="hidden" name="file_name" value="{{file_name}}">
+                        <input type="hidden" name="old_ip" value="{{old_ip}}">
+                        <input type="hidden" name="old_port" value="{{old_port}}">
+                        <input type="hidden" name="service_name" value="{{service_name}}">
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">IP</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="user-name" name="new_ip" value="{{old_ip}}" placeholder="请输入IP">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-email" class="am-u-sm-3 am-form-label">端口号</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="new_port" id="user-email" value="{{old_port}}" placeholder="请输入端口号">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

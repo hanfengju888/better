@@ -1,0 +1,519 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Load Test Results</title>
+<style type="text/css">
+				body {
+					font:normal 68% verdana,arial,helvetica;
+					color:#000000;
+				}
+				table tr td, table tr th {
+					font-size: 68%;
+				}
+				table.details tr th{
+				    color: #ffffff;
+					font-weight: bold;
+					text-align:center;
+					background:#2674a6;
+					white-space: nowrap;
+				}
+				table.details tr td{
+					background:#eeeee0;
+					white-space: nowrap;
+				}
+				h1 {
+					margin: 0px 0px 5px; font: 165% verdana,arial,helvetica
+				}
+				h2 {
+					margin-top: 1em; margin-bottom: 0.5em; font: bold 125% verdana,arial,helvetica
+				}
+				h3 {
+					margin-bottom: 0.5em; font: bold 115% verdana,arial,helvetica
+				}
+				.Failure {
+					font-weight:bold; color:red;
+				}
+				
+	
+				img
+				{
+				  border-width: 0px;
+				}
+				
+				.expand_link
+				{
+				   position=absolute;
+				   right: 0px;
+				   width: 27px;
+				   top: 1px;
+				   height: 27px;
+				}
+				
+				.page_details
+				{
+				   display: none;
+				}
+                                
+                                .page_details_expanded
+                                {
+                                    display: block;
+                                    display/* hide this definition from  IE5/6 */: table-row;
+                                }
+
+
+			</style>
+<script language="JavaScript">
+                           function expand(details_id)
+			   {
+			      
+			      document.getElementById(details_id).className = "page_details_expanded";
+			   }
+			   
+			   function collapse(details_id)
+			   {
+			      
+			      document.getElementById(details_id).className = "page_details";
+			   }
+			   
+			   function change(details_id)
+			   {
+			      if(document.getElementById(details_id+"_image").src.match("expand"))
+			      {
+			         document.getElementById(details_id+"_image").src = "collapse.png";
+			         expand(details_id);
+			      }
+			      else
+			      {
+			         document.getElementById(details_id+"_image").src = "expand.png";
+			         collapse(details_id);
+			      } 
+                           }
+			</script>
+</head>
+<body>
+<h1>Load Test Results</h1>
+<table width="100%">
+<tr>
+<td align="left">Date report: 2020/05/15 17:28</td><td align="right">Designed for use with <a href="http://jmeter.apache.org/">JMeter</a> and <a href="http://ant.apache.org">Ant</a>.</td>
+</tr>
+</table>
+<hr size="1">
+<h2>Summary</h2>
+<table width="95%" cellspacing="2" cellpadding="5" border="0" class="details" align="center">
+<tr valign="top">
+<th># Samples</th><th>Failures</th><th>Success Rate</th><th>Average Time</th><th>Min Time</th><th>Max Time</th>
+</tr>
+<tr valign="top" class="">
+<td align="center">29</td><td align="center">0</td><td align="center">100.00%</td><td align="center">1000 ms</td><td align="center">0 ms</td><td align="center">9744 ms</td>
+</tr>
+</table>
+<hr align="center" width="95%" size="1">
+<h2>Pages</h2>
+<table width="95%" cellspacing="2" cellpadding="5" border="0" class="details" align="center">
+<tr valign="top">
+<th>URL</th><th># Samples</th><th>Failures</th><th>Success Rate</th><th>Average Time</th><th>Min Time</th><th>Max Time</th><th></th>
+</tr>
+<tr valign="top" class="">
+<td>个人注册正常用例断言</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">14 ms</td><td align="right">14 ms</td><td align="right">14 ms</td><td align="center"><a href="javascript:change('page_details_1')"><img alt="expand/collapse" src="expand.png" id="page_details_1_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_1">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "个人注册正常用例断言"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">14</td><td align="right">1291</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>个人用户注册_正常用例</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">594 ms</td><td align="right">594 ms</td><td align="right">594 ms</td><td align="center"><a href="javascript:change('page_details_2')"><img alt="expand/collapse" src="expand.png" id="page_details_2_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_2">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "个人用户注册_正常用例"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">594</td><td align="right">1997</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>法人注册正常用例断言</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">29 ms</td><td align="right">29 ms</td><td align="right">29 ms</td><td align="center"><a href="javascript:change('page_details_3')"><img alt="expand/collapse" src="expand.png" id="page_details_3_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_3">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "法人注册正常用例断言"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">29</td><td align="right">1378</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>法人用户注册_正常用例</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">534 ms</td><td align="right">534 ms</td><td align="right">534 ms</td><td align="center"><a href="javascript:change('page_details_4')"><img alt="expand/collapse" src="expand.png" id="page_details_4_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_4">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "法人用户注册_正常用例"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">534</td><td align="right">2084</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>个人修改正常用例断言</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">19 ms</td><td align="right">19 ms</td><td align="right">19 ms</td><td align="center"><a href="javascript:change('page_details_5')"><img alt="expand/collapse" src="expand.png" id="page_details_5_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_5">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "个人修改正常用例断言"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">19</td><td align="right">1336</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>个人用户修改_正常用例</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">145 ms</td><td align="right">145 ms</td><td align="right">145 ms</td><td align="center"><a href="javascript:change('page_details_6')"><img alt="expand/collapse" src="expand.png" id="page_details_6_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_6">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "个人用户修改_正常用例"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">145</td><td align="right">1998</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>法人修改正常用例断言</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">0 ms</td><td align="right">0 ms</td><td align="right">0 ms</td><td align="center"><a href="javascript:change('page_details_7')"><img alt="expand/collapse" src="expand.png" id="page_details_7_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_7">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "法人修改正常用例断言"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td></td><td align="center">1</td><td align="right">0</td><td align="right">0</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>获取用户信息</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">36 ms</td><td align="right">36 ms</td><td align="right">36 ms</td><td align="center"><a href="javascript:change('page_details_8')"><img alt="expand/collapse" src="expand.png" id="page_details_8_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_8">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "获取用户信息"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">36</td><td align="right">2191</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>正常用例</td><td align="center">2</td><td align="center">0</td><td align="right">100.00%</td><td align="right">0 ms</td><td align="right">0 ms</td><td align="right">0 ms</td><td align="center"><a href="javascript:change('page_details_9')"><img alt="expand/collapse" src="expand.png" id="page_details_9_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_9">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "正常用例"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td></td><td align="center">1</td><td align="right">0</td><td align="right">0</td><td align="center">true</td>
+</tr>
+<tr>
+<td></td><td align="center">2</td><td align="right">0</td><td align="right">0</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>个人用户注册_异常用例</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">0 ms</td><td align="right">0 ms</td><td align="right">0 ms</td><td align="center"><a href="javascript:change('page_details_10')"><img alt="expand/collapse" src="expand.png" id="page_details_10_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_10">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "个人用户注册_异常用例"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td></td><td align="center">1</td><td align="right">0</td><td align="right">0</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>法人用户注册_异常用例</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">0 ms</td><td align="right">0 ms</td><td align="right">0 ms</td><td align="center"><a href="javascript:change('page_details_11')"><img alt="expand/collapse" src="expand.png" id="page_details_11_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_11">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "法人用户注册_异常用例"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td></td><td align="center">1</td><td align="right">0</td><td align="right">0</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>个人用户修改_异常用例</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">0 ms</td><td align="right">0 ms</td><td align="right">0 ms</td><td align="center"><a href="javascript:change('page_details_12')"><img alt="expand/collapse" src="expand.png" id="page_details_12_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_12">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "个人用户修改_异常用例"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td></td><td align="center">1</td><td align="right">0</td><td align="right">0</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>法人用户修改_异常用例</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">0 ms</td><td align="right">0 ms</td><td align="right">0 ms</td><td align="center"><a href="javascript:change('page_details_13')"><img alt="expand/collapse" src="expand.png" id="page_details_13_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_13">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "法人用户修改_异常用例"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td></td><td align="center">1</td><td align="right">0</td><td align="right">0</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>对外接口</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">8145 ms</td><td align="right">8145 ms</td><td align="right">8145 ms</td><td align="center"><a href="javascript:change('page_details_14')"><img alt="expand/collapse" src="expand.png" id="page_details_14_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_14">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "对外接口"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">8145</td><td align="right">41928</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>姓名+身份证号</td><td align="center">2</td><td align="center">0</td><td align="right">100.00%</td><td align="right">594 ms</td><td align="right">507 ms</td><td align="right">680 ms</td><td align="center"><a href="javascript:change('page_details_15')"><img alt="expand/collapse" src="expand.png" id="page_details_15_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_15">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "姓名+身份证号"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">680</td><td align="right">372</td><td align="center">true</td>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">2</td><td align="right">507</td><td align="right">394</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>姓名+身份证号+有效期开始时间+有效期结束时间</td><td align="center">2</td><td align="center">0</td><td align="right">100.00%</td><td align="right">769 ms</td><td align="right">477 ms</td><td align="right">1061 ms</td><td align="center"><a href="javascript:change('page_details_16')"><img alt="expand/collapse" src="expand.png" id="page_details_16_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_16">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "姓名+身份证号+有效期开始时间+有效期结束时间"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">477</td><td align="right">372</td><td align="center">true</td>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">2</td><td align="right">1061</td><td align="right">788</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>姓名+身份证号+用户照片</td><td align="center">2</td><td align="center">0</td><td align="right">100.00%</td><td align="right">2253 ms</td><td align="right">1913 ms</td><td align="right">2593 ms</td><td align="center"><a href="javascript:change('page_details_17')"><img alt="expand/collapse" src="expand.png" id="page_details_17_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_17">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "姓名+身份证号+用户照片"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">1913</td><td align="right">380</td><td align="center">true</td>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">2</td><td align="right">2593</td><td align="right">667</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>姓名+身份证号+银行卡号</td><td align="center">2</td><td align="center">0</td><td align="right">100.00%</td><td align="right">460 ms</td><td align="right">457 ms</td><td align="right">464 ms</td><td align="center"><a href="javascript:change('page_details_18')"><img alt="expand/collapse" src="expand.png" id="page_details_18_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_18">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "姓名+身份证号+银行卡号"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">464</td><td align="right">372</td><td align="center">true</td>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">2</td><td align="right">457</td><td align="right">609</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>姓名+身份证号+银行卡号+手机号</td><td align="center">2</td><td align="center">0</td><td align="right">100.00%</td><td align="right">474 ms</td><td align="right">295 ms</td><td align="right">652 ms</td><td align="center"><a href="javascript:change('page_details_19')"><img alt="expand/collapse" src="expand.png" id="page_details_19_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_19">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "姓名+身份证号+银行卡号+手机号"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">295</td><td align="right">372</td><td align="center">true</td>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">2</td><td align="right">652</td><td align="right">812</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>企业名称+统一社会信用代码+法人信息</td><td align="center">2</td><td align="center">0</td><td align="right">100.00%</td><td align="right">322 ms</td><td align="right">137 ms</td><td align="right">508 ms</td><td align="center"><a href="javascript:change('page_details_20')"><img alt="expand/collapse" src="expand.png" id="page_details_20_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_20">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "企业名称+统一社会信用代码+法人信息"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">137</td><td align="right">195</td><td align="center">true</td>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">2</td><td align="right">508</td><td align="right">594</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+<tr valign="top" class="">
+<td>核验服务</td><td align="center">1</td><td align="center">0</td><td align="right">100.00%</td><td align="right">9744 ms</td><td align="right">9744 ms</td><td align="right">9744 ms</td><td align="center"><a href="javascript:change('page_details_21')"><img alt="expand/collapse" src="expand.png" id="page_details_21_image"></a></td>
+</tr>
+<tr class="page_details" id="page_details_21">
+<td bgcolor="#FF0000" colspan="8">
+<div align="center">
+<b>Details for Page "核验服务"</b>
+<table width="95%" cellspacing="1" cellpadding="1" border="0" bgcolor="#2674A6" bordercolor="#000000">
+<tr>
+<th>Thread</th><th>Iteration</th><th>Time (milliseconds)</th><th>Bytes</th><th>Success</th>
+</tr>
+<tr>
+<td>线程组 1-1</td><td align="center">1</td><td align="right">9744</td><td align="right">5927</td><td align="center">true</td>
+</tr>
+</table>
+</div>
+</td>
+</tr>
+</table>
+<hr align="center" width="95%" size="1">
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>接口测试平台 </title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename = 'assets/i/favicon1.png') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename = 'assets/i/app-icon72x72@2x.png') }}">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'assets/css/amazeui.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'assets/css/admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'assets/css/app.css') }}"  >
+
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="{{ url_for('static', filename = 'assets/js/echarts.min.js') }}"></script>
+</head>
+
+<body data-type="index">
+    <header class="am-topbar am-topbar-inverse admin-header">
+        <div class="am-topbar-brand">
+            <a href="javascript:;" class="tpl-logo">
+                <img src="{{ url_for('static', filename = 'assets/img/RMGS_BJCA1.png') }}" alt="">
+            </a>
+
+        </div>
+        <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
+
+        </div>
+
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+        <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+                <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
+                    <ul class="am-dropdown-content tpl-dropdown-content">
+                        <li class="tpl-dropdown-content-external">
+                            <h3>你有 <span class="tpl-color-success">5</span> 条提醒</h3><a href="###">全部</a></li>
+                        <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span class="am-icon-btn am-icon-plus tpl-dropdown-ico-btn-size tpl-badge-success"></span> 【预览模块】移动端 查看时 手机、电脑框隐藏。</a>
+                            <span class="tpl-dropdown-list-fr">3小时前</span>
+                        </li>
+                        <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span class="am-icon-btn am-icon-check tpl-dropdown-ico-btn-size tpl-badge-danger"></span> 移动端，导航条下边距处理</a>
+                            <span class="tpl-dropdown-list-fr">15分钟前</span>
+                        </li>
+                        <li class="tpl-dropdown-list-bdbc"><a href="#" class="tpl-dropdown-list-fl"><span class="am-icon-btn am-icon-bell-o tpl-dropdown-ico-btn-size tpl-badge-warning"></span> 追加统计代码</a>
+                            <span class="tpl-dropdown-list-fr">2天前</span>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen" class="tpl-header-list-link"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li> -->
+
+                <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
+                    <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
+                        <span class="tpl-header-list-user-nick"></span><span class="tpl-header-list-user-ico"> <img src="{{ url_for('static', filename = 'assets/img/user01.png') }}">{{session.get('username')}}</span>
+                    </a>
+                </li>
+                <li><a href="/user/logout" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="tpl-page-container tpl-page-header-fixed">
+        <div class="tpl-left-nav tpl-left-nav-hover">
+            <div class="tpl-left-nav-title">
+<!--                RMGS_BJCA 列表-->
+            </div>
+            <div class="tpl-left-nav-list">
+                <ul class="tpl-left-nav-menu">
+                    <li class="tpl-left-nav-item">
+                        {% if session.get('sign') == 'index' %}
+                        <a href="/index?sign=index" class="nav-link active">
+                        {% else %}
+                        <a href="/index?sign=index" class="nav-link">
+                        {% endif %}
+                            <i class="am-icon-home"></i>
+                            <span>首页</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-users"></i>
+                            <span>用户中心</span>
+                            {% if session.get('sign') == 'user' or session.get('sign') == 'role' %}
+                                <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+                            {% else %}
+                                <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                            {% endif %}
+                        </a>
+
+                            {% if session.get('sign') == 'user' or session.get('sign') == 'role' %}
+                                <ul class="tpl-left-nav-sub-menu" style="display:block">
+                            {% else %}
+                                <ul class="tpl-left-nav-sub-menu">
+                            {% endif %}
+
+                            <li>
+                                    {% if session.get('sign') == 'user' %}
+                                        <a href="/user/list?sign=user" class="active">
+                                    {% else %}
+                                        <a href="/user/list?sign=user">
+                                    {% endif %}
+                                    <i class="am-icon-male" ></i>
+                                    <span>用户管理</span>
+                                </a>
+                            </li>
+                            <li>
+                                    {% if session.get('sign') == 'role' %}
+                                        <a href="/role/list?sign=role" class="active">
+                                    {% else %}
+                                        <a href="/role/list?sign=role">
+                                    {% endif %}
+
+                                    <i class="am-icon-child"></i>
+                                    <span>角色管理</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="tpl-left-nav-item">
+                        <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-plug" ></i>
+                            <span>接口测试</span>
+                                {% if session.get('sign') == 'project' or session.get('sign') == 'module'%}
+                                <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+                                {% else %}
+                                    <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                                {% endif %}
+                        </a>
+                            {% if session.get('sign') == 'project' or session.get('sign') == 'module' %}
+                                <ul class="tpl-left-nav-sub-menu" style="display:block">
+                            {% else %}
+                                <ul class="tpl-left-nav-sub-menu">
+                            {% endif %}
+                            <li>
+                                    {% if session.get('sign') == 'project' %}
+                                        <a href="/project/list?sign=project" class="active">
+                                    {% else %}
+                                        <a href="/project/list?sign=project">
+                                    {% endif %}
+                                    <i class="am-icon-desktop" ></i>
+                                    <span>项目管理</span>
+                                </a>
+                            </li>
+                            <li>
+                                {% if session.get('sign') == 'module' %}
+                                <a href="/module/list?sign=module" class="active">
+                                {% else %}
+                                    <a href="/module/list?sign=module">
+                                {% endif %}
+                                    <i class="am-icon-desktop" ></i>
+                                    <span>模块管理</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        {% if session.get('sign') == 'job' %}
+                        <a href="/job/list?sign=job" class="nav-link active">
+                        {% else %}
+                        <a href="/job/list?sign=job" class="nav-link">
+                        {% endif %}
+                            <i class="am-icon-home"></i>
+                            <span>任务中心</span>
+                        </a>
+                    </li>
+                    <!--
+                    <li class="tpl-left-nav-item">
+                        <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-file-text-o"></i>
+                            <span>日志管理</span>
+                                <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+
+                        </a>
+                            <ul class="tpl-left-nav-sub-menu">
+                                <li>
+                                        <a href="/log/get?sign=log">
+                                        <i class="am-icon-paint-brush"></i>
+                                        <span>操作日志</span>
+                                    </a>
+                                </li>
+                            </ul>
+                    </li>
+                    -->
+                </ul>
+            </div>
+        </div>
+
+        {% block mainbody %}
+        {% endblock %}
+
+    </div>
+
+    <script src="{{ url_for('static', filename = 'assets/js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename = 'assets/js/amazeui.min.js') }}" ></script>
+	<script src="{{ url_for('static', filename = 'assets/js/iscroll.js') }}" ></script>
+	<script src= "{{ url_for('static', filename = 'assets/js/app.js') }}"></script>
+    <!--json格式化依赖的js-->
+    <script src="https://www.json.cn/static/kj/js/bignumber.min.js"></script>
+    <script src="https://www.json.cn/static/202010/js/jquery.json.js"></script>
+
+</body>
+
+</html>

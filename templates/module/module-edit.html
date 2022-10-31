@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block mainbody %}
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        模块编辑
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">模块中心</a></li>
+        <li><a href="#">模块管理</a></li>
+        <li class="am-active">修改</li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 模块修改
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tpl-block ">
+
+            <div class="am-g tpl-amazeui-form">
+
+
+                <div class="am-u-sm-12 am-u-md-9">
+                    <form class="am-form am-form-horizontal" method="POST" action="/module/edit">
+                       <input type="hidden" name="id" value="{{module.id}}">
+                       <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">模块名称(英文)</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="user-name" name="module_name" value="{{module.module_code}}" placeholder="模块名称(英文)">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-email" class="am-u-sm-3 am-form-label">模块名称(中文)</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="module_name_zh" value="{{module.module_name}}" id="user-email" placeholder="模块名称(中文)">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-intro" class="am-u-sm-3 am-form-label">备注</label>
+                            <div class="am-u-sm-9">
+                                <textarea class="" name="remark" rows="5" id="user-intro" placeholder="请输入备注">{{module.remark}}</textarea>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
