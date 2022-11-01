@@ -46,3 +46,62 @@ WHERE user.username = %s OR user.email = %s OR user.name = %s OR user.password =
 [2022-10-31 07:31:06.025078] INFO: userDao: 有人访问了登录页面
 [2022-11-01 08:36:03.172527] INFO: userDao: 有人访问了登录页面
 [2022-11-01 11:18:49.265226] INFO: userDao: 有人访问了登录页面
+[2022-11-01 16:06:59.643247] ERROR: userDao: 获取用户:1项目列表失败,Boolean value of this clause is not defined
+[2022-11-01 16:11:44.431979] ERROR: userDao: 获取用户:1项目列表失败,Boolean value of this clause is not defined
+[2022-11-01 16:13:26.868626] ERROR: userDao: 获取用户:1项目列表失败,Boolean value of this clause is not defined
+[2022-11-01 16:17:03.538594] ERROR: userDao: 获取用户:1项目列表失败,Boolean value of this clause is not defined
+[2022-11-01 16:18:43.667859] ERROR: userDao: 获取用户:1项目列表失败,Boolean value of this clause is not defined
+[2022-11-01 16:23:36.663614] ERROR: userDao: 获取用户:1项目列表失败,type object 'Project' has no attribute 'owner'
+[2022-11-01 17:03:37.450527] ERROR: userDao: 新增项目:first_project失败，Entity namespace for "project" has no property "name"
+[2022-11-01 17:07:44.864902] ERROR: userDao: 新增项目:first_project失败，(_mysql_exceptions.OperationalError) (1054, "Unknown column 'project.name' in 'field list'")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('first_project', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 17:09:24.443628] ERROR: userDao: 新增项目:first_project失败，commit() takes 1 positional argument but 2 were given
+[2022-11-01 19:42:34.428978] INFO: userDao: 有人访问了登录页面
+[2022-11-01 19:51:02.708247] INFO: userDao: 有人访问了登录页面
+[2022-11-01 20:21:26.630043] ERROR: userDao: 新增项目:阿里百度联手项目失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('阿里百度联手项目', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 20:27:21.426255] ERROR: userDao: 新增项目:阿里百度联手项目失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('阿里百度联手项目', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 20:27:24.700421] ERROR: userDao: 新增项目:阿里百度联手项目失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('阿里百度联手项目', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 20:27:43.954822] ERROR: userDao: 新增项目:阿里百度联手项目失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('阿里百度联手项目', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 20:30:36.358681] ERROR: userDao: 新增项目:阿里百度联手项目失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('阿里百度联手项目', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 20:30:50.446260] ERROR: userDao: 新增项目:阿里百度联手项目失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('阿里百度联手项目', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)

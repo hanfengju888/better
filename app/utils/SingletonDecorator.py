@@ -15,7 +15,8 @@ class SingletonDecorator:
             self.instance = self.cls(*args,**kwargs)
         return self.instance
 
-def permission(role=better.config.get("GUEST")):
+def permission(role="GUEST"):
+    role=better.config.get(role,0)
     def login_required(func):
         @wraps(func)
         def wrapper(*args,**kwargs):

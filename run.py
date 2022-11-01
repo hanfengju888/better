@@ -2,12 +2,15 @@ from app import better
 from app.utils.logger import Log
 from app import dao
 from app.controllers.auth.user import auth
+from app.controllers.project.project import pr
 from app.controllers.request.http import req
+
 from flask import render_template
 
 #注册蓝图
 better.register_blueprint(auth)
 better.register_blueprint(req)
+better.register_blueprint(pr)
 
 
 import sys

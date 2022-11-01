@@ -1,7 +1,7 @@
 from flask import Blueprint, request, session
 from flask import jsonify
 from app.dao.auth.UserDao import UserDao
-from handler.factory import ResponseFactory
+from app.handler.factory import ResponseFactory
 from app.middleware.Jwt import UserToken
 from flask import render_template
 
