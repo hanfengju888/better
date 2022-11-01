@@ -17,8 +17,9 @@ class UserToken(object):
     @staticmethod
     def parse_toekn(token):
         try:
-            return jwt.decode(token,key=UserToken.key)
-        except Exception:
+            return jwt.decode(token,key=UserToken.key,algorithms=['HS256'])
+        except Exception as e:
+            print(e)
             raise Exception("token已过期，请重新登录")
 
     @staticmethod

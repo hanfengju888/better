@@ -16,5 +16,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = "mysql://%s:%s@%s:%d/%s" %(MYSQL_USER,MYSQL_PWD,MYSQL_HOST,MYSQL_PORT,DBNAME)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    GUEST = 0
+
 
 

@@ -37,7 +37,7 @@ class Request(object):
                 return Request.response(False,status_code)
             elapsed = Request.get_elapsed(response.elapsed)
             data = response.json()
-            return Request.response(True,200,data,response.headers,response.request.headers,elapsed=elapsed)
+            return Request.response(True,200,data,response.headers,response.request.headers,response.cookies,elapsed=elapsed)
         except Exception as e:
             return Request.response(False,status_code,msg=str(e),elapsed=elapsed)
 
@@ -45,10 +45,12 @@ class Request(object):
         return self.request("POST")
 
     @staticmethod
-    def response(status,status_code=200,response=None,response_header=None,request_header=None,elapsed=None,msg="success"):
-        request_header = {k:v for k,v in request_header.items()}
-        response_header = {k:v for k,v in response_header.items()}
+    def response(status,status_code=200,response=None,response_header=None,request_header=None,cookies=None,elapsed=None,msg="success"):
+        request_header = {k:v for k,v in request_header.items()} if request_header is not None else {}
+        response_header = {k:v for k,v in response_header.items()} if response_header is not None else {}
+        cookies = {k:v for k,v in cookies.items()} if cookies is not None else {}
+
         return {
             "status":status,"response":response,"status_code":status_code,"response_header":response_header,"request_header":request_header,
-            "msg":msg,"elapsed":elapsed
+            "cookies":cookies,"msg":msg,"elapsed":elapsed
         }

@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, session
 from flask import jsonify
 from app.dao.auth.UserDao import UserDao
 from handler.factory import ResponseFactory
@@ -11,7 +11,7 @@ auth = Blueprint("auth",__name__,url_prefix='/auth')
 @auth.route("/register",methods=["POST"])
 def register():
     #获取request请求数据
-    print(request.headers)
+
     print(request.data)
     data = request.get_json()
     print(data)
@@ -29,6 +29,7 @@ def register():
 
 @auth.route("/login",methods=["POST"])
 def login():
+    print(request.headers)
     #标识通过什么登录，0为页面，1为接口
     flag = 0
     username, password = "",""
@@ -52,6 +53,8 @@ def login():
     token = UserToken.get_token(user)
     if err is not None:
         return jsonify(dict(code=110,msg=err))
+
+    session["token"] = token
     if flag == 1:
         return jsonify(dict(code=0,msg="登录成功",data=dict(token=token,user=user)))
     else:

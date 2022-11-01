@@ -131,25 +131,36 @@
                         <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                             <i class="am-icon-plug" ></i>
                             <span>接口测试</span>
-                                {% if session.get('sign') == 'project' or session.get('sign') == 'module'%}
+                                {% if session.get('sign') == 'project' or session.get('sign') == 'module' or session.get('sign') == 'request'%}
                                 <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
                                 {% else %}
                                     <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
                                 {% endif %}
                         </a>
-                            {% if session.get('sign') == 'project' or session.get('sign') == 'module' %}
+                            {% if session.get('sign') == 'project' or session.get('sign') == 'module' or session.get('sign') == 'request'%}
                                 <ul class="tpl-left-nav-sub-menu" style="display:block">
                             {% else %}
                                 <ul class="tpl-left-nav-sub-menu">
                             {% endif %}
+
                             <li>
-                                    {% if session.get('sign') == 'project' %}
-                                        <a href="/project/list?sign=project" class="active">
-                                    {% else %}
-                                        <a href="/project/list?sign=project">
-                                    {% endif %}
-                                    <i class="am-icon-desktop" ></i>
-                                    <span>项目管理</span>
+                                {% if session.get('sign') == 'request' %}
+                                    <a href="/request/http_ui?sign=request" class="active">
+                                {% else %}
+                                    <a href="/request/http_ui?sign=request">
+                                {% endif %}
+                                <i class="am-icon-desktop" ></i>
+                                <span>HTTP测试</span>
+                                </a>
+                            </li>
+                            <li>
+                                {% if session.get('sign') == 'project' %}
+                                    <a href="/project/list?sign=project" class="active">
+                                {% else %}
+                                    <a href="/project/list?sign=project">
+                                {% endif %}
+                                <i class="am-icon-desktop" ></i>
+                                <span>项目管理</span>
                                 </a>
                             </li>
                             <li>
