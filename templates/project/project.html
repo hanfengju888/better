@@ -11,7 +11,8 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <button type="button" onclick="window.location.href='/project/to_insert'" class="am-btn am-btn-default am-btn-success"><span
+                    <button type="button" onclick="window.location.href='/project/to_insert'"
+                            class="am-btn am-btn-default am-btn-success"><span
                             class="am-icon-plus"></span> 新增
                     </button>
                 </div>
@@ -20,13 +21,14 @@
 
         <div class="am-u-sm-12 am-u-md-3">
             <div class="am-input-group am-input-group-sm">
-                <input type="text" class="am-form-field">
+                <input type="text" class="am-form-field" id="search_project_name" value="{{name}}">
                 <span class="am-input-group-btn">
             <button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search"
-                    type="button"></button>
+                    type="button" onclick="search()"></button>
           </span>
             </div>
         </div>
+
     </div>
 
 
@@ -49,14 +51,14 @@
         <ol class="am-pagination am-fr">
             <li class="am-disabled"><a href="/project/list_ui?page=1">«</a></li>
             {%
-                for p in range(1,max_page+1)
+            for p in range(1,max_page+1)
             %}
-                {% if p == page%}
-                    <li class="am-active">
+            {% if p == page%}
+            <li class="am-active">
                 {%else%}
-                    <li>
+            <li>
                 {% endif %}
-                    <a href="/project/list_ui?page={{p}}">{{p}}</a></li>
+                <a href="/project/list_ui?page={{p}}">{{p}}</a></li>
             {% endfor %}
             <li><a href="/project/list_ui?page={{max_page}}">»</a></li>
         </ol>
@@ -76,9 +78,11 @@
           });
     }
 
-
+    function search(){
+        var search_project_name = $("#search_project_name").val()
+        window.location.href = "/project/list_ui?name=" + search_project_name
+    }
 
 </script>
-
 
 {% endblock %}

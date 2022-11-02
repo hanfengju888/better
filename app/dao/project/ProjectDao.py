@@ -40,3 +40,10 @@ class ProjectDao(object):
         except Exception as e:
             ProjectDao.log.error(f"新增项目:{name}失败，{e}")
             return 0,0,f"新增项目:{name}失败,{e}"
+
+    @staticmethod
+    def search_project(name):
+        if name == "" or name is None:
+            search_project_list = Project.query.filter_by(delete_at=None).all()
+        search_project_list = Project.query.filter_by(name=name,delete_at=None).all()
+        print(search_project_list)

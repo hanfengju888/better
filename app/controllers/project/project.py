@@ -51,7 +51,7 @@ def list_project_ui(user_info):
     result, total, err = ProjectDao.list_project(user_id, user_role, page, size, name)
     max_page = int(total/size + 1)
 
-    return render_template("project/project.html", data=ResponseFactory.model_to_dict(result),total=total,max_page=max_page,page=page)
+    return render_template("project/project.html", data=ResponseFactory.model_to_dict(result),name=name,total=total,max_page=max_page,page=page)
 
 @pr.route("/insert",methods=["POST"])
 @permission(role="MANAGER")
@@ -92,3 +92,4 @@ def insert_project(user_info):
 @permission()
 def to_insert(user_info):
     return render_template("project/project-add.html")
+
