@@ -105,3 +105,111 @@ WHERE project.name = %s AND project.deleted_at IS NULL
  LIMIT %s]
 [parameters: ('阿里百度联手项目', 1)]
 (Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 21:34:36.731439] ERROR: userDao: 查询用户:1项目失败,(_mysql_exceptions.OperationalError) (2013, 'Lost connection to MySQL server during query')
+[SQL: SELECT project_role.id AS project_role_id, project_role.user_id AS project_role_user_id, project_role.project_id AS project_role_project_id, project_role.project_role AS project_role_project_role, project_role.created_at AS project_role_created_at, project_role.updated_at AS project_role_updated_at, project_role.deleted_at AS project_role_deleted_at, project_role.create_user AS project_role_create_user, project_role.update_user AS project_role_update_user 
+FROM project_role 
+WHERE project_role.user_id = %s AND project_role.deleted_at IS NULL]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 21:34:36.734455] ERROR: userDao: 获取用户:1项目列表失败,Can't reconnect until invalid transaction is rolled back. (Background on this error at: https://sqlalche.me/e/14/8s2b)
+[2022-11-01 23:13:35.551558] INFO: userDao: 有人访问了登录页面
+[2022-11-01 23:14:02.656030] ERROR: userDao: 新增项目:我的失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('我的', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 23:15:18.976537] ERROR: userDao: 新增项目:我的失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('我的', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 23:15:41.209111] ERROR: userDao: 新增项目:我的失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('我的', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 23:17:57.136381] ERROR: userDao: 新增项目:我的失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('我的', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 23:20:15.023213] ERROR: userDao: 新增项目:我的失败，(_mysql_exceptions.OperationalError) (2013, 'Lost connection to MySQL server during query')
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('我的', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 23:20:29.005955] ERROR: userDao: 新增项目:我的失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('我的', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 23:24:25.478480] ERROR: userDao: 新增项目:我的失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('我的', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 23:25:47.210361] ERROR: userDao: 新增项目:我的失败，(_mysql_exceptions.OperationalError) (2013, 'Lost connection to MySQL server during query')
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('我的', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 23:25:51.731170] ERROR: userDao: 新增项目:我的失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('我的', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-01 23:25:52.977638] ERROR: userDao: 新增项目:我的失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('我的', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-02 09:59:56.803092] ERROR: userDao: 新增项目:我的失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('我的', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-02 11:45:36.276740] INFO: userDao: 有人访问了登录页面
+[2022-11-02 14:07:31.327287] ERROR: userDao: 新增项目:tes123t33543f33s23失败，(_mysql_exceptions.DataError) (1406, "Data too long for column 'name' at row 1")
+[SQL: INSERT INTO project (name, owner, created_at, updated_at, deleted_at, create_user, update_user, private, img, description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)]
+[parameters: ('tes123t33543f33s23', 1, datetime.datetime(2022, 11, 2, 14, 7, 31, 313200), datetime.datetime(2022, 11, 2, 14, 7, 31, 313200), None, 1, 1, 1, 'https://t7.baidu.com/it/u=2359570649,2574326109&fm=193&f=GIF', '')]
+(Background on this error at: https://sqlalche.me/e/14/9h9h)
+[2022-11-02 14:08:27.777446] ERROR: userDao: 新增项目:test234失败，(_mysql_exceptions.OperationalError) (1366, "Incorrect integer value: 'on' for column 'private' at row 1")
+[SQL: INSERT INTO project (name, owner, created_at, updated_at, deleted_at, create_user, update_user, private, img, description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)]
+[parameters: ('test234', '0', datetime.datetime(2022, 11, 2, 14, 8, 27, 766882), datetime.datetime(2022, 11, 2, 14, 8, 27, 766882), None, '0', '0', 'on', 'https://t7.baidu.com/it/u=836228418,3299829885&fm=193&f=GIF', '123123')]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-02 14:09:30.413289] ERROR: userDao: 新增项目:test234失败，(_mysql_exceptions.OperationalError) (1366, "Incorrect integer value: 'on' for column 'private' at row 1")
+[SQL: INSERT INTO project (name, owner, created_at, updated_at, deleted_at, create_user, update_user, private, img, description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)]
+[parameters: ('test234', '0', datetime.datetime(2022, 11, 2, 14, 9, 30, 386096), datetime.datetime(2022, 11, 2, 14, 9, 30, 386096), None, '0', '0', 'on', 'https://t7.baidu.com/it/u=2177360828,736658999&fm=193&f=GIF', '123123')]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-02 14:14:15.013603] ERROR: userDao: 新增项目:test234失败，(_mysql_exceptions.OperationalError) (1366, "Incorrect integer value: 'on' for column 'private' at row 1")
+[SQL: INSERT INTO project (name, owner, created_at, updated_at, deleted_at, create_user, update_user, private, img, description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)]
+[parameters: ('test234', '0', datetime.datetime(2022, 11, 2, 14, 14, 14, 998143), datetime.datetime(2022, 11, 2, 14, 14, 14, 998143), None, '0', '0', 'on', 'https://t7.baidu.com/it/u=3985596329,30052956&fm=193&f=GIF', '123123')]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-02 14:21:19.930676] ERROR: userDao: 新增项目:123123失败，(_mysql_exceptions.OperationalError) (1366, "Incorrect integer value: 'on' for column 'private' at row 1")
+[SQL: INSERT INTO project (name, owner, created_at, updated_at, deleted_at, create_user, update_user, private, img, description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)]
+[parameters: ('123123', '0', datetime.datetime(2022, 11, 2, 14, 21, 19, 918269), datetime.datetime(2022, 11, 2, 14, 21, 19, 918269), None, '0', '0', 'on', 'https://t7.baidu.com/it/u=1811223786,2017754440&fm=193&f=GIF', '123123')]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-02 14:40:26.138482] INFO: userDao: 有人访问了登录页面
+[2022-11-02 14:47:18.195714] INFO: userDao: 有人访问了登录页面

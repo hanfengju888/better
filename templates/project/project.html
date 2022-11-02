@@ -4,209 +4,66 @@
 <div class="admin-content">
 
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">项目列表</strong> / <small>Gallery</small></div>
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">项目列表</strong> / <small>Gallery</small></div>
     </div>
 
-    <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-margin gallery-list">
-      {% for project in data%}
-      <li>
-        <a href="#">
-          <img class="am-img-thumbnail am-img-bdrs" src="{{project.img}}" alt="">
-          <div class="gallery-title">{{project.name}}</div>
-          <div class="gallery-desc">{{project.updated_at}}</div>
-        </a>
-      </li>
-      {% endfor %}
-      <li>
-        <a href="#">
-          <img class="am-img-thumbnail am-img-bdrs" src="http://pic.33.la/tt/1920x1080/webshots_zhiwu-027.jpg" alt="">
-          <div class="gallery-title">君可见漫天落霞</div>
-          <div class="gallery-desc">2375-09-26</div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img class="am-img-thumbnail am-img-bdrs" src="http://s.cn.bing.net/az/hprichbg/rb/CardinalsBerries_ZH-CN10679090179_1366x768.jpg" alt="">
-          <div class="gallery-title">此刻鲜花满天幸福在身边</div>
-          <div class="gallery-desc">2375-09-26</div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img class="am-img-thumbnail am-img-bdrs" src="http://s.cn.bing.net/az/hprichbg/rb/QingdaoJiaozhou_ZH-CN10690497202_1366x768.jpg" alt="">
-          <div class="gallery-title">你当我是浮夸吧</div>
-          <div class="gallery-desc">2375-09-26</div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img class="am-img-thumbnail am-img-bdrs" src="http://s.cn.bing.net/az/hprichbg/rb/FennecFox_ZH-CN13720911949_1366x768.jpg" alt="">
-          <div class="gallery-title">远方 有一个地方 那里种有我们的梦想</div>
-          <div class="gallery-desc">2375-09-26</div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img class="am-img-thumbnail am-img-bdrs" src="http://cn.bing.com/az/hprichv/LondonTrainStation_GettyRR_139321755_ZH-CN742316019.jpg" alt="">
-          <div class="gallery-title">斜阳染幽草 几度飞红</div>
-          <div class="gallery-desc">2375-09-26</div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img class="am-img-thumbnail am-img-bdrs" src="http://cn.bing.com/az/hprichv/LondonTrainStation_GettyRR_139321755_ZH-CN742316019.jpg" alt="">
-          <div class="gallery-title">远方 有一个地方 那里种有我们的梦想</div>
-          <div class="gallery-desc">2375-09-26</div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img class="am-img-thumbnail am-img-bdrs" src="http://s.cn.bing.net/az/hprichbg/rb/FennecFox_ZH-CN13720911949_1366x768.jpg" alt="">
-          <div class="gallery-title">你当我是浮夸吧</div>
-          <div class="gallery-desc">2375-09-26</div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img class="am-img-thumbnail am-img-bdrs" src="http://s.cn.bing.net/az/hprichbg/rb/QingdaoJiaozhou_ZH-CN10690497202_1366x768.jpg" alt="">
-          <div class="gallery-title">远方 有一个地方 那里种有我们的梦想</div>
-          <div class="gallery-desc">2375-09-26</div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img class="am-img-thumbnail am-img-bdrs" src="http://s.cn.bing.net/az/hprichbg/rb/FennecFox_ZH-CN13720911949_1366x768.jpg" alt="">
-          <div class="gallery-title">你当我是浮夸吧</div>
-          <div class="gallery-desc">2375-09-26</div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img class="am-img-thumbnail am-img-bdrs" src="http://pic.33.la/tt/1920x1080/webshots_zhiwu-027.jpg" alt="">
-          <div class="gallery-title">君可见漫天落霞</div>
-          <div class="gallery-desc">2375-09-26</div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <img class="am-img-thumbnail am-img-bdrs" src="http://cn.bing.com/az/hprichv/LondonTrainStation_GettyRR_139321755_ZH-CN742316019.jpg" alt="">
-          <div class="gallery-title">斜阳染幽草 几度飞红</div>
-          <div class="gallery-desc">2375-09-26</div>
-        </a>
-      </li>
-    </ul>
-
-    <div class="am-margin am-cf">
-      <hr>
-      <p class="am-fl">共 15 条记录</p>
-      <ol class="am-pagination am-fr">
-        <li class="am-disabled"><a href="#">«</a></li>
-        <li class="am-active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">»</a></li>
-      </ol>
-    </div>
-
-  </div>
-<!--
-
-
-<div class="tpl-content-wrapper">
-    <div class="tpl-content-page-title">
-        项目
-    </div>
-    <ol class="am-breadcrumb">
-        <li><a href="#" class="am-icon-home"></a></li>
-    </ol>
-    <div class="tpl-portlet-components">
-        <div class="tpl-block">
-            <div class="am-g">
-                <div class="am-u-sm-12 am-u-md-2">
-                    <div class="am-btn-toolbar">
-                        <div class="am-btn-group am-btn-group-xs">
-                            <button type="button" onclick="window.location.href='/project/to_add'" class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span> 新增</button>
-                        </div>
-                    </div>
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <button type="button" onclick="window.location.href='/project/to_insert'" class="am-btn am-btn-default am-btn-success"><span
+                            class="am-icon-plus"></span> 新增
+                    </button>
                 </div>
-            </div>
-            <div class="am-g">
-                <div class="am-u-sm-12">
-                    <form class="am-form">
-                        <table class="am-table am-table-striped am-table-hover table-main">
-                            <thead>
-                                <tr>
-                                    <th class="table-type">序号</th>
-                                    <th class="table-title">项目名称</th>
-                                    <th class="table-date am-hide-sm-only">版本号</th>
-                                    <th class="table-title">创建时间</th>
-                                    <th class="table-title">更新时间</th>
-                                    <th class="table-type">状态</th>
-                                    <th class="table-type">操作</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                                {% for project in projects %}
-                                    <tr>
-                                    <td>{{loop.index}}</td>
-                                    <td>{{project.project_name}}</a></td>
-                                    <td>{{project.version}}</td>
-                                    <td>{{project.create_time}}</td>
-                                    <td>{{project.update_time}}</td>
-                                    {% if project.state == '1' %}
-                                        <td>正常</td>
-                                    {% else %}
-                                          <td>其他状态</td>
-                                    {% endif %}
-
-                                    <td>
-                                        <div class="am-btn-toolbar">
-                                            <div class="am-btn-group am-btn-group-xs">
-                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span><a href="/project/to_edit?id={{project.id}}"> 编辑</a></button>
-                                               <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-eye" ></span><a href="/project/to_detail?id={{project.id}}"> 查看详情</a></button>
-                                                <button id="aa" onclick="del('{{project.id}}'"
-                                                  type="button"
-                                                  class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                  ><span class="am-icon-trash-o" ></span>
-                                                  <a href="#">删除</a>
-                                                </button>
-
-                                                <div class="am-modal am-modal-confirm" tabindex="-1" id="s">
-                                                  <div class="am-modal-dialog">
-                                                    <div class="am-modal-hd">删除用例</div>
-                                                    <div class="am-modal-bd">
-                                                      你，确定要删除这条记录吗？
-                                                    </div>
-                                                    <div class="am-modal-footer">
-                                                      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-                                                      <span class="am-modal-btn" data-am-modal-confirm>确定</span>
-                                                    </div>
-                                                  </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </td>
-                                    </tr>
-                                {% endfor %}
-
-                            </tbody>
-                        </table>
-                        <hr>
-
-                    </form>
-                </div>
-
             </div>
         </div>
-        <div class="tpl-alert"></div>
+
+        <div class="am-u-sm-12 am-u-md-3">
+            <div class="am-input-group am-input-group-sm">
+                <input type="text" class="am-form-field">
+                <span class="am-input-group-btn">
+            <button class="am-btn  am-btn-default am-btn-success tpl-am-btn-success am-icon-search"
+                    type="button"></button>
+          </span>
+            </div>
+        </div>
+    </div>
+
+
+    <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-margin gallery-list">
+        {% for project in data%}
+        <li>
+            <a href="#">
+                <img class="am-img-thumbnail am-img-bdrs" src="{{project.img}}" alt="">
+                <div class="gallery-title">{{project.name}}</div>
+                <div class="gallery-desc">{{project.updated_at}}</div>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+
+
+    <div class="am-margin am-cf">
+        <hr>
+        <p class="am-fl">共 {{total}} 条记录</p>
+        <ol class="am-pagination am-fr">
+            <li class="am-disabled"><a href="/project/list_ui?page=1">«</a></li>
+            {%
+                for p in range(1,max_page+1)
+            %}
+                {% if p == page%}
+                    <li class="am-active">
+                {%else%}
+                    <li>
+                {% endif %}
+                    <a href="/project/list_ui?page={{p}}">{{p}}</a></li>
+            {% endfor %}
+            <li><a href="/project/list_ui?page={{max_page}}">»</a></li>
+        </ol>
     </div>
 
 </div>
--->
+
 
 <script>
     function del(id){
@@ -218,8 +75,10 @@
             }
           });
     }
-</script>
 
+
+
+</script>
 
 
 {% endblock %}

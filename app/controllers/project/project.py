@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, session,render_template
+from flask import Blueprint, request, jsonify, session,render_template,redirect
 
 from app import better
 from app.dao.project.ProjectDao import ProjectDao
@@ -17,6 +17,7 @@ def list_project(user_info):
     :param user_info:
     :return:
     """
+
     sign = request.args.get("sign")
     if sign is not None:
         session["sign"] = sign
@@ -32,21 +33,62 @@ def list_project(user_info):
         return jsonify(dict(code=0,data=[],msg="操作成功"))
 
     if sign is not None:
-        return render_template("project/project.html",data=ResponseFactory.model_to_dict(result))
+        return render_template("project/project.html",data=ResponseFactory.model_to_dict(result),total=total)
     return jsonify(dict(code=0,data=ResponseFactory.model_to_dict(result),msg="操作成功"))
+
+
+@pr.route("/list_ui")
+@permission()
+def list_project_ui(user_info):
+    """
+    获取项目列表
+    :param user_info:
+    :return:
+    """
+    page, size = PageHandler.page()
+    user_role, user_id = user_info["role"], user_info["id"]
+    name = request.args.get("name")
+    result, total, err = ProjectDao.list_project(user_id, user_role, page, size, name)
+    max_page = int(total/size + 1)
+
+    return render_template("project/project.html", data=ResponseFactory.model_to_dict(result),total=total,max_page=max_page,page=page)
 
 @pr.route("/insert",methods=["POST"])
 @permission(role="MANAGER")
 def insert_project(user_info):
-    try:
-        user_id = user_info["id"]
-        data = request.get_json()
-        if not data.get("name") or not data.get("owner"):
-            return jsonify(dict(code=101,msg="项目名称/项目负责人不能为空"))
-        private = data.get("private",0)
-        err = ProjectDao.add_project(data.get("name"),data.get("owner"),user_id,private)
-        if err is not None:
-            return jsonify(dict(code=110,msg=err))
-        return jsonify(dict(code=0, msg="操作成功"))
-    except Exception as e:
-        return jsonify(dict(code=111,msg=str(e)))
+
+    data = request.get_json()
+    #走接口
+    if data is not None:
+        try:
+            user_id = user_info["id"]
+
+            if not data.get("name") or not data.get("owner"):
+                return jsonify(dict(code=101,msg="项目名称/项目负责人不能为空"))
+            private = data.get("private",0)
+            err = ProjectDao.add_project(data.get("name"),data.get("owner"),user_id,private)
+            if err is not None:
+                return jsonify(dict(code=110,msg=err))
+            return jsonify(dict(code=0, msg="操作成功"))
+        except Exception as e:
+            return jsonify(dict(code=111,msg=str(e)))
+    #走页面
+    else:
+        name = request.form["name"]
+        owner = int(request.form["owner"])
+        description = request.form["description"]
+        private = int(request.form["private"])
+        print(private)
+        err = ProjectDao.add_project(name, owner, owner, private,description)
+        if err is None:
+            return redirect("list_ui")
+        print(err)
+
+
+
+
+
+@pr.route("/to_insert",methods=["GET"])
+@permission()
+def to_insert(user_info):
+    return render_template("project/project-add.html")

@@ -3,7 +3,7 @@ from flask import request
 #默认页数和页码
 
 PAGE = 1
-SIZE = 10
+SIZE = 12
 
 class PageHandler(object):
     @staticmethod
