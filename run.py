@@ -4,6 +4,8 @@ from app import dao
 from app.controllers.auth.user import auth
 from app.controllers.project.project import pr
 from app.controllers.request.http import req
+from app.controllers.user.user import user
+from app.controllers.user.role import role
 
 from flask import render_template
 
@@ -11,6 +13,8 @@ from flask import render_template
 better.register_blueprint(auth)
 better.register_blueprint(req)
 better.register_blueprint(pr)
+better.register_blueprint(user)
+better.register_blueprint(role)
 
 
 import sys

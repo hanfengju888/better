@@ -4,6 +4,8 @@ from app import better
 from app.dao.project.ProjectDao import ProjectDao
 from app.handler.factory import ResponseFactory
 from app.handler.page import PageHandler
+from app.models.project import Project
+from app.models.user import User
 from app.utils.SingletonDecorator import permission
 
 pr = Blueprint("project", __name__, url_prefix="/project")
@@ -45,6 +47,12 @@ def list_project_ui(user_info):
     :param user_info:
     :return:
     """
+    #标记页面左侧菜单
+    sign = request.args.get("sign")
+    if sign is not None:
+        session["sign"] = sign
+
+
     page, size = PageHandler.page()
     user_role, user_id = user_info["role"], user_info["id"]
     name = request.args.get("name")
@@ -85,11 +93,31 @@ def insert_project(user_info):
         print(err)
 
 
-
-
-
 @pr.route("/to_insert",methods=["GET"])
 @permission()
 def to_insert(user_info):
-    return render_template("project/project-add.html")
+    user_objects = User.query.all()
+    return render_template("project/project-add.html",data=ResponseFactory.model_to_dict(user_objects))
+
+#查看项目详情
+@pr.route("/to_detail",methods=["GET"])
+@permission()
+def to_detail(user_info):
+    id = request.args.get("id")
+    project = Project.query.filter_by(id=id).first()
+    user_objects = User.query.all()
+    return render_template("project/project-edit.html",project=project,data=ResponseFactory.model_to_dict(user_objects))
+
+#更新项目
+@pr.route("/update",methods=["POST"])
+@permission()
+def update(user_info):
+    id = request.form["id"]
+    name = request.form["name"]
+    owner = int(request.form["owner"])
+    description = request.form["description"]
+    private = int(request.form["private"])
+    ProjectDao.add_project(name, owner, owner, private,description,id)
+
+    return redirect("list_ui")
 

@@ -13,14 +13,14 @@ class User(db.Model):
     deleted_at = db.Column(db.DATETIME)
     last_login_at = db.Column(db.DATETIME)
 
-    def __init__(self, username, name, password, email):
+    def __init__(self, username, name, password, email,role=1):
         self.username = username
         self.password = password
         self.email = email
         self.name = name
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
-        self.role = 0
+        self.role = role
 
     def __repr__(self):
         return '<User %r>' % self.username

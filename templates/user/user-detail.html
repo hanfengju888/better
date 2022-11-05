@@ -28,7 +28,7 @@
                         <div class="am-form-group">
                             <label for="user-name" class="am-u-sm-3 am-form-label">姓名</label>
                             <div class="am-u-sm-9">
-                                <input type="text" id="user-name" value="{{user.username}}">
+                                <input type="text" id="user-name" value="{{user.name}}">
                             </div>
                         </div>
 
@@ -39,57 +39,29 @@
                             </div>
                         </div>
 
-                        <div class="am-form-group">
-                            <label for="user-phone" class="am-u-sm-3 am-form-label">电话</label>
-                            <div class="am-u-sm-9">
-                                <input type="tel" id="user-phone" value="{{user.phoneNumber}}" disabled="disabled">
-                            </div>
-                        </div>
-
-                        <div class="am-form-group">
-                            <label for="user-phone" class="am-u-sm-3 am-form-label">部门</label>
-                            <div class="am-u-sm-9">
-                                <select name="department" data-am-selected="{btnSize: 'sm'}">
-                                  <option value="1">请输入</option>
-                                  {% if user.department == '1' %}
-                                  <option value="1" selected="selected">测试部</option>
-                                  {% else %}
-                                  <option value="1">测试部</option>
-                                  {% endif %}
-                                  {% if user.department == '2' %}
-                                  <option value="2" selected="selected">研发部门</option>
-                                  {% else %}
-                                  <option value="2">研发部门</option>
-                                  {% endif %}
-                                </select>
-                            </div>
-                        </div>
 
                         <div class="am-form-group">
                             <label for="user-phone" class="am-u-sm-3 am-form-label">角色</label>
                             <div class="am-u-sm-9">
                                 <select name="role" value="1" data-am-selected="{btnSize: 'sm'}">
-                                  <option value="option1">请输入</option>
-                                  {% if user.role == '1' %}
-                                  <option value="1" selected="selected">管理员</option>
-                                  {% else %}
-                                  <option value="1">管理员</option>
-                                  {% endif %}
+                                  <option value="0">请输入</option>
+                                  {% for role1 in roles %}
+                                    {% if user.role == role1.role_code|int %}
+                                        <option value="{{role1.role_code}}" selected="selected">{{role1.role_name}}</option>
+                                    {% else %}
+                                        <option value="{{role1.role_code}}">{{role1.role_name}}</option>
+                                    {% endif %}
+                                  {% endfor %}
 
-                                  {% if user.role == '2' %}
-                                  <option value="2" selected="selected">普通用户</option>
-                                  {% else %}
-                                  <option value="2">普通用户</option>
-                                  {% endif %}
                                 </select>
-                                
                             </div>
                         </div>
+
 
                         <div class="am-form-group">
                             <label for="user-QQ" class="am-u-sm-3 am-form-label">登录名</label>
                             <div class="am-u-sm-9">
-                                <input type="text" value="{{user.account}}" id="user-QQ" placeholder="jin">
+                                <input type="text" value="{{user.username}}" id="user-QQ" placeholder="jin">
                             </div>
                         </div>
 
@@ -100,12 +72,7 @@
                             </div>
                         </div>
 
-                        <div class="am-form-group">
-                            <label for="user-intro" class="am-u-sm-3 am-form-label">备注</label>
-                            <div class="am-u-sm-9">
-                                <textarea class="" rows="5" id="user-intro">{{user.remark}}</textarea>
-                            </div>
-                        </div>
+
                     </form>
                 </div>
             </div>

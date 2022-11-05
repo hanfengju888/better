@@ -41,7 +41,7 @@
                                 <tr>
                                     <!-- <th class="table-id">ID</th> -->
                                     <th class="table-title">姓名</th>
-                                    <th class="table-type">部门</th>
+                                    <th class="table-title">登录名</th>
                                     <th class="table-author am-hide-sm-only">角色</th>
                                     <th class="table-date am-hide-sm-only">状态</th>
                                     <th class="table-set">操作</th>
@@ -50,29 +50,21 @@
                             <tbody>
                                 {% for user in users %}
                                 <tr>
+                                    <td>{{user.name}}</td>
                                     <td>{{user.username}}</td>
 
-                                    {% if user.department == '1' %}
-                                    <td>测试部</td>
-                                    {% endif %}
-                                    {% if user.department == '2' %}
-                                    <td>研发部门</td>
-                                    {% endif %}
-
-                                    {% for role in roles %}
+                                   {% for role in roles %}
                                         {% if user.role|int == role.role_code|int %}
                                             <td class="am-hide-sm-only">{{role.role_name}}</td>
                                         {% endif %}
                                     {% endfor %}
 
-                                    <!--{% if user.state == '1' %}  -->
+                                    {% if user.deleted_at == None %}
                                     <td class="am-hide-sm-only">启用中</td>
                                     <td>
                                         <div class="am-btn-toolbar">
                                             <div class="am-btn-group am-btn-group-xs">
                                                 <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span><a href="/user/to_edit?id={{user.id}}"> 编辑</a></button>
-
-                                                <!--<button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-lock"></span> <a href="/user/lock?id={{user.id}}&lock=lock">冻结</a></button>-->
 
                                                 <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-eye" ></span><a href="/user/to_detail?id={{user.id}}"> 查看详情</a></button>
 
@@ -100,19 +92,17 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <!--
                                     {% else %}
-                                        <td class="am-hide-sm-only">已冻结</td>
+                                        <td class="am-hide-sm-only">已删除</td>
                                         <td>
                                             <div class="am-btn-toolbar">
                                                 <div class="am-btn-group am-btn-group-xs">
-                                                    <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-unlock"></span> <a href="/user/lock?id={{user.id}}&lock=unlock">解冻</a></button>
+                                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-eye" ></span><a href="/user/to_detail?id={{user.id}}"> 查看详情</a></button>
                                                 </div>
                                             </div>
                                         </td>
                                     {% endif %}
-                                    -->
-                                    
+
                                 </tr>
                                 {% endfor %}
                                 

@@ -29,17 +29,29 @@ class ProjectDao(object):
             return [],0,f"获取用户：{user_id}项目列表失败,{e}"
 
     @staticmethod
-    def add_project(name,owner,user,private,description=""):
-        try:
-            data = Project.query.filter_by(name=name,deleted_at=None).first()
-            if data is not None:
-                return "项目已存在"
-            pr = Project(name,owner,user,private,description)
-            db.session.add(pr)
+    def add_project(name,owner,user,private,description="",id=None):
+        #新增
+        if id is None:
+            try:
+                data = Project.query.filter_by(name=name,deleted_at=None).first()
+                if data is not None:
+                    return "项目已存在"
+                pr = Project(name,owner,user,private,description)
+                db.session.add(pr)
+                db.session.commit()
+            except Exception as e:
+                ProjectDao.log.error(f"新增项目:{name}失败，{e}")
+                return 0,0,f"新增项目:{name}失败,{e}"
+        #更新
+        else:
+            project = Project.query.get(id)
+            project.name = name
+            project.owner = owner
+            project.private = private
+            project.description = description
             db.session.commit()
-        except Exception as e:
-            ProjectDao.log.error(f"新增项目:{name}失败，{e}")
-            return 0,0,f"新增项目:{name}失败,{e}"
+
+
 
     @staticmethod
     def search_project(name):

@@ -1,60 +1,130 @@
 {% extends "base.html" %}
 {% block mainbody %}
 <div class="tpl-content-wrapper">
-    <div class="tpl-content-page-title">
-        项目编辑
-    </div>
-    <ol class="am-breadcrumb">
-        <li><a href="#" class="am-icon-home">项目中心</a></li>
-        <li><a href="#">项目管理</a></li>
-        <li class="am-active">修改</li>
-    </ol>
     <div class="tpl-portlet-components">
         <div class="portlet-title">
             <div class="caption font-green bold">
-                <span class="am-icon-code"></span> 项目修改
+                <span class="am-icon-code"></span> {{project.name}}
             </div>
             <div class="tpl-portlet-input tpl-fz-ml">
                 <div class="portlet-input input-small input-inline">
                 </div>
             </div>
-
-
         </div>
+
         <div class="tpl-block ">
-
             <div class="am-g tpl-amazeui-form">
-
-
                 <div class="am-u-sm-12 am-u-md-9">
-                    <form class="am-form am-form-horizontal" method="POST" action="/project/edit">
-                       <input type="hidden" name="id" value="{{project.id}}">
-                       <div class="am-form-group">
-                            <label for="user-name" class="am-u-sm-3 am-form-label">项目名称</label>
-                            <div class="am-u-sm-9">
-                                <input type="text" id="user-name" name="project_name" value="{{project.project_name}}" placeholder="项目名称" required>
-                            </div>
-                        </div>
 
-                        <div class="am-form-group">
-                            <label for="expect_type_label" class="am-u-sm-3 am-form-label">版本号</label>
-                            <div class="am-u-sm-9">
-                                <input type="text" id="expect_type_label" name="version" placeholder="版本号" value="{{project.version}}"requeired>
-                            </div>
-                        </div>
+                    <div class="am-form-group">
+                        <div class="am-tabs am-margin" data-am-tabs="">
+                            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                                <li class="am-active"><a href="#testcase">测试用例</a></li>
+                                <li><a href="#update_project">编辑项目</a></li>
+                                <li><a href="#user_manage">成员管理</a></li>
+                            </ul>
+                            <div class="am-tabs-bd">
+                                <!-- 测试用例-->
+                                <div class="am-tab-panel am-fade" id="testcase">
+                                    <div class="am-g am-margin-top">
+                                        <div class="am-u-sm-8 am-u-md-10">
 
-                        <div class="am-form-group">
-                            <label for="user-intro" class="am-u-sm-3 am-form-label">备注</label>
-                            <div class="am-u-sm-9">
-                                <textarea class="" name="remark" rows="5" id="user-intro" placeholder="请输入备注">{{project.remark}}</textarea>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- 编辑项目-->
+                                <div class="am-tab-panel am-fade" id="update_project">
+                                    <div class="am-g am-margin-top">
+                                        <div class="am-u-sm-8 am-u-md-10">
+                                            <form class="am-form am-form-horizontal" method="POST"
+                                                  action="/project/update">
+                                                <input type="hidden" name="id" value="{{project.id}}">
+                                                <div class="am-form-group">
+                                                    <label for="user-name" class="am-u-sm-3 am-form-label">项目名称</label>
+                                                    <div class="am-u-sm-9">
+                                                        <input type="text" id="user-name" name="name" placeholder="项目名称"
+                                                               value="{{project.name}}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="am-form-group">
+                                                    <label class="am-u-sm-3 am-form-label">项目负责人</label>
+                                                    <div class="am-u-sm-9">
+                                                        <select name="owner" data-am-selected="{btnSize: 'sm'}">
+                                                            {% for user in data %}
+                                                            {% if user.id == project.owner %}
+                                                            <option value="{{user.id}}" selected="selected">
+                                                                {% else %}
+                                                            <option value="{{user.id}}">
+                                                                {% endif %}
+                                                                {{user.name}}({{user.email}})
+                                                            </option>
+                                                            {% endfor %}
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="am-form-group">
+                                                    <label class="am-u-sm-3 am-form-label">项目描述</label>
+                                                    <div class="am-u-sm-9">
+                                                <textarea class="" name="description" rows="5"
+                                                          placeholder="请输入项目描述">{{project.description}}</textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="am-form-group">
+                                                    <label class="am-u-sm-3 am-form-label">是否私有</label>
+                                                    <div class="am-u-sm-9">
+                                                        <div class="am-form-group">
+                                                            <label class="am-radio-inline">
+                                                                {% if project.private == 1 %}
+                                                                <input type="radio" name="private" value="1"
+                                                                       data-am-ucheck checked> 是
+                                                                {% else %}
+                                                                <input type="radio" name="private" value="1"
+                                                                       data-am-ucheck> 是
+                                                                {% endif %}
+
+                                                            </label>
+                                                            <label class="am-radio-inline">
+                                                                {% if project.private == 0 %}
+                                                                <input type="radio" name="private" value="0"
+                                                                       data-am-ucheck checked> 否
+                                                                {% else %}
+                                                                <input type="radio" name="private" value="0"
+                                                                       data-am-ucheck> 否
+                                                                {% endif %}
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="am-form-group">
+                                                    <div class="am-u-sm-9 am-u-sm-push-3">
+                                                        <button type="submit" class="am-btn am-btn-primary">保存</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- 成员管理-->
+                                <div class="am-tab-panel am-fade" id="user_manage">
+
+                                </div>
+
                             </div>
                         </div>
-                        <div class="am-form-group">
-                            <div class="am-u-sm-9 am-u-sm-push-3">
-                                <button type="submit" class="am-btn am-btn-primary">保存</button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -62,4 +132,25 @@
     </div>
 
 </div>
+
+
 {% endblock %}
+
+<script>
+ function select(){
+        var obj = document.getElementsByName("private")
+        if(obj.checked){
+            obj.checked = false;
+            $("#private_id").val = 0
+        }else{
+            obj.checked = true;
+            $("#private_id").val = 1
+        }
+
+    }
+
+
+
+
+
+</script>

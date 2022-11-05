@@ -19,7 +19,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     #项目列表图片
-    PROJECT_IMG_LIST = ["http://s.cn.bing.net/az/hprichbg/rb/CardinalsBerries_ZH-CN10679090179_1366x768.jpg",
+    PROJECT_IMG_LIST = [
                         "https://t7.baidu.com/it/u=2621658848,3952322712&fm=193&f=GIF","https://image.baidu.com/search/detail?tn=baiduimagedetail&word=%E8%88%AA%E6%8B%8D%E5%9C%B0%E7%90%83%E7%B3%BB%E5%88%97&album_tab=%E8%AE%BE%E8%AE%A1%E7%B4%A0%E6%9D%90&album_id=312&ie=utf-8&fr=albumsdetail&cs=1856946436,1599379154&pi=120716&pn=12&ic=0&objurl=https%3A%2F%2Ft7.baidu.com%2Fit%2Fu%3D1856946436%2C1599379154%26fm%3D193%26f%3DGIF",
                         "https://t7.baidu.com/it/u=931123624,502354944&fm=193&f=GIF","https://t7.baidu.com/it/u=4113083086,1494496387&fm=193&f=GIF",
                         "https://t7.baidu.com/it/u=407688855,3169248799&fm=193&f=GIF","https://t7.baidu.com/it/u=1723458001,3671360301&fm=193&f=GIF",
