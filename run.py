@@ -6,6 +6,7 @@ from app.controllers.project.project import pr
 from app.controllers.request.http import req
 from app.controllers.user.user import user
 from app.controllers.user.role import role
+from app.controllers.project.projectRole import projectRole
 
 from flask import render_template
 
@@ -15,6 +16,7 @@ better.register_blueprint(req)
 better.register_blueprint(pr)
 better.register_blueprint(user)
 better.register_blueprint(role)
+better.register_blueprint(projectRole)
 
 
 import sys

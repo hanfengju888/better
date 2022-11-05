@@ -2,6 +2,7 @@ from flask import Flask,render_template,request,session,redirect,url_for,Bluepri
 from flask import render_template
 from datetime import datetime
 
+from app.dao.project.ProjectRoleDao import ProjectRoleDao
 from app.models import db
 from app.models.role import Role
 from app.models.user import User
@@ -48,6 +49,7 @@ def to_edit():
     id = request.args.get("id")
     user = User.query.filter_by(id=id).first()
     roles = Role.query.filter(Role.state == 1)
+
     return render_template('user/user-edit.html',user=user,roles=roles)
 
 @user.route('/edit',methods = ['POST','GET'])
