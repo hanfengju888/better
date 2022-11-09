@@ -7,6 +7,7 @@ from app.handler.factory import ResponseFactory
 from app.handler.page import PageHandler
 from app.models.project import Project
 from app.models.role import Role
+from app.models.test_case import TestCase
 from app.models.user import User
 from app.utils.SingletonDecorator import permission
 
@@ -101,7 +102,7 @@ def to_insert(user_info):
     user_objects = User.query.all()
     return render_template("project/project-add.html",data=ResponseFactory.model_to_dict(user_objects))
 
-#查看项目详情
+#查看项目详情--页面过来的
 @pr.route("/to_detail",methods=["GET"])
 @permission()
 def to_detail(user_info):
@@ -111,10 +112,35 @@ def to_detail(user_info):
 
     #成员管理tab页
     #项目绑定的用户
+
     user_list, project_role_id = ProjectRoleDao.list_user_by_project_id(id)
     #角色信息
     roles = Role.query.filter(Role.state == 1)
-    return render_template("project/project-edit.html",roles=roles,project_role_id=project_role_id,user_list=ResponseFactory.model_to_dict(user_list),project=project,data=ResponseFactory.model_to_dict(user_objects))
+
+    #用例信息
+    testcases = TestCase.query.filter_by(project_id=id,deleted_at=None).all()
+
+    return render_template("project/project-edit.html",cases=testcases,roles=roles,project_role_id=project_role_id,user_list=ResponseFactory.model_to_dict(user_list),project=project,data=ResponseFactory.model_to_dict(user_objects))
+
+
+#查看项目详情--带参数，其他方法redirect过来的
+@pr.route("/to_detail_with_param/<int:id>",methods=["GET"])
+def to_detail_with_param(id):
+    project = Project.query.filter_by(id=id).first()
+    user_objects = User.query.all()
+
+    #成员管理tab页
+    #项目绑定的用户
+
+    user_list, project_role_id = ProjectRoleDao.list_user_by_project_id(id)
+    #角色信息
+    roles = Role.query.filter(Role.state == 1)
+
+    #用例信息
+    testcases = TestCase.query.filter_by(project_id=id,deleted_at=None).all()
+
+    return render_template("project/project-edit.html",cases=testcases,roles=roles,project_role_id=project_role_id,user_list=ResponseFactory.model_to_dict(user_list),project=project,data=ResponseFactory.model_to_dict(user_objects))
+
 
 #更新项目
 @pr.route("/update",methods=["POST"])
@@ -128,4 +154,7 @@ def update(user_info):
     ProjectDao.add_project(name, owner, owner, private,description,id)
 
     return redirect("list_ui")
+
+
+
 

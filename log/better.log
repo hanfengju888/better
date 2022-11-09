@@ -220,3 +220,8 @@ WHERE project.name = %s AND project.deleted_at IS NULL
 [2022-11-05 23:03:33.016207] ERROR: userDao: 查询项目:24用户失败,get() got an unexpected keyword argument 'id'
 [2022-11-05 23:04:18.520130] ERROR: userDao: 查询项目:24用户失败,get() got an unexpected keyword argument 'id'
 [2022-11-05 23:12:22.876143] ERROR: userDao: 查询项目:24用户失败,get() got an unexpected keyword argument 'id'
+[2022-11-06 14:07:46.644329] INFO: userDao: 有人访问了登录页面
+[2022-11-07 12:21:43.651857] INFO: userDao: 有人访问了登录页面
+[2022-11-07 18:43:38.945179] INFO: userDao: 有人访问了登录页面
+[2022-11-08 18:54:57.983959] INFO: userDao: 有人访问了登录页面
+[2022-11-09 08:19:42.795832] INFO: userDao: 有人访问了登录页面

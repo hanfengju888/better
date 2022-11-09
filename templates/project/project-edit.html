@@ -1,5 +1,106 @@
 {% extends "base.html" %}
 {% block mainbody %}
+<script>
+
+ // appscan续期
+ function appscan_apply_continue(id){
+
+    $("#project_add_user").modal({
+        onConfirm: function(options) {
+            project_add_user_id = $("#project_add_user_id").val()
+            window.location.href = "/projectRole/add_project_user?project_add_user_id="+project_add_user_id+"&project_id={{project.id}}"
+        },
+        onCancel: function() {
+        }
+
+    });
+    }
+
+ function select(){
+        var obj = document.getElementsByName("private")
+        if(obj.checked){
+            obj.checked = false;
+            $("#private_id").val = 0
+        }else{
+            obj.checked = true;
+            $("#private_id").val = 1
+        }
+
+    }
+
+ function del(project_role_id,project_id){
+    $('#del_project_user').modal({
+        onConfirm: function(options) {
+              window.location.href = "/projectRole/delete?project_role_id="+project_role_id+"&project_id="+project_id
+        },
+        onCancel: function() {
+        }
+      });
+    }
+
+</script>
+
+<script>
+    function del(id,module_id){
+        $('#s').modal({
+            onConfirm: function(options) {
+              window.location.href = "/case/delete?id="+id+"&module_id="+module_id
+            },
+            onCancel: function() {
+            }
+          });
+    }
+
+    //部分选择
+    function multi_start(){
+        var obj = document.getElementsByName("wait_start_id")
+        var id_list = []
+
+        for(var i in obj){
+            if(obj[i].checked){
+                id_list.push(obj[i].value) ;
+            }
+        }
+        if(id_list.length == 0){
+            alert("至少选择一个用例！")
+        }else{
+            //进入到后台
+
+            $("#before_start").modal({
+                onConfirm: function(options) {
+                    var job_name = $("#job_name").val()
+                    var nodeC_ip = $("#nodeC_ip").val()
+                    var nodeB1_ip = $("#nodeB1_ip").val()
+                    window.location.href = "/job/add?id_list="+id_list+"&job_name="+job_name+"&nodeC_ip="+nodeC_ip+"&nodeB1_ip="+nodeB1_ip
+                },
+                onCancel: function() {
+                }
+
+         });
+
+        }
+    }
+
+    //批量选择
+    function select_all(){
+        var select_btn = document.getElementsByName("select_all_btn")
+        var obj = document.getElementsByName("wait_start_id")
+        if(select_btn[0].checked){
+            for(var i in obj){
+                obj[i].checked = true;
+            }
+        }else{
+            for(var i in obj){
+                obj[i].checked = false;
+            }
+        }
+    }
+
+
+
+</script>
+
+
 <div class="tpl-content-wrapper">
     <div class="tpl-portlet-components">
         <div class="portlet-title">
@@ -18,19 +119,139 @@
                     <div class="am-form-group">
                         <div class="am-tabs am-margin" data-am-tabs="">
                             <ul class="am-tabs-nav am-nav am-nav-tabs">
-                                <li class="am-active"><a href="#testcase">测试用例</a></li>
-                                <li><a href="#update_project">编辑项目</a></li>
+                                <li><a href="#testcase">测试用例</a></li>
+                                <li class="am-active"><a href="#update_project">编辑项目</a></li>
                                 <li><a href="#user_manage">成员管理</a></li>
                             </ul>
+
                             <div class="am-tabs-bd">
                                 <!-- 测试用例-->
                                 <div class="am-tab-panel am-fade" id="testcase">
-                                    <div class="am-g am-margin-top">
-                                        <div class="am-u-sm-8 am-u-md-10">
+                                    <div class="tpl-portlet-components">
+                                        <div class="tpl-block">
+                                            <div class="am-g">
+                                                <div class="am-u-sm-12 am-u-md-5">
+                                                    <div class="am-btn-toolbar">
+                                                        <div class="am-btn-group am-btn-group-xs">
+                                                            <button type="button" onclick="window.location.href='/project/list_ui?sign=project'" class="am-btn am-btn-default"> 返回</button>
+                                                            <button type="button" onclick="window.location.href='/case/to_add?project_id={{project.id}}'"
+                                                                    class="am-btn am-btn-default am-btn-success"><span
+                                                                    class="am-icon-plus"></span> 新增
+                                                            </button>
+                                                            <button type="button" onclick="multi_start()"
+                                                                    class="am-btn am-btn-warning"><span
+                                                                    class="am-icon-youtube-play"></span> 批量执行
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="am-g">
+                                                <div class="am-u-sm-12">
+                                                    <form class="am-form">
+                                                        <table class="am-table am-table-striped am-table-hover table-main">
+                                                            <thead>
+                                                            <tr>
+                                                                <th><input type="checkbox" value="all"
+                                                                           onclick="select_all()" name="select_all_btn">
+                                                                </th>
+                                                                <th class="table-type">序号</th>
+                                                                <th class="table-type">所属模块</th>
+                                                                <th class="table-title">用例名称</th>
+                                                                <th class="table-date am-hide-sm-only">断言类型</th>
+                                                                <th class="table-date am-hide-sm-only">断言结果</th>
+                                                                <th class="table-title">创建时间</th>
+                                                                <th class="table-title">更新时间</th>
+                                                                <th class="table-type">状态</th>
+                                                                <th class="table-type">操作</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                            {% for case in cases %}
+                                                            <tr>
+                                                                <td>
+                                                                    <input type="checkbox" value="{{case.id}}"
+                                                                           name="wait_start_id">
+                                                                </td>
+                                                                <td>{{loop.index}}</td>
+                                                                <td><a>{{case.name}}</a></td>
+                                                                <td>{{case.case_name}}</td>
+                                                                <td>
+                                                                    {% if case.request_type == '0' %}
+                                                                    数量
+                                                                    {% elif case.request_type == '1' %}
+                                                                    范围
+                                                                    {% elif case.request_type == '2' %}
+                                                                    MD5加密
+                                                                    {% elif case.request_type == '3' %}
+                                                                    源文件
+                                                                    {% endif %}
+                                                                </td>
+                                                                <td>{{case.created_at}}</td>
+                                                                <td>{{case.created_at}}</td>
+                                                                <td>{{case.updated_at}}</td>
+                                                                {% if case.state == '1' %}
+                                                                <td>正常状态</td>
+                                                                {% else %}
+                                                                <td>其他状态</td>
+                                                                {% endif %}
+
+                                                                <td>
+                                                                    <div class="am-btn-toolbar">
+                                                                        <div class="am-btn-group am-btn-group-xs">
+                                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary">
+                                                                                <span class="am-icon-pencil-square-o"></span><a
+                                                                                    href="/case/to_edit?id={{case.id}}">
+                                                                                编辑</a></button>
+                                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary">
+                                                                                <span class="am-icon-eye"></span><a
+                                                                                    href="/case/to_detail?id={{case.id}}">
+                                                                                查看详情</a></button>
 
 
+                                                                            <button id="case_del_id" onclick="case_del('{{case.id}}')"
+                                                                                    type="button"
+                                                                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                                            ><span class="am-icon-trash-o"></span>
+                                                                                <a href="/case/delete?case_id={{case.id}}&project_id={{project.id}}">删除</a>
+                                                                            </button>
+
+                                                                            <div class="am-modal am-modal-confirm"
+                                                                                 tabindex="-1" id="s">
+                                                                                <div class="am-modal-dialog">
+                                                                                    <div class="am-modal-hd">删除用例</div>
+                                                                                    <div class="am-modal-bd">
+                                                                                        你，确定要删除这条记录吗？
+                                                                                    </div>
+                                                                                    <div class="am-modal-footer">
+                                                                                        <span class="am-modal-btn"
+                                                                                              data-am-modal-cancel>取消</span>
+                                                                                        <span class="am-modal-btn"
+                                                                                              data-am-modal-confirm>确定</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            {% endfor %}
+
+
+                                                            </tbody>
+                                                        </table>
+                                                        <hr>
+
+                                                    </form>
+                                                </div>
+
+                                            </div>
                                         </div>
+                                        <div class="tpl-alert"></div>
                                     </div>
+
 
                                 </div>
                                 <!-- 编辑项目-->
@@ -124,7 +345,7 @@
                                                     <div class="am-btn-toolbar">
                                                         <div class="am-btn-group am-btn-group-xs">
                                                             <button type="button"
-                                                                    onclick="window.location.href='/user/to_add'"
+                                                                    onclick="appscan_apply_continue('1')"
                                                                     class="am-btn am-btn-default am-btn-success"><span
                                                                     class="am-icon-plus"></span> 新增
                                                             </button>
@@ -157,9 +378,9 @@
                                                             <td>{{user.username}}</td>
 
                                                             {% for role in roles %}
-                                                                {% if user.role|int == role.role_code|int %}
-                                                                <td class="am-hide-sm-only">{{role.role_name}}</td>
-                                                                {% endif %}
+                                                            {% if user.role|int == role.role_code|int %}
+                                                            <td class="am-hide-sm-only">{{role.role_name}}</td>
+                                                            {% endif %}
                                                             {% endfor %}
 
                                                             {% if user.deleted_at == None %}
@@ -171,28 +392,14 @@
                                                                 <div class="am-btn-toolbar">
                                                                     <div class="am-btn-group am-btn-group-xs">
 
-                                                                        <button id="aa" onclick="del('{{project_role_id}}','{{project.id}}')"
+                                                                        <button id="aa"
+                                                                                onclick="del('{{project_role_id}}','{{project.id}}')"
                                                                                 type="button"
                                                                                 class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
                                                                         ><span class="am-icon-trash-o"></span>
-                                                                            <a href="/projectRole/delete?project_role_id={{project_role_id}}&project_id={{project.id}}">删除</a>
+                                                                            删除
                                                                         </button>
 
-                                                                        <div class="am-modal am-modal-confirm"
-                                                                             tabindex="-1" id="s">
-                                                                            <div class="am-modal-dialog">
-                                                                                <div class="am-modal-hd">删除用户</div>
-                                                                                <div class="am-modal-bd">
-                                                                                    你，确定要删除这条记录吗？
-                                                                                </div>
-                                                                                <div class="am-modal-footer">
-                                                                                    <span class="am-modal-btn"
-                                                                                          data-am-modal-cancel>取消</span>
-                                                                                    <span class="am-modal-btn"
-                                                                                          data-am-modal-confirm>确定</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
 
                                                                     </div>
                                                                 </div>
@@ -221,6 +428,44 @@
                     </div>
                 </div>
 
+                <div class="am-modal am-modal-confirm"
+                     tabindex="-1" id="del_project_user">
+                    <div class="am-modal-dialog">
+                        <div class="am-modal-hd">删除用户</div>
+                        <div class="am-modal-bd">
+                            你，确定要删除这条记录吗？
+                        </div>
+                        <div class="am-modal-footer">
+                            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="am-modal am-modal-confirm" tabindex="-1" id="project_add_user">
+                    <div class="am-modal-dialog">
+                        <div class="am-modal-hd">添加项目<{{project.name}}>用户</div>
+                        <div class="am-form-group">
+
+                            <div class="am-u-sm-12">
+                                <select id="project_add_user_id" data-am-selected="{btnSize: 'sm'}">
+                                    {% for user in data %}
+                                    <option value="{{user.id}}">
+                                        {{user.name}}({{user.email}})
+                                    </option>
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="am-modal-footer">
+                            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                            <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -233,32 +478,3 @@
 
 {% endblock %}
 
-<script>
- function select(){
-        var obj = document.getElementsByName("private")
-        if(obj.checked){
-            obj.checked = false;
-            $("#private_id").val = 0
-        }else{
-            obj.checked = true;
-            $("#private_id").val = 1
-        }
-
-    }
-
- function del(project_role_id,project_id){
-    $('#s').modal({
-        onConfirm: function(options) {
-              window.location.href = "/projectRole/delete?project_role_id="+project_role_id+"&project_id="+project_id
-<!--          window.location.href = "/projectRole/delete?project_id="+project_id+"&user_id="+project_id-->
-        },
-        onCancel: function() {
-        }
-      });
-    }
-
-
-
-
-
-</script>

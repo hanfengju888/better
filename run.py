@@ -7,8 +7,9 @@ from app.controllers.request.http import req
 from app.controllers.user.user import user
 from app.controllers.user.role import role
 from app.controllers.project.projectRole import projectRole
-
+from app.controllers.case.case import case
 from flask import render_template
+
 
 #注册蓝图
 better.register_blueprint(auth)
@@ -17,6 +18,7 @@ better.register_blueprint(pr)
 better.register_blueprint(user)
 better.register_blueprint(role)
 better.register_blueprint(projectRole)
+better.register_blueprint(case)
 
 
 import sys

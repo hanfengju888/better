@@ -38,11 +38,10 @@ class ProjectRoleDao(object):
     @staticmethod
     def list_user_by_project_id(project_id):
         """
-
         :param project_id: 通过Project_id获取user
         :return:
         """
-
+        print(project_id)
         try:
             project_roles = ProjectRole.query.filter_by(project_id=project_id,deleted_at=None).all()
             project_role_id = None
