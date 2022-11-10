@@ -225,3 +225,49 @@ WHERE project.name = %s AND project.deleted_at IS NULL
 [2022-11-07 18:43:38.945179] INFO: userDao: 有人访问了登录页面
 [2022-11-08 18:54:57.983959] INFO: userDao: 有人访问了登录页面
 [2022-11-09 08:19:42.795832] INFO: userDao: 有人访问了登录页面
+[2022-11-09 09:38:12.583614] ERROR: userDao: 获取用户:1项目列表失败,(_mysql_exceptions.OperationalError) (1054, "Unknown column 'project.app' in 'field list'")
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.app AS project_app, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img, project.description AS project_description 
+FROM project 
+WHERE project.deleted_at IS NULL AND (project.owner = %s OR project.private = %s)) AS anon_1]
+[parameters: (1, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-09 09:38:14.642148] ERROR: userDao: 获取用户:1项目列表失败,(_mysql_exceptions.OperationalError) (1054, "Unknown column 'project.app' in 'field list'")
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.app AS project_app, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img, project.description AS project_description 
+FROM project 
+WHERE project.deleted_at IS NULL AND (project.owner = %s OR project.private = %s)) AS anon_1]
+[parameters: (1, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-09 09:38:21.182605] ERROR: userDao: 获取用户:1项目列表失败,(_mysql_exceptions.OperationalError) (1054, "Unknown column 'project.app' in 'field list'")
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.app AS project_app, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img, project.description AS project_description 
+FROM project 
+WHERE project.deleted_at IS NULL AND (project.owner = %s OR project.private = %s)) AS anon_1]
+[parameters: (1, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-09 09:38:43.752382] ERROR: userDao: 获取用户:1项目列表失败,(_mysql_exceptions.OperationalError) (1054, "Unknown column 'project.app' in 'field list'")
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.app AS project_app, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img, project.description AS project_description 
+FROM project 
+WHERE project.deleted_at IS NULL AND (project.owner = %s OR project.private = %s)) AS anon_1]
+[parameters: (1, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-09 09:39:58.329965] ERROR: userDao: 获取用户:1项目列表失败,(_mysql_exceptions.OperationalError) (1054, "Unknown column 'project.app' in 'field list'")
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.app AS project_app, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img, project.description AS project_description 
+FROM project 
+WHERE project.deleted_at IS NULL AND (project.owner = %s OR project.private = %s)) AS anon_1]
+[parameters: (1, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-09 09:41:21.570065] ERROR: userDao: 执行用例失败: the JSON object must be str, bytes or bytearray, not 'NoneType'
+[2022-11-09 09:42:46.685804] ERROR: userDao: 执行用例失败: the JSON object must be str, bytes or bytearray, not 'NoneType'
+[2022-11-09 09:43:02.300778] ERROR: userDao: 执行用例失败: the JSON object must be str, bytes or bytearray, not 'NoneType'
+[2022-11-09 09:45:49.150794] ERROR: userDao: 执行用例失败: the JSON object must be str, bytes or bytearray, not 'NoneType'
+[2022-11-09 09:45:49.159231] ERROR: userDao: 执行用例失败: 'NoneType' object has no attribute 'request_header'
+[2022-11-09 09:45:49.169797] ERROR: userDao: 执行用例失败: the JSON object must be str, bytes or bytearray, not 'NoneType'
+[2022-11-09 14:58:15.971152] INFO: userDao: 有人访问了登录页面
+[2022-11-09 17:39:54.678744] INFO: userDao: 有人访问了登录页面
+[2022-11-09 17:55:11.344069] ERROR: userDao: 连接数据库82.157.253.2373失败: (2003, "Can't connect to MySQL server on '82.157.253.2373' ([Errno 11001] getaddrinfo failed)")
+[2022-11-10 09:20:45.382811] INFO: userDao: 有人访问了登录页面
+[2022-11-10 14:45:40.341463] INFO: userDao: 有人访问了登录页面

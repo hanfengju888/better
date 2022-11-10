@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block mainbody %}
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        数据库添加
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">数据库中心</a></li>
+        <li><a href="#">数据库管理</a></li>
+        <li class="am-active">添加</li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 数据库添加
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tpl-block ">
+
+            <div class="am-g tpl-amazeui-form">
+                <div class="am-u-sm-12 am-u-md-9">
+                    <form class="am-form am-form-horizontal" method="POST" action="/database/edit">
+                        <input type="hidden" name="id" value="{{database.id}}"/>
+                        <div class="am-form-group">
+                            <label  class="am-u-sm-3 am-form-label">数据库类型</label>
+                            <div class="am-u-sm-9">
+                                <select name="sql_type" data-am-selected="{btnSize: 'sm'}">
+                                   {% if database.sql_type == '1' %}
+                                    <option value="1" selected>mysql</option>
+                                  {% else %}
+                                    <option value="1">mysql</option>
+                                  {% endif %}
+
+                                  {% if database.sql_type == 2 %}
+                                    <option value="2" selected>postgresql</option>
+                                  {% else %}
+                                    <option value="2">postgresql</option>
+                                  {% endif %}
+
+                                  {% if database.sql_type == 3 %}
+                                    <option value="3" selected>mongo</option>
+                                  {% else %}
+                                    <option value="3">mongo</option>
+                                  {% endif %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="database-name" class="am-u-sm-3 am-form-label">名称</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="database-name" name="name" placeholder="请输入名称" maxlength="16"  value="{{database.name}}">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">地址</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="host" placeholder="请输入地址" value="{{database.host}}">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">端口</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="port" placeholder="请输入端口" value="{{database.port}}">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">库名</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="database_name" placeholder="请输入库名" value="{{database.database_name}}">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="am-form-group">
+                            <label for="database-QQ" class="am-u-sm-3 am-form-label">账号</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="username" id="database-QQ" placeholder="请输入账号" maxlength="16" value="{{database.username}}">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="database-weibo" class="am-u-sm-3 am-form-label">密码</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="password" id="database-weibo" placeholder="请输入密码" pattern="\S+" value="{{database.password}}">
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,7 +1,7 @@
 import datetime
 
 from flask import Flask, render_template, request, session, redirect, url_for, Blueprint, jsonify
-
+from app.utils.executor import Executor
 import json
 
 from app.middleware.HttpClient import Request
@@ -43,7 +43,7 @@ def send_http(user_info):
         return render_template('case/case-add.html', project=project,url=url,payload=payload,response=response)
     else:
         #保存到数据库
-        test_case =  TestCase('1', 1, url, project_id, "", payload,1, "expected", user_info.get("id") )
+        test_case =  TestCase('1', 1, url, project_id, "", payload,1, "expected", user_info.get("id") ,request_method=method)
         db.session.add(test_case)
         db.session.commit()
         return redirect(f"/project/to_detail_with_param/{project_id}")
@@ -58,6 +58,18 @@ def case_delete():
     db.session.commit()
 
     return redirect(f"/project/to_detail_with_param/{project_id}")
+
+#执行用例
+@case.route("/execute",methods=['GET','POST'])
+def execute_case():
+    id_list = request.args.get("id_list")
+    print(id_list)
+    for id in id_list.split(","):
+        result,err = Executor.run(id)
+        if err is None:
+            print(result)
+        else:
+            print(err)
 
 #
 # @case.route('/case/add',methods = ['POST'])

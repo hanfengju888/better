@@ -177,6 +177,48 @@
                         </ul>
                     </li>
 
+
+                    <li class="tpl-left-nav-item">
+                        <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-users"></i>
+                            <span>实用工具</span>
+                            {% if session.get('sign') == 'database' or session.get('sign') == 'role' %}
+                                <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+                            {% else %}
+                                <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                            {% endif %}
+                        </a>
+
+                            {% if session.get('sign') == 'database' or session.get('sign') == 'role' %}
+                                <ul class="tpl-left-nav-sub-menu" style="display:block">
+                            {% else %}
+                                <ul class="tpl-left-nav-sub-menu">
+                            {% endif %}
+
+                            <li>
+                                    {% if session.get('sign') == 'database' %}
+                                        <a href="/database/list?sign=database" class="active">
+                                    {% else %}
+                                        <a href="/database/list?sign=database">
+                                    {% endif %}
+                                    <i class="am-icon-male" ></i>
+                                    <span>数据库客户端</span>
+                                </a>
+                            </li>
+                            <li>
+                                    {% if session.get('sign') == 'role' %}
+                                        <a href="/role/list?sign=role" class="active">
+                                    {% else %}
+                                        <a href="/role/list?sign=role">
+                                    {% endif %}
+
+                                    <i class="am-icon-child"></i>
+                                    <span>角色管理</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="tpl-left-nav-item">
                         {% if session.get('sign') == 'job' %}
                         <a href="/job/list?sign=job" class="nav-link active">

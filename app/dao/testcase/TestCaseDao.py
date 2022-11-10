@@ -26,6 +26,16 @@ class TestCaseDao(object):
                      children=[{"key": f"case_{child.id}", "title": child.name} for child in result[key]],
                      title=key, total=len(result[key])) for key in keys]
 
+    @staticmethod
+    def query_case_by_id(case_id):
+        try:
+            tc = TestCase.query.filter_by(id=case_id,deleted_at=None).first()
+            return tc,None
+        except Exception as e:
+            err = f"TestCaseDao: 查询用例失败，{str(e)}"
+            TestCaseDao.log.error(err)
+            return None,err
+
 
 
 

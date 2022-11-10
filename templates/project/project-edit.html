@@ -64,19 +64,7 @@
         if(id_list.length == 0){
             alert("至少选择一个用例！")
         }else{
-            //进入到后台
-
-            $("#before_start").modal({
-                onConfirm: function(options) {
-                    var job_name = $("#job_name").val()
-                    var nodeC_ip = $("#nodeC_ip").val()
-                    var nodeB1_ip = $("#nodeB1_ip").val()
-                    window.location.href = "/job/add?id_list="+id_list+"&job_name="+job_name+"&nodeC_ip="+nodeC_ip+"&nodeB1_ip="+nodeB1_ip
-                },
-                onCancel: function() {
-                }
-
-         });
+           window.location.href = "/case/execute?id_list="+id_list
 
         }
     }

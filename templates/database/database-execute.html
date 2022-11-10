@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% block mainbody %}
+<script src="{{ url_for('static', filename = 'assets/js/dtree.js') }}"></script>
+<script src="{{ url_for('static', filename = 'assets/css/dtree.css') }}"></script>
+
+
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        数据库添加
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">数据库中心</a></li>
+        <li><a href="#">数据库管理</a></li>
+        <li class="am-active">添加</li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 数据库添加
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tpl-block ">
+
+            <div class="am-g tpl-amazeui-form">
+                <div class="am-u-sm-12 am-u-md-3">
+
+                    <script type="text/javascript">
+<!--                    　　添加一个树节点的方法：-->
+<!--                            add(id,pid,name,url,title,target,icon,iconOpen,open);-->
+<!--　　                          参数说明：-->
+<!--                              1） id               int           节点自身的id(唯一) -->
+<!--                              2） pid             int           节点的父节点id -->
+<!--                              3） name         string       节点显示在页面上的名称 -->
+<!--                              4） url             string       节点的链接地址 -->
+<!--                              5） title           string       鼠标放在节点上显示的提示信息 -->
+<!--                              6） target        string       节点链接所打开的目标frame -->
+<!--                              7） icon           string       节点关闭状态时显示的图标 -->
+<!--                              8） iconOpen    string      节点打开状态时显示的图标 -->
+<!--                              9） open          boolen     节点第一次加载是否打开 -->
+<!--                        7、dtree的方法-->
+<!--                        openAll();   //打开所有树节点，在生成树之前或者之后使用。-->
+<!--                        例子：tree.openAll();-->
+<!--                        closeAll();   //关闭所有树节点，在生成树之前或者之后使用。-->
+<!--                        例子：tree.closeAll();-->
+<!--                        openTo();   //打开某一个树节点，仅在树生成后使用。-->
+<!--                        例子：tree.openTo(3,true) ;-->
+
+
+                        d = new dTree('d');
+                        d.add(0,-1,'{{database.database_name}}');
+                        {% for v in return_list %}
+                            d.add({{v[0]}},{{v[1]}},'{{v[2]}}')
+                        {% endfor %}
+
+                        document.write(d);
+
+
+                    </script>
+
+                    <!--                    <script type="text/javascript">-->
+                    <!--                        d = new dTree('d');-->
+
+                    <!--                        d.add(0,-1,'{{database.database_name}}');-->
+                    <!--                        d.add(1,0,'Node 1');-->
+                    <!--                        d.add(2,0,'Node 2','example01.html');-->
+                    <!--                        d.add(3,1,'Node 1.1','example01.html');-->
+                    <!--                        d.add(4,0,'Node 3','example01.html');-->
+                    <!--                        d.add(5,3,'Node 1.1.1','example01.html');-->
+                    <!--                        d.add(6,5,'Node 1.1.1.1','example01.html');-->
+                    <!--                        d.add(7,0,'Node 4','example01.html');-->
+                    <!--                        d.add(8,1,'Node 1.2','example01.html');-->
+                    <!--                        d.add(9,0,'My Pictures','example01.html','Pictures I\'ve taken over the years','','','img/imgfolder.gif');-->
+                    <!--                        d.add(10,9,'The trip to Iceland','example01.html','Pictures of Gullfoss and Geysir');-->
+                    <!--                        d.add(11,9,'Mom\'s birthday','example01.html');-->
+                    <!--                        d.add(12,0,'Recycle Bin','example01.html','','','img/trash.gif');-->
+
+                    <!--                        document.write(d);-->
+
+
+                    <!--                    </script>-->
+
+                    <!--                    <div class="am-panel am-panel-light">-->
+                    <!--                        <div class="am-panel-hd am-cf am-collapsed" data-am-collapse="{target: '#collapse-panel-2'}">-->
+                    <!--                            浏览器统计<span-->
+                    <!--                                class="am-icon-chevron-right am-fr"></span></div>-->
+                    <!--                        <div id="collapse-panel-2" class="am-collapse" style="">-->
+                    <!--                            <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">-->
+                    <!--                                <tbody>-->
+                    <!--                                <tr>-->
+                    <!--                                    <th class="am-text-center">#</th>-->
+                    <!--                                    <th>浏览器</th>-->
+                    <!--                                    <th>访问量</th>-->
+                    <!--                                </tr>-->
+                    <!--                                <tr>-->
+                    <!--                                    <td class="am-text-center"><img src="assets/i/examples/admin-chrome.png" alt="">-->
+                    <!--                                    </td>-->
+                    <!--                                    <td>Google Chrome</td>-->
+                    <!--                                    <td>3,005</td>-->
+                    <!--                                </tr>-->
+                    <!--                                <tr>-->
+                    <!--                                    <td class="am-text-center"><img src="assets/i/examples/admin-firefox.png" alt="">-->
+                    <!--                                    </td>-->
+                    <!--                                    <td>Mozilla Firefox</td>-->
+                    <!--                                    <td>2,505</td>-->
+                    <!--                                </tr>-->
+                    <!--                                <tr>-->
+                    <!--                                    <td class="am-text-center"><img src="assets/i/examples/admin-ie.png" alt=""></td>-->
+                    <!--                                    <td>Internet Explorer</td>-->
+                    <!--                                    <td>1,405</td>-->
+                    <!--                                </tr>-->
+                    <!--                                <tr>-->
+                    <!--                                    <td class="am-text-center"><img src="assets/i/examples/admin-opera.png" alt=""></td>-->
+                    <!--                                    <td>Opera</td>-->
+                    <!--                                    <td>4,005</td>-->
+                    <!--                                </tr>-->
+                    <!--                                <tr>-->
+                    <!--                                    <td class="am-text-center"><img src="assets/i/examples/admin-safari.png" alt="">-->
+                    <!--                                    </td>-->
+                    <!--                                    <td>Safari</td>-->
+                    <!--                                    <td>505</td>-->
+                    <!--                                </tr>-->
+                    <!--                                </tbody>-->
+                    <!--                            </table>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+
+                </div>
+                <div class="am-u-sm-12 am-u-md-7">
+                    <form class="am-form am-form-horizontal" method="POST" action="/database/add">
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">数据库类型</label>
+                            <div class="am-u-sm-9">
+                                <select name="sql_type" data-am-selected="{btnSize: 'sm'}">
+                                    {% if database.sql_type == '1' %}
+                                    <option value="1" selected>mysql</option>
+                                    {% else %}
+                                    <option value="1">mysql</option>
+                                    {% endif %}
+
+                                    {% if database.sql_type == 2 %}
+                                    <option value="2" selected>postgresql</option>
+                                    {% else %}
+                                    <option value="2">postgresql</option>
+                                    {% endif %}
+
+                                    {% if database.sql_type == 3 %}
+                                    <option value="3" selected>mongo</option>
+                                    {% else %}
+                                    <option value="3">mongo</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="database-name" class="am-u-sm-3 am-form-label">名称</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="database-name" name="name" placeholder="请输入名称" maxlength="16"
+                                       value="tencent_mysql">
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
