@@ -118,7 +118,6 @@ def to_execute():
                                 port=database.port)
 
     sql = "show tables;"
-    # sql = "select * from user"
     result_list = table_cursor.execute_sql(table_cursor.cursor,sql)
     return_list = []
     first_number = 1
@@ -137,3 +136,47 @@ def to_execute():
             first_number += 1
 
     return render_template('database/database-execute.html',database=database,result_list=result_list,return_list=return_list)
+
+
+#执行SQL
+@database.route('/execute_sql',methods = ['POST','GET'])
+def execute_sql():
+    execute_sql = request.args.get("sql")
+    id = request.args.get("database_id")
+    database = Database.query.filter_by(id=id).first()
+    cursor = DatabaseUtil(database.host, user=database.username, password=database.password,
+                                database=database.database_name,
+                                port=database.port)
+    table_name = execute_sql.split(" ")[-1]
+    title_list = cursor.execute_sql(cursor.cursor,f"desc `{table_name}`")
+    final_title_list = []
+    for i in title_list:
+        final_title_list.append(i[0])
+
+    value_list = cursor.execute_sql(cursor.cursor,execute_sql)
+
+    table_cursor = DatabaseUtil(database.host, user=database.username, password=database.password,
+                                database=database.database_name,
+                                port=database.port)
+    desc_cursor = DatabaseUtil(database.host, user=database.username, password=database.password,
+                               database=database.database_name,
+                               port=database.port)
+
+    sql = "show tables;"
+    result_list = table_cursor.execute_sql(table_cursor.cursor, sql)
+    return_list = []
+    first_number = 1
+    for v in result_list:
+        second_number = 0
+        table_name = v[0]
+        sql = f"desc `{table_name}`;"
+        return_list.append([first_number, second_number, table_name])
+        second_number = first_number
+        first_number += 1
+
+        desc_list = desc_cursor.execute_sql(desc_cursor.cursor, sql)
+        for m in desc_list:
+            return_list.append([first_number, second_number, m[0] + " " + m[1]])
+            first_number += 1
+
+    return render_template('database/database-execute.html',database=database,sql=execute_sql,value_list=value_list,title_list=final_title_list,result_list=result_list,return_list=return_list)
