@@ -60,7 +60,7 @@ height: 300px;
 
 
                         d = new dTree('d');
-                        d.add(0,-1,'{{database.database_name}}');
+                        d.add(0,-1,'{{database.database_name}}({{database.host}}:{{database.port}})');
                         {% for v in return_list %}
                             d.add({{v[0]}},{{v[1]}},'{{v[2]}}')
                         {% endfor %}

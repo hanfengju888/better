@@ -182,14 +182,14 @@
                         <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                             <i class="am-icon-users"></i>
                             <span>实用工具</span>
-                            {% if session.get('sign') == 'database' or session.get('sign') == 'role' %}
+                            {% if session.get('sign') == 'database' or session.get('sign') == 'redis' %}
                                 <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
                             {% else %}
                                 <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
                             {% endif %}
                         </a>
 
-                            {% if session.get('sign') == 'database' or session.get('sign') == 'role' %}
+                            {% if session.get('sign') == 'database' or session.get('sign') == 'redis' %}
                                 <ul class="tpl-left-nav-sub-menu" style="display:block">
                             {% else %}
                                 <ul class="tpl-left-nav-sub-menu">
@@ -206,14 +206,14 @@
                                 </a>
                             </li>
                             <li>
-                                    {% if session.get('sign') == 'role' %}
-                                        <a href="/role/list?sign=role" class="active">
+                                    {% if session.get('sign') == 'redis' %}
+                                        <a href="/redis/list?sign=redis" class="active">
                                     {% else %}
-                                        <a href="/role/list?sign=role">
+                                        <a href="/redis/list?sign=redis">
                                     {% endif %}
 
                                     <i class="am-icon-child"></i>
-                                    <span>角色管理</span>
+                                    <span>redis客户端</span>
                                 </a>
                             </li>
                         </ul>

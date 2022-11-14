@@ -9,6 +9,7 @@ from app.controllers.user.role import role
 from app.controllers.project.projectRole import projectRole
 from app.controllers.case.case import case
 from app.controllers.database.dataBase import database
+from app.controllers.redis.redis import rediss
 from flask import render_template
 
 
@@ -21,6 +22,7 @@ better.register_blueprint(role)
 better.register_blueprint(projectRole)
 better.register_blueprint(case)
 better.register_blueprint(database)
+better.register_blueprint(rediss)
 
 
 import sys

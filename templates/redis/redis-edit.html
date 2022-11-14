@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block mainbody %}
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        redis编辑
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">redis中心</a></li>
+        <li><a href="#">redis管理</a></li>
+        <li class="am-active">编辑</li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> redis编辑
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tpl-block ">
+
+            <div class="am-g tpl-amazeui-form">
+                <div class="am-u-sm-12 am-u-md-9">
+                    <form class="am-form am-form-horizontal" method="POST" action="/redis/edit">
+                        <input type="hidden" name="id" value="{{redis.id}}"/>
+                        <div class="am-form-group">
+                            <label for="database-name" class="am-u-sm-3 am-form-label">名称</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="database-name" name="name" placeholder="请输入名称" maxlength="16"  value="{{redis.name}}">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">IP</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="host" placeholder="请输入地址" value="{{redis.host}}">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">端口</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="port" placeholder="请输入端口" value="{{redis.port}}">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">数据库编号</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="db_number" placeholder="请输入数据库编号" value="{{redis.db_number}}">
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
+                            <label for="database-weibo" class="am-u-sm-3 am-form-label">密码</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="password" id="database-weibo" placeholder="请输入密码" value="{{redis.password}}">
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

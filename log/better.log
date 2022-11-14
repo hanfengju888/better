@@ -271,3 +271,15 @@ WHERE project.deleted_at IS NULL AND (project.owner = %s OR project.private = %s
 [2022-11-09 17:55:11.344069] ERROR: userDao: 连接数据库82.157.253.2373失败: (2003, "Can't connect to MySQL server on '82.157.253.2373' ([Errno 11001] getaddrinfo failed)")
 [2022-11-10 09:20:45.382811] INFO: userDao: 有人访问了登录页面
 [2022-11-10 14:45:40.341463] INFO: userDao: 有人访问了登录页面
+[2022-11-11 09:30:40.664743] INFO: userDao: 有人访问了登录页面
+[2022-11-14 09:44:53.977905] INFO: userDao: 有人访问了登录页面
+[2022-11-14 09:45:40.572070] ERROR: userDao: 连接redis数据库192.168.4.16失败: 'Blueprint' object has no attribute 'Redis'
+[2022-11-14 09:46:02.689715] ERROR: userDao: 连接redis数据库192.168.4.16失败: 'Blueprint' object has no attribute 'Redis'
+[2022-11-14 09:46:35.675001] ERROR: userDao: 连接redis数据库192.168.4.16失败: 'Blueprint' object has no attribute 'Redis'
+[2022-11-14 09:47:05.328602] ERROR: userDao: 连接redis数据库192.168.4.16失败: 'Blueprint' object has no attribute 'Redis'
+[2022-11-14 09:48:48.910724] ERROR: userDao: 连接redis数据库192.168.4.16失败: 'Blueprint' object has no attribute 'Redis'
+[2022-11-14 09:53:25.811692] ERROR: userDao: 连接redis数据库192.168.4.16失败: 'Blueprint' object has no attribute 'Redis'
+[2022-11-14 09:53:45.558564] ERROR: userDao: 连接redis数据库192.168.4.16失败: 'Blueprint' object has no attribute 'Redis'
+[2022-11-14 10:09:13.421764] ERROR: userDao: 连接数据库192.168.4.161失败: 'Redis' object has no attribute 'Redis'
+[2022-11-14 10:09:28.118717] ERROR: userDao: 连接数据库192.168.4.16失败: 'Redis' object has no attribute 'Redis'
+[2022-11-14 10:13:47.389453] ERROR: userDao: 连接数据库192.168.4.16失败: 'Redis' object has no attribute 'Redis'
