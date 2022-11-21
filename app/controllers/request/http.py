@@ -1,3 +1,6 @@
+import json
+
+import requests
 from flask import Blueprint, session
 from flask import jsonify
 from flask import request
@@ -8,6 +11,7 @@ from app.middleware.HttpClient import Request
 
 req = Blueprint("request",__name__,url_prefix="/request")
 
+#仅接口使用
 @req.route("/http",methods=['POST'])
 @permission()
 def http_request(user_info):
@@ -35,6 +39,7 @@ def http_ui():
 
     return render_template("http/http.html")
 
+#页面使用，在线执行
 @req.route("/send_http",methods=["POST"])
 @permission()
 def send_http(user_info):
@@ -42,10 +47,19 @@ def send_http(user_info):
     url = request.form["url"]
     payload = request.form["payload"]
     # headers = {"Content-Type":"application/json"}
-    headers = None
-
-    r = Request(url, data=payload, headers=headers)
-    response = r.request(method)
+    headers = {}
+    payload = payload.replace("'",'"')
+    json_payload = json.loads(payload)
+    #上传资源特殊处理
+    if json_payload.get('modeFile') is not None:
+        file_path = json_payload.get('modeFile')
+        files = [('modeFile',(file_path.split("/")[-1],open(file_path,'rb'),'text/csv'))]
+        del json_payload['modeFile']
+        r = Request(url, data=json_payload, headers=None,files=files,verify=False)
+        response = r.request(method)
+    else:
+        r = Request(url, data=payload, headers=headers)
+        response = r.request(method)
 
     if not response.get("status"):
         print("未通过。。。")

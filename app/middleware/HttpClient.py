@@ -27,6 +27,7 @@ class Request(object):
             if method.upper() == "GET":
                 response = self.client.get(self.url,**self.kwargs)
             elif method.upper() == "POST":
+                print(self.kwargs)
                 response = self.client.post(self.url,**self.kwargs)
 
                 print(response.text)

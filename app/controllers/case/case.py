@@ -27,23 +27,36 @@ def send_http(user_info):
     method = request.form["request_method"]
     url = request.form["url"]
     payload = request.form["payload"]
-    headers = None
+    headers = {}
     project_id = request.form["project_id"]
     project = Project.query.get(project_id)
 
     if flag == "0":
-        r = Request(url, data=payload, headers=headers)
-        response = r.request(method)
+
+        payload = payload.replace("'", '"')
+        json_payload = json.loads(payload)
+        # 上传资源特殊处理
+        if json_payload.get('modeFile') is not None:
+            file_path = json_payload.get('modeFile')
+            files = [('modeFile', (file_path.split("/")[-1], open(file_path, 'rb'), 'text/csv'))]
+            del json_payload['modeFile']
+            r = Request(url, data=json_payload, headers=headers, files=files, verify=False)
+            response = r.request(method)
+        else:
+            r = Request(url, data=payload, headers=headers)
+            response = r.request(method)
 
         if not response.get("status"):
             return jsonify(dict(code=110, data=response, msg=response.get("msg")))
 
 
 
-        return render_template('case/case-add.html', project=project,url=url,payload=payload,response=response)
+        return render_template('case/case-add.html', project=project,url=url,payload=payload,response=json.dumps(response,sort_keys=True,indent=2,ensure_ascii=False))
     else:
         #保存到数据库
-        test_case =  TestCase('1', 1, url, project_id, "", payload,1, "expected", user_info.get("id") ,request_method=method)
+        expected = request.form["expected"]
+        name = request.form.get("name")
+        test_case =  TestCase(name, 1, url, project_id, "", payload,1, expected, user_info.get("id") ,request_method=method)
         db.session.add(test_case)
         db.session.commit()
         return redirect(f"/project/to_detail_with_param/{project_id}")
@@ -70,6 +83,74 @@ def execute_case():
             print(result)
         else:
             print(err)
+
+
+@case.route('/to_edit',methods = ['POST','GET'])
+def case_to_edit():
+    id = request.args.get("id")
+    project_id = request.args.get("project_id")
+    case = TestCase.query.filter_by(id=id).first()
+    case.body = json.dumps(json.loads(case.body),indent=2,ensure_ascii=False)
+    project = Project.query.filter_by(id=project_id).first()
+    assert_dic = dict(expected=case.expected,acutal='',assert_result='')
+    return render_template('case/case-edit.html',case=case,project=project,assert_dic=assert_dic)
+
+
+@case.route('/send_http_edit',methods = ['POST','GET'])
+def case_edit():
+    # flag 标记是点击的请求按钮 0   还是保存按钮 1
+    id = request.form["case_id"]
+    flag = request.form["flag"]
+    method = request.form["request_method"]
+    url = request.form["url"]
+    payload = request.form["payload"]
+    headers = {}
+    project_id = request.form["project_id"]
+    project = Project.query.get(project_id)
+
+    if flag == "0":
+
+        payload = payload.replace("'", '"')
+        json_payload = json.loads(payload)
+        # 上传资源特殊处理
+        if json_payload.get('modeFile') is not None:
+            file_path = json_payload.get('modeFile')
+            files = [('modeFile', (file_path.split("/")[-1], open(file_path, 'rb'), 'text/csv'))]
+            del json_payload['modeFile']
+            r = Request(url, data=json_payload, headers=headers, files=files, verify=False)
+            response = r.request(method)
+        else:
+            r = Request(url, data=payload, headers=headers)
+            response = r.request(method)
+
+        if not response.get("status"):
+            return jsonify(dict(code=110, data=response, msg=response.get("msg")))
+
+        case = TestCase.query.filter_by(id=id).first()
+        case.body = json.dumps(json.loads(case.body), indent=2, ensure_ascii=False)
+
+        assert_dic = {}
+        assert_dic['expected'] = case.expected
+        assert_dic['actual'] = response['response']['msg']
+        assert_result = assert_dic.get("expected") == assert_dic.get('actual')
+        assert_result = '成功' if assert_result else '失败'
+        assert_dic['assert_result'] = assert_result
+
+        return render_template('case/case-edit.html', assert_dic=assert_dic,project=project, case=case,response=json.dumps(response,sort_keys=True,indent=2,ensure_ascii=False))
+    else:
+        # 保存到数据库
+        test_case = TestCase.query.get(id)
+        test_case.name = request.form.get("name")
+        test_case.request_method = method
+        test_case.url = url
+        test_case.body = payload
+        test_case.updated_at = datetime.datetime.now()
+        db.session.commit()
+        return redirect(f"/project/to_detail_with_param/{project_id}")
+
+
+
+
 
 #
 # @case.route('/case/add',methods = ['POST'])
@@ -100,31 +181,8 @@ def execute_case():
 #
 #
 #
-# @case.route('/case/to_edit',methods = ['POST','GET'])
-# def case_to_edit():
-#     id = request.args.get("id")
-#     case = Case.query.filter_by(id=id).first()
-#
-#     return render_template('case/case-edit.html',case=case)
-#
-# @case.route('/case/edit',methods = ['POST','GET'])
-# def case_edit():
-#     id = request.form['id']
-#     case = Case.query.get(id)
-#     case.case_name = request.form['case_name']
-#     case.case_detail = request.form['case_detail']
-#     case.expect_type = request.form['expect_type']
-#     case.expect_result = request.form['expect_result']
-#     case.remark = request.form['remark']
-#     case.update_time = utils.get_now_time()
-#
-#     DB.session.commit()
-#
-#     module = Module.query.filter_by(id=case.module_id).first()
-#     cases = Case.query.filter(Case.state == '1', Case.module_id == case.module_id)
-#
-#     return render_template('case/case.html', cases=cases, module=module)
-#
+
+
 # @case.route('/case/to_detail',methods = ['POST','GET'])
 # def case_to_detail():
 #     id = request.args.get("id")

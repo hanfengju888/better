@@ -38,7 +38,7 @@
                                 </select>
                             </div>
                             <div class="am-u-sm-7">
-                                <input type="text" id="url" name="url" placeholder="请输入URL" value="https://api.apiopen.top/api/getHaoKanVideo?page=0&size=2" required>
+                                <input type="text" id="url" name="url" placeholder="请输入URL" value="https://192.168.4.103/iof/base/resource/addResourceBf" required>
                             </div>
                             <div class="am-u-sm-2">
                                 <button type="submit" class="am-btn am-btn-primary"><i class="am-icon-send">send</i>
@@ -69,17 +69,31 @@
 
                                     </div>
                                     <div class="am-tab-panel am-fade" id="tab2">
-                                        <form class="am-form">
-                                            <div class="am-g am-margin-top">
-                                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
-                                                    文章标题
-                                                </div>
-                                                <div class="am-u-sm-8 am-u-md-4">
-                                                    <input type="text" class="am-input-sm">
-                                                </div>
-                                                <div class="am-hide-sm-only am-u-md-6">*必填，不可重复</div>
-                                            </div>
-                                        </form>
+                                        <div class="card-box">
+                                            <!-- col start -->
+                                            <table class="am-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>参数名称</th>
+                                                        <th>值</th>
+                                                        <th>备注</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><input type="text" /></td>
+                                                        <td><input type="text" /></td>
+                                                        <td><input type="text" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="text" /></td>
+                                                        <td><input type="text" /></td>
+                                                        <td><input type="text" /></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!-- col end -->
+                                        </div>
                                     </div>
                                     <div class="am-tab-panel am-fade am-in am-active" id="tab3">
                                         <label class="am-radio-inline">
@@ -101,7 +115,12 @@
                                         <label class="am-radio-inline">
                                             <input type="radio" name="radio10" value="pig" data-am-ucheck> GraphQL
                                         </label>
+
+
                                         <textarea class="" rows="5" id="payload" name="payload">{{payload}}</textarea>
+
+
+
                                     </div>
                                 </div>
                             </div>

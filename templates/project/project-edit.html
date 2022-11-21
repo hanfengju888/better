@@ -144,10 +144,7 @@
                                                                            onclick="select_all()" name="select_all_btn">
                                                                 </th>
                                                                 <th class="table-type">序号</th>
-                                                                <th class="table-type">所属模块</th>
                                                                 <th class="table-title">用例名称</th>
-                                                                <th class="table-date am-hide-sm-only">断言类型</th>
-                                                                <th class="table-date am-hide-sm-only">断言结果</th>
                                                                 <th class="table-title">创建时间</th>
                                                                 <th class="table-title">更新时间</th>
                                                                 <th class="table-type">状态</th>
@@ -164,39 +161,17 @@
                                                                 </td>
                                                                 <td>{{loop.index}}</td>
                                                                 <td><a>{{case.name}}</a></td>
-                                                                <td>{{case.case_name}}</td>
-                                                                <td>
-                                                                    {% if case.request_type == '0' %}
-                                                                    数量
-                                                                    {% elif case.request_type == '1' %}
-                                                                    范围
-                                                                    {% elif case.request_type == '2' %}
-                                                                    MD5加密
-                                                                    {% elif case.request_type == '3' %}
-                                                                    源文件
-                                                                    {% endif %}
-                                                                </td>
                                                                 <td>{{case.created_at}}</td>
                                                                 <td>{{case.created_at}}</td>
                                                                 <td>{{case.updated_at}}</td>
-                                                                {% if case.state == '1' %}
-                                                                <td>正常状态</td>
-                                                                {% else %}
-                                                                <td>其他状态</td>
-                                                                {% endif %}
 
                                                                 <td>
                                                                     <div class="am-btn-toolbar">
                                                                         <div class="am-btn-group am-btn-group-xs">
                                                                             <button class="am-btn am-btn-default am-btn-xs am-text-secondary">
                                                                                 <span class="am-icon-pencil-square-o"></span><a
-                                                                                    href="/case/to_edit?id={{case.id}}">
+                                                                                    href="/case/to_edit?id={{case.id}}&project_id={{project.id}}">
                                                                                 编辑</a></button>
-                                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary">
-                                                                                <span class="am-icon-eye"></span><a
-                                                                                    href="/case/to_detail?id={{case.id}}">
-                                                                                查看详情</a></button>
-
 
                                                                             <button id="case_del_id" onclick="case_del('{{case.id}}')"
                                                                                     type="button"

@@ -1,144 +1,180 @@
 {% extends "base.html" %}
 {% block mainbody %}
-<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+<script>
+    function test(){
+        document.getElementById("flag1").value = "0"
+        $("#mainForm").submit()
+    }
+
+</script>
 <div class="tpl-content-wrapper">
-    <div class="tpl-content-page-title">
-        用例编辑
-    </div>
-    <ol class="am-breadcrumb">
-        <li><a href="#" class="am-icon-home">用例中心</a></li>
-        <li><a href="#">用例管理</a></li>
-        <li class="am-active">修改</li>
-    </ol>
+
     <div class="tpl-portlet-components">
         <div class="portlet-title">
             <div class="caption font-green bold">
-                <span class="am-icon-code"></span> 用例修改
+                <span class="am-icon-code"></span> 项目：{{project.name}} --> 编辑用例
             </div>
             <div class="tpl-portlet-input tpl-fz-ml">
                 <div class="portlet-input input-small input-inline">
                 </div>
             </div>
-
-
         </div>
+
         <div class="tpl-block ">
-
             <div class="am-g tpl-amazeui-form">
-
-
-                <div class="am-u-sm-12 am-u-md-9">
-                    <form id="edit_form" class="am-form am-form-horizontal" method="POST" action="/case/edit">
-                       <input type="hidden" name="id" value="{{case.id}}">
-                       <div class="am-form-group">
-                            <label for="user-name" class="am-u-sm-3 am-form-label">用例名称</label>
-                            <div class="am-u-sm-9">
-                                <input type="text" id="user-name" name="case_name" value="{{case.case_name}}" placeholder="用例名称" required>
-                            </div>
-                        </div>
-
+                <div class="am-u-sm-12 am-u-md-12">
+                    <form class="am-form am-form-horizontal" method="POST" action="/case/send_http_edit" id="mainForm">
+                        <input type="hidden" name="project_id" value="{{project.id}}"/>
+                        <input type="hidden" name="case_id" value="{{case.id}}"/>
+                        <input type="hidden" name="flag" id="flag1" value="1"/>
                         <div class="am-form-group">
-                            <label for="case_detail_label" class="am-u-sm-3 am-form-label">用例描述</label>
-                            <div class="am-u-sm-9">
-                                <pre id="case_detail_pre" style="padding: 5px; background-color: #EEE; border: 2px solid #6495ED;" hidden="hidden"></pre>
-<!--                                <input id="case_detail" name="case_detail" value="{{case.case_detail}}" hidden="hidden"/>-->
-                                <textarea class="" name="case_detail" rows="5" id="case_detail" onblur="change()" placeholder="用例描述">{{case.case_detail}}</textarea>
+                            <div class="am-u-sm-3">
+                                <label class="am-u-sm-3 am-form-label">用例名称</label>
                             </div>
+                            <div class="am-u-sm-3">
+                                <input type="text" name="name" placeholder="请输入用例名称" value="{{case.name}}">
+                            </div>
+                            <div class="am-u-sm-6">
+                            </div>
+
                         </div>
                         <div class="am-form-group">
-                            <label for="expect_type_label" class="am-u-sm-3 am-form-label">断言类型</label>
-                            <div class="am-u-sm-9">
-                                <select name="expect_type" data-am-selected="{btnSize: 'sm'}">
-                                    {% if case.expect_type == '0' %}
-                                    <option value="0" selected="selected">数量</option>
+                            <div class="am-u-sm-3">
+                                <select name="request_method" data-am-selected>
+                                    {% if case.request_method == 'GET' %}
+                                        <option value="GET" selected>GET</option>
                                     {% else %}
-                                     <option value="0">数量</option>
+                                        <option value="GET">GET</option>
                                     {% endif %}
 
-                                    {% if case.expect_type == '1' %}
-                                    <option value="1" selected="selected">范围</option>
+                                    {% if case.request_method == 'POST' %}
+                                        <option value="POST" selected>POST</option>
                                     {% else %}
-                                     <option value="1">范围</option>
+                                        <option value="POST">POST</option>
                                     {% endif %}
 
-                                    {% if case.expect_type == '2' %}
-                                    <option value="2" selected="selected">MD5加密</option>
+                                    {% if case.request_method == 'DELETE' %}
+                                        <option value="DELETE" selected>DELETE</option>
                                     {% else %}
-                                     <option value="2">MD5加密</option>
+                                        <option value="DELETE">DELETE</option>
                                     {% endif %}
 
-                                    {% if case.expect_type == '3' %}
-                                    <option value="3" selected="selected">源文件</option>
+                                    {% if case.request_method == 'HEAD' %}
+                                        <option value="HEAD" selected>HEAD</option>
                                     {% else %}
-                                     <option value="3">源文件</option>
+                                        <option value="HEAD">HEAD</option>
                                     {% endif %}
 
                                 </select>
+                            </div>
+                            <div class="am-u-sm-7">
+                                <input type="text" id="url" name="url" placeholder="请输入URL" value="{{case.url}}" required>
+                            </div>
+                            <div class="am-u-sm-2">
+                                <button type="button" onclick="test()" class="am-btn am-btn-primary"><i class="am-icon-send">send</i></button>
+                                <button type="submit" class="am-btn am-btn-primary">保存</i></button>
 
                             </div>
                         </div>
 
+
                         <div class="am-form-group">
-                            <label for="expect_result_label" class="am-u-sm-3 am-form-label">断言结果</label>
-                            <div class="am-u-sm-9">
-                                <textarea class="" name="expect_result" rows="5" id="expect_result_label" placeholder="用例描述">{{case.expect_result}}</textarea>
+                            <div class="am-tabs am-margin" data-am-tabs="">
+                                <ul class="am-tabs-nav am-nav am-nav-tabs">
+<!--                                    <li><a href="#tab1">Params</a></li>-->
+<!--                                    <li><a href="#tab2">Headers</a></li>-->
+                                    <li class="am-active"><a href="#tab3">Body</a></li>
+                                </ul>
+                                <div class="am-tabs-bd">
+                                    <div class="am-tab-panel am-fade" id="tab1">
+                                    </div>
+                                    <div class="am-tab-panel am-fade" id="tab2">
+<!--                                        <form class="am-form">-->
+                                            <div class="am-g am-margin-top">
+                                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                                    文章标题
+                                                </div>
+                                                <div class="am-u-sm-8 am-u-md-4">
+                                                    <input type="text" class="am-input-sm">
+                                                </div>
+                                                <div class="am-hide-sm-only am-u-md-6">*必填，不可重复</div>
+                                            </div>
+<!--                                        </form>-->
+                                    </div>
+                                    <div class="am-tab-panel am-fade am-in am-active" id="tab3">
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="male" data-am-ucheck> none-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="female" data-am-ucheck> form-data-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="pig" data-am-ucheck>-->
+<!--                                            x-www-form-urlencoded-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> raw-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> binary-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> GraphQL-->
+<!--                                        </label>-->
+
+                                        <textarea class="" rows="5" id="payload" name="payload">{{case.body}}</textarea>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="am-form-group">
-                            <label for="user-intro" class="am-u-sm-3 am-form-label">备注</label>
-                            <div class="am-u-sm-9">
-                                <textarea class="" name="remark" rows="5" id="user-intro" placeholder="请输入备注">{{case.remark}}</textarea>
-                            </div>
-                        </div>
-                        <div class="am-form-group">
-                            <div class="am-u-sm-9 am-u-sm-push-3">
-                                <button type="button" class="am-btn am-btn-primary" onclick="toSumbmit()">保存</button>
-                            </div>
-                        </div>
+
                     </form>
                 </div>
+
             </div>
+
+        </div>
+
+         <div class="tpl-block ">
+
+            <div class="am-g tpl-amazeui-form">
+                <div class="am-u-sm-12 am-u-md-12">
+                    <form class="am-form am-form-horizontal" method="POST" action="/request/send_http">
+
+                        <div class="am-form-group">
+                            <div class="am-tabs am-margin" data-am-tabs="">
+                                <ul class="am-tabs-nav am-nav am-nav-tabs">
+<!--                                    <li><a href="#other">其他</a></li>-->
+                                    <li><a href="#assert">断言</a></li>
+                                    <li class="am-active"><a href="#response_result">响应结果</a></li>
+                                </ul>
+                                <div class="am-tabs-bd">
+<!--                                    <div class="am-tab-panel am-fade" id="other">-->
+<!--                                    </div>-->
+                                    <div class="am-tab-panel am-fade" id="assert">
+                                        期望结果:{{assert_dic.expected}}<br>
+                                        实际结果:{{assert_dic.actual}}<br>
+                                        断言结果： <mark>{{assert_dic.assert_result}}</mark><br>
+                                    </div>
+                                    <div class="am-tab-panel am-fade am-in am-active" id="response_result">
+                                        <pre>{{response}}</pre>
+<!--                                        <textarea class="" rows="5" id="res">{{response}}</textarea>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
         </div>
 
     </div>
 
-<script type="text/javascript">
-    function change(){
-        var case_detail = $("#case_detail").val()
-        try {
-            json = new JSONFormat(case_detail, 4).toString();
-            $("#case_detail_pre").html(json);
-            $("#case_detail").hide()
-            $("#case_detail_pre").show()
-        }catch(e) {
-        }
-    }
-
-    $(document).ready(function(){
-        var case_detail = $("#case_detail").val()
-
-        case_detail = case_detail.replace(/\s*/g,'')
-        try {
-            json = new JSONFormat(case_detail, 4).toString();
-            $("#case_detail_pre").html(json);
-            $("#case_detail").hide()
-            $("#case_detail_pre").removeAttr("hidden")
-        }catch(e) {
-<!--            alert("json")-->
-        }
-    });
-
-    function toSumbmit(){
-        var case_detail_content = $("#case_detail_pre").text()
-        var case_detail_chuli = case_detail_content.replace(/\s*/g,'')
-        $("#case_detail").val(case_detail_chuli);
-        $("#edit_form").submit();
-    }
-
-
-
-</script>
 </div>
-
 
 {% endblock %}

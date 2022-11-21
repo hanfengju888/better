@@ -283,3 +283,9 @@ WHERE project.deleted_at IS NULL AND (project.owner = %s OR project.private = %s
 [2022-11-14 10:09:13.421764] ERROR: userDao: 连接数据库192.168.4.161失败: 'Redis' object has no attribute 'Redis'
 [2022-11-14 10:09:28.118717] ERROR: userDao: 连接数据库192.168.4.16失败: 'Redis' object has no attribute 'Redis'
 [2022-11-14 10:13:47.389453] ERROR: userDao: 连接数据库192.168.4.16失败: 'Redis' object has no attribute 'Redis'
+[2022-11-17 15:40:27.097961] INFO: userDao: 有人访问了登录页面
+[2022-11-17 19:39:29.714453] INFO: userDao: 有人访问了登录页面
+[2022-11-18 17:11:13.748208] INFO: userDao: 有人访问了登录页面
+[2022-11-18 18:32:37.623071] INFO: userDao: 有人访问了登录页面
+[2022-11-19 15:01:20.903449] INFO: userDao: 有人访问了登录页面
+[2022-11-21 09:19:43.987270] INFO: userDao: 有人访问了登录页面

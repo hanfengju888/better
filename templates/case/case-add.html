@@ -29,6 +29,17 @@
                         <input type="hidden" name="flag" id="flag1" value="1"/>
                         <div class="am-form-group">
                             <div class="am-u-sm-3">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">用例名称</label>
+                            </div>
+                            <div class="am-u-sm-3">
+                                <input type="text" name="name" placeholder="请输入用例名称">
+                            </div>
+                            <div class="am-u-sm-6">
+                            </div>
+
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-3">
                                 <select name="request_method" data-am-selected>
                                     <option value="GET">GET</option>
                                     <option value="POST" selected>POST</option>
@@ -37,7 +48,7 @@
                                 </select>
                             </div>
                             <div class="am-u-sm-7">
-                                <input type="text" id="url" name="url" placeholder="请输入URL" value="https://api.apiopen.top/api/getHaoKanVideo?page=0&size=2" required>
+                                <input type="text" id="url" name="url" placeholder="请输入URL" value="https://192.168.4.103/iof/base/resource/addResourceBf" required>
                             </div>
                             <div class="am-u-sm-2">
                                 <button type="button" onclick="test()" class="am-btn am-btn-primary"><i class="am-icon-send">send</i></button>
@@ -50,9 +61,10 @@
                         <div class="am-form-group">
                             <div class="am-tabs am-margin" data-am-tabs="">
                                 <ul class="am-tabs-nav am-nav am-nav-tabs">
-                                    <li><a href="#tab1">Params</a></li>
-                                    <li><a href="#tab2">Headers</a></li>
+<!--                                    <li><a href="#tab1">Params</a></li>-->
+<!--                                    <li><a href="#tab2">Headers</a></li>-->
                                     <li class="am-active"><a href="#tab3">Body</a></li>
+                                    <li><a href="#tab4">断言</a></li>
                                 </ul>
                                 <div class="am-tabs-bd">
                                     <div class="am-tab-panel am-fade" id="tab1">
@@ -82,26 +94,34 @@
 <!--                                        </form>-->
                                     </div>
                                     <div class="am-tab-panel am-fade am-in am-active" id="tab3">
-                                        <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="male" data-am-ucheck> none
-                                        </label>
-                                        <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="female" data-am-ucheck> form-data
-                                        </label>
-                                        <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="pig" data-am-ucheck>
-                                            x-www-form-urlencoded
-                                        </label>
-                                        <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> raw
-                                        </label>
-                                        <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> binary
-                                        </label>
-                                        <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> GraphQL
-                                        </label>
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="male" data-am-ucheck> none-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="female" data-am-ucheck> form-data-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="pig" data-am-ucheck>-->
+<!--                                            x-www-form-urlencoded-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> raw-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> binary-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> GraphQL-->
+<!--                                        </label>-->
                                         <textarea class="" rows="5" id="payload" name="payload">{{payload}}</textarea>
+                                    </div>
+                                    <div class="am-tab-panel am-fade" id="tab4">
+                                        <div class="am-form-group">
+                                            <label for="user-name" class="am-u-sm-3 am-form-label">期望结果</label>
+                                            <div class="am-u-sm-9">
+                                                <input type="text" name="expected" placeholder="请输入内容">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -123,8 +143,8 @@
                         <div class="am-form-group">
                             <div class="am-tabs am-margin" data-am-tabs="">
                                 <ul class="am-tabs-nav am-nav am-nav-tabs">
-                                    <li><a href="#other">其他</a></li>
-                                    <li><a href="#assert">断言</a></li>
+<!--                                    <li><a href="#other">其他</a></li>-->
+<!--                                    <li><a href="#assert">断言</a></li>-->
                                     <li class="am-active"><a href="#response_result">响应结果</a></li>
                                 </ul>
                                 <div class="am-tabs-bd">
@@ -143,19 +163,16 @@
                                     </div>
                                     <div class="am-tab-panel am-fade" id="assert">
                                         <form class="am-form">
-                                            <div class="am-g am-margin-top">
-                                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
-                                                    文章标题
+                                            <div class="am-form-group">
+                                                <label for="user-name" class="am-u-sm-3 am-form-label">期望结果</label>
+                                                <div class="am-u-sm-9">
+                                                    <input type="text" id="user-name" name="expected" placeholder="请输入内容">
                                                 </div>
-                                                <div class="am-u-sm-8 am-u-md-4">
-                                                    <input type="text" class="am-input-sm">
-                                                </div>
-                                                <div class="am-hide-sm-only am-u-md-6">*必填，不可重复</div>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="am-tab-panel am-fade am-in am-active" id="response_result">
-                                        <textarea class="" rows="5">{{response}}</textarea>
+                                        <pre>{{response}}</pre>
                                     </div>
                                 </div>
                             </div>
