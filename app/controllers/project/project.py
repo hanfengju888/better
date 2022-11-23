@@ -148,10 +148,11 @@ def to_detail_with_param(id):
 def update(user_info):
     id = request.form["id"]
     name = request.form["name"]
+    accessToken = request.form["accessToken"]
     owner = int(request.form["owner"])
     description = request.form["description"]
     private = int(request.form["private"])
-    ProjectDao.add_project(name, owner, owner, private,description,id)
+    ProjectDao.add_project(name, owner, owner, private,description,id,accessToken)
 
     return redirect("list_ui")
 

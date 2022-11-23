@@ -29,7 +29,7 @@ class ProjectDao(object):
             return [],0,f"获取用户：{user_id}项目列表失败,{e}"
 
     @staticmethod
-    def add_project(name,owner,user,private,description="",id=None):
+    def add_project(name,owner,user,private,description="",id=None,accessToken=""):
         #新增
         if id is None:
             try:
@@ -49,6 +49,7 @@ class ProjectDao(object):
             project.owner = owner
             project.private = private
             project.description = description
+            project.accessToken = accessToken
             db.session.commit()
 
 

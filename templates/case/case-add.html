@@ -41,14 +41,33 @@
                         <div class="am-form-group">
                             <div class="am-u-sm-3">
                                 <select name="request_method" data-am-selected>
-                                    <option value="GET">GET</option>
-                                    <option value="POST" selected>POST</option>
-                                    <option value="DELETE">DELETE</option>
-                                    <option value="HEAD">HEAD</option>
+                                    {% if method == 'GET' %}
+                                        <option value="GET" selected>GET</option>
+                                    {% else %}
+                                        <option value="GET">GET</option>
+                                    {% endif %}
+
+                                    {% if method == 'POST' %}
+                                        <option value="POST" selected>POST</option>
+                                    {% else %}
+                                        <option value="POST">POST</option>
+                                    {% endif %}
+
+                                    {% if method == 'DELETE' %}
+                                        <option value="DELETE" selected>DELETE</option>
+                                    {% else %}
+                                        <option value="DELETE">DELETE</option>
+                                    {% endif %}
+
+                                    {% if method == 'HEAD' %}
+                                        <option value="HEAD" selected>HEAD</option>
+                                    {% else %}
+                                        <option value="HEAD">HEAD</option>
+                                    {% endif %}
                                 </select>
                             </div>
                             <div class="am-u-sm-7">
-                                <input type="text" id="url" name="url" placeholder="请输入URL" value="https://192.168.4.103/iof/base/resource/addResourceBf" required>
+                                <input type="text" id="url" name="url" placeholder="请输入URL" value="{{url}}" required>
                             </div>
                             <div class="am-u-sm-2">
                                 <button type="button" onclick="test()" class="am-btn am-btn-primary"><i class="am-icon-send">send</i></button>

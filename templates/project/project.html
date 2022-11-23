@@ -35,7 +35,7 @@
     <ul class="am-avg-sm-2 am-avg-md-4 am-avg-lg-6 am-margin gallery-list">
         {% for project in data%}
         <li>
-            <a href="/project/to_detail?id={{project.id}}">
+            <a href="/project/to_detail?id={{project.id}}#update_project">
                 <img class="am-img-thumbnail am-img-bdrs" src="{{project.img}}" alt="">
                 <div class="gallery-title">{{project.name}}</div>
                 <div class="gallery-desc">{{project.updated_at}}</div>

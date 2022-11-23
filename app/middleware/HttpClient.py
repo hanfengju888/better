@@ -25,10 +25,9 @@ class Request(object):
         elapsed = "-1ms"
         try:
             if method.upper() == "GET":
-                response = self.client.get(self.url,**self.kwargs)
+                response = self.client.get(self.url,**self.kwargs,verify=False)
             elif method.upper() == "POST":
-                print(self.kwargs)
-                response = self.client.post(self.url,**self.kwargs)
+                response = self.client.post(self.url,**self.kwargs,verify=False)
 
                 print(response.text)
             else:

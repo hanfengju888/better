@@ -108,7 +108,7 @@
                         <div class="am-tabs am-margin" data-am-tabs="">
                             <ul class="am-tabs-nav am-nav am-nav-tabs">
                                 <li><a href="#testcase">测试用例</a></li>
-                                <li class="am-active"><a href="#update_project">编辑项目</a></li>
+                                <li><a href="#update_project">编辑项目</a></li>
                                 <li><a href="#user_manage">成员管理</a></li>
                             </ul>
 
@@ -288,6 +288,14 @@
 
 
                                                 <div class="am-form-group">
+                                                    <label class="am-u-sm-3 am-form-label">accessToken</label>
+                                                    <div class="am-u-sm-9">
+                                                         <input type="text" name="accessToken"
+                                                               value="{{project.accessToken}}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="am-form-group">
                                                     <div class="am-u-sm-9 am-u-sm-push-3">
                                                         <button type="submit" class="am-btn am-btn-primary">保存</button>
                                                     </div>
@@ -374,7 +382,6 @@
 
                                                         </tbody>
                                                     </table>
-                                                    <div class="am-cf">
 
                                                         <hr>
                                                 </form>

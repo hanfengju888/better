@@ -18,6 +18,7 @@ class Project(db.Model):
     private = db.Column(db.INT,comment="0:False-公开 1:True-私有")
     img = db.Column(db.String(1024))
     description = db.Column(db.String(10240))
+    accessToken = db.Column(db.String(10240))
 
     def __init__(self, name, owner, app,create_user, private=0,description=""):
         self.name = name

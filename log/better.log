@@ -289,3 +289,18 @@ WHERE project.deleted_at IS NULL AND (project.owner = %s OR project.private = %s
 [2022-11-18 18:32:37.623071] INFO: userDao: 有人访问了登录页面
 [2022-11-19 15:01:20.903449] INFO: userDao: 有人访问了登录页面
 [2022-11-21 09:19:43.987270] INFO: userDao: 有人访问了登录页面
+[2022-11-21 12:04:11.512760] ERROR: userDao: 执行用例失败: 'NoneType' object has no attribute 'request_header'
+[2022-11-21 12:04:11.528298] ERROR: userDao: 执行用例失败: 'NoneType' object has no attribute 'request_header'
+[2022-11-21 12:04:11.542699] ERROR: userDao: 执行用例失败: 'NoneType' object has no attribute 'request_header'
+[2022-11-21 12:04:11.554744] ERROR: userDao: 执行用例失败: 'NoneType' object has no attribute 'request_header'
+[2022-11-21 12:04:11.564804] ERROR: userDao: 执行用例失败: 'NoneType' object has no attribute 'request_header'
+[2022-11-21 14:16:15.619980] INFO: userDao: 有人访问了登录页面
+[2022-11-22 09:25:39.685780] INFO: userDao: 有人访问了登录页面
+[2022-11-22 16:23:25.094321] INFO: userDao: 有人访问了登录页面
+[2022-11-22 17:45:54.704366] ERROR: userDao: 新增项目:民生银行联邦平台失败，(_mysql_exceptions.OperationalError) (1267, "Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '='")
+[SQL: SELECT project.id AS project_id, project.name AS project_name, project.owner AS project_owner, project.app AS project_app, project.created_at AS project_created_at, project.updated_at AS project_updated_at, project.deleted_at AS project_deleted_at, project.create_user AS project_create_user, project.update_user AS project_update_user, project.private AS project_private, project.img AS project_img, project.description AS project_description, project.`accessToken` AS `project_accessToken` 
+FROM project 
+WHERE project.name = %s AND project.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('民生银行联邦平台', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)

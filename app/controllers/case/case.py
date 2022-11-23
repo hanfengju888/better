@@ -19,6 +19,7 @@ def case_to_add():
 
     return render_template('case/case-add.html',project=project)
 
+#添加用例时
 @case.route("/send_http",methods=["POST"])
 @permission()
 def send_http(user_info):
@@ -27,21 +28,24 @@ def send_http(user_info):
     method = request.form["request_method"]
     url = request.form["url"]
     payload = request.form["payload"]
-    headers = {}
     project_id = request.form["project_id"]
     project = Project.query.get(project_id)
+    headers = {'accessToken': project.accessToken,'requestType':'1'}
 
     if flag == "0":
-
-        payload = payload.replace("'", '"')
-        json_payload = json.loads(payload)
-        # 上传资源特殊处理
-        if json_payload.get('modeFile') is not None:
-            file_path = json_payload.get('modeFile')
-            files = [('modeFile', (file_path.split("/")[-1], open(file_path, 'rb'), 'text/csv'))]
-            del json_payload['modeFile']
-            r = Request(url, data=json_payload, headers=headers, files=files, verify=False)
-            response = r.request(method)
+        if payload is not None and payload != "":
+            payload = payload.replace("'", '"')
+            json_payload = json.loads(payload)
+            # 上传资源特殊处理
+            if json_payload.get('modeFile') is not None:
+                file_path = json_payload.get('modeFile')
+                files = [('modeFile', (file_path.split("/")[-1], open(file_path, 'rb'), 'text/csv'))]
+                del json_payload['modeFile']
+                r = Request(url, data=json_payload, headers=headers, files=files, verify=False)
+                response = r.request(method)
+            else:
+                r = Request(url, data=payload, headers=headers)
+                response = r.request(method)
         else:
             r = Request(url, data=payload, headers=headers)
             response = r.request(method)
@@ -51,7 +55,7 @@ def send_http(user_info):
 
 
 
-        return render_template('case/case-add.html', project=project,url=url,payload=payload,response=json.dumps(response,sort_keys=True,indent=2,ensure_ascii=False))
+        return render_template('case/case-add.html', method=method,project=project,url=url,payload=payload,response=json.dumps(response,sort_keys=True,indent=2,ensure_ascii=False))
     else:
         #保存到数据库
         expected = request.form["expected"]
@@ -90,7 +94,8 @@ def case_to_edit():
     id = request.args.get("id")
     project_id = request.args.get("project_id")
     case = TestCase.query.filter_by(id=id).first()
-    case.body = json.dumps(json.loads(case.body),indent=2,ensure_ascii=False)
+    if case.body is not None and case.body != "":
+        case.body = json.dumps(json.loads(case.body),indent=2,ensure_ascii=False)
     project = Project.query.filter_by(id=project_id).first()
     assert_dic = dict(expected=case.expected,acutal='',assert_result='')
     return render_template('case/case-edit.html',case=case,project=project,assert_dic=assert_dic)
@@ -104,22 +109,27 @@ def case_edit():
     method = request.form["request_method"]
     url = request.form["url"]
     payload = request.form["payload"]
-    headers = {}
+
     project_id = request.form["project_id"]
     project = Project.query.get(project_id)
-
+    headers = {'accessToken': project.accessToken,'requestType':'1'}
     if flag == "0":
-
-        payload = payload.replace("'", '"')
-        json_payload = json.loads(payload)
-        # 上传资源特殊处理
-        if json_payload.get('modeFile') is not None:
-            file_path = json_payload.get('modeFile')
-            files = [('modeFile', (file_path.split("/")[-1], open(file_path, 'rb'), 'text/csv'))]
-            del json_payload['modeFile']
-            r = Request(url, data=json_payload, headers=headers, files=files, verify=False)
-            response = r.request(method)
+        if len(payload) > 3:
+            payload = payload.replace("'", '"')
+            json_payload = json.loads(payload)
+            # 上传资源特殊处理
+            if json_payload.get('modeFile') is not None:
+                file_path = json_payload.get('modeFile')
+                files = [('modeFile', (file_path.split("/")[-1], open(file_path, 'rb'), 'text/csv'))]
+                del json_payload['modeFile']
+                r = Request(url, data=json_payload, headers=headers, files=files, verify=False)
+                response = r.request(method)
+            else:
+                headers['Content-Type'] = 'application/json'
+                r = Request(url, data=payload, headers=headers)
+                response = r.request(method)
         else:
+            headers['Content-Type'] = 'application/json'
             r = Request(url, data=payload, headers=headers)
             response = r.request(method)
 
@@ -127,11 +137,13 @@ def case_edit():
             return jsonify(dict(code=110, data=response, msg=response.get("msg")))
 
         case = TestCase.query.filter_by(id=id).first()
-        case.body = json.dumps(json.loads(case.body), indent=2, ensure_ascii=False)
+        if len(case.body) > 3:
+            case.body = json.dumps(json.loads(case.body), indent=2, ensure_ascii=False)
 
         assert_dic = {}
         assert_dic['expected'] = case.expected
-        assert_dic['actual'] = response['response']['msg']
+        print(response)
+        assert_dic['actual'] = response['response']['code']
         assert_result = assert_dic.get("expected") == assert_dic.get('actual')
         assert_result = '成功' if assert_result else '失败'
         assert_dic['assert_result'] = assert_result
