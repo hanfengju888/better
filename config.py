@@ -13,6 +13,7 @@ class Config(object):
     MYSQL_PWD = "1qaz#EDC"
     DBNAME = "better"
 
+
     #sqlalchemy
     # SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{}:{}@{}:{}/{}".format(MYSQL_USER,MYSQL_PWD,MYSQL_HOST,MYSQL_PORT,DBNAME)
     SQLALCHEMY_DATABASE_URI = "mysql://%s:%s@%s:%d/%s" %(MYSQL_USER,MYSQL_PWD,MYSQL_HOST,MYSQL_PORT,DBNAME)
