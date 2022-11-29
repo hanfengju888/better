@@ -39,3 +39,5 @@ class Executor(object):
     def thread_run(func):
         t = threading.Thread(target=func,args=())
         t.start()
+
+

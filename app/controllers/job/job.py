@@ -5,6 +5,7 @@ from flask import render_template
 from datetime import datetime
 from app.models.job import Job
 from app.utils.executor import Executor
+from config import Config
 
 job = Blueprint("job",__name__,url_prefix='/job')
 
@@ -14,7 +15,7 @@ def job_to_list():
     sign = request.args.get('sign')
     if sign is not None:
         session['sign'] = sign
-    jobs = Job.query.all()
+    jobs = Job.query.order_by(Job.created_at.desc()).all()
 
     return render_template('job/job.html',jobs=jobs)
 
@@ -29,6 +30,25 @@ def view_report():
     Executor.thread_run(view)
 
     return redirect('list')
+
+
+#执行jenkins下发的任务
+@job.route('/execute_jenkins',methods = ['POST','GET'])
+def execute_jenkins():
+    accessToken = '' if request.args.get('accessToken') is None else request.args.get('accessToken')
+
+    #level1级别用例对应模板文件
+    level1_path = os.path.join(Config.JENKINS_TASK_PATH,'level1_template.py')
+    with open(level1_path,'r') as f:
+        wait_modify = f.read()
+        wait_modify = wait_modify.replace('waitModifyAccessToken',accessToken)
+        final_py = os.path.join(Config.ROOT,'log','jenkins_reports','level1_cases.py')
+        with open(final_py,'w+') as f2:
+            f2.write(wait_modify)
+
+
+
+
 '''
 @job.route('/to_add',methods = ['GET'])
 def to_add():
