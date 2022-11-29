@@ -305,3 +305,14 @@ WHERE project.name = %s AND project.deleted_at IS NULL
 [parameters: ('民生银行联邦平台', 1)]
 (Background on this error at: https://sqlalche.me/e/14/e3q8)
 [2022-11-24 07:55:51.253570] INFO: userDao: 有人访问了登录页面
+[2022-11-27 22:07:29.738359] INFO: userDao: 有人访问了登录页面
+[2022-11-28 09:41:47.034449] INFO: userDao: 有人访问了登录页面
+[2022-11-28 09:42:12.879721] ERROR: userDao: 用户hanfengju登录失败:(_mysql_exceptions.OperationalError) (2013, 'Lost connection to MySQL server during query')
+[SQL: SELECT user.id AS user_id, user.username AS user_username, user.name AS user_name, user.password AS user_password, user.email AS user_email, user.`role` AS user_role, user.created_at AS user_created_at, user.updated_at AS user_updated_at, user.deleted_at AS user_deleted_at, user.last_login_at AS user_last_login_at 
+FROM user 
+WHERE user.username = %s AND user.password = %s AND user.deleted_at IS NULL 
+ LIMIT %s]
+[parameters: ('hanfengju', '3032cf02526b924f057454fc31468f8e', 1)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2022-11-28 15:19:37.729956] INFO: userDao: 有人访问了登录页面
+[2022-11-29 10:12:19.687880] INFO: userDao: 有人访问了登录页面

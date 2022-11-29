@@ -5,21 +5,10 @@
     <div class="tpl-content-page-title">
         任务中心
     </div>
-    <ol class="am-breadcrumb">
-        <li><a href="#" class="am-icon-home"></a></li>
-    </ol>
+
     <div class="tpl-portlet-components">
         <div class="tpl-block">
-            <div class="am-g">
-                <div class="am-u-sm-12 am-u-md-2">
-                    <div class="am-btn-toolbar">
-                        <div class="am-btn-group am-btn-group-xs">
-                        </div>
-                    </div>
-                </div>
 
-
-            </div>
             <div class="am-g">
                 <div class="am-u-sm-12">
                     <form class="am-form">
@@ -29,8 +18,9 @@
                                     <th class="table-type">序号</th>
                                     <th class="table-type">任务名称</th>
                                     <th class="table-title">用例数量</th>
+                                    <th class="table-title">运行时长(s)</th>
                                     <th class="table-date am-hide-sm-only">开始时间</th>
-<!--                                    <th class="table-date am-hide-sm-only">结束时间</th>-->
+                                    <th class="table-date am-hide-sm-only">结束时间</th>
                                     <th class="table-type">状态</th>
                                     <th class="table-type">操作</th>
                                 </tr>
@@ -40,13 +30,14 @@
                                 {% for job in jobs %}
                                     <tr>
                                     <td>{{loop.index}}</td>
-                                    <td>{{job.job_name}}</a></td>
+                                    <td>{{job.name}}</a></td>
                                     <td>{{job.case_count}}</td>
-                                    <td>{{job.create_time}}</td>
-<!--                                    <td>{{job.end_time}}</td>-->
-                                    {% if job.state == '1' %}
+                                    <td>{{job.how_long}}</td>
+                                    <td>{{job.created_at}}</td>
+                                    <td>{{job.end_at}}</td>
+                                    {% if job.status == '1' %}
                                         <td>运行中</td>
-                                    {% elif job.state == '2' %}
+                                    {% elif job.status == '2' %}
                                         <td>运行完成</td>
                                     {% else %}
                                         <td>运行失败</td>
@@ -55,7 +46,9 @@
                                     <td>
                                         <div class="am-btn-toolbar">
                                             <div class="am-btn-group am-btn-group-xs">
-                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-eye"></span><a href="/subjob/list?job_id={{job.id}}"> 查看</a></button>
+                                                {% if job.status == '2' %}
+                                                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-eye"></span><a href="/job/view_report?job_id={{job.id}}"> 查看</a></button>
+                                                {% endif %}
 <!--                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span><a href="/job/to_edit?id={{job.id}}"> 查看</a></button>-->
                                             </div>
                                         </div>

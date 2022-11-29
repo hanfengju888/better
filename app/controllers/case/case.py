@@ -1,6 +1,12 @@
 import datetime
+import os
+import time
 
 from flask import Flask, render_template, request, session, redirect, url_for, Blueprint, jsonify
+
+from app.dao.testcase.TestCaseDao import TestCaseDao
+from app.models.job import Job
+from app.utils.GeneratePyTestCaseUtil import GeneratePyTestCase
 from app.utils.executor import Executor
 import json
 
@@ -9,6 +15,7 @@ from app.models import db
 from app.models.project import Project
 from app.models.test_case import TestCase
 from app.utils.SingletonDecorator import permission
+from config import Config
 
 case = Blueprint("case",__name__,url_prefix='/case')
 
@@ -79,14 +86,62 @@ def case_delete():
 #执行用例
 @case.route("/execute",methods=['GET','POST'])
 def execute_case():
+    project_id = request.args.get("project_id")
     id_list = request.args.get("id_list")
-    print(id_list)
+    name = request.args.get("job_name")
+
+    job_path = os.path.join(Config.TESTCASE_REPORT_PATH,name+str(int(time.time())))
+    if not os.path.exists(job_path):
+        os.makedirs(job_path)
+    py_path = os.path.join(job_path,'temp_test.py')
+    f = open(py_path,'w+',encoding='utf-8')
+    f.writelines('# _*_ coding:utf-8 _*_\n')
+    f.writelines('import pytest,allure,json,requests\n')
+
+    num = 0
     for id in id_list.split(","):
-        result,err = Executor.run(id)
-        if err is None:
-            print(result)
-        else:
-            print(err)
+        GeneratePyTestCase.generate_pytest_testcase(id,num,f)
+        num += 1
+
+    f.close()
+
+    # 存入任务到数据库
+    db.session.add(Job(project_id, id_list, name, len(id_list.split(",")),
+                       allure_report_path=os.path.join(job_path, 'allure_report')))
+    db.session.commit()
+
+    inser_job = Job.query.filter_by(name=name,project_id=project_id).first()
+    print(inser_job.id)
+    #执行命令
+    # pytest xx.py --alluredir=report
+    # allure generate ./allure-results/ -o ./allure-report/
+    # allure open -h 127.0.0.1 -p 8080 ./allure-report/
+    def execute_job():
+        update_job = Job.query.get(inser_job.id)
+        st = time.time()
+        os.system(f"pytest {py_path} --alluredir={os.path.join(job_path,'pytest_report')}")
+        os.system(f"allure generate {os.path.join(job_path,'pytest_report')}/ -o {os.path.join(job_path,'allure_report')} ")
+        how_long = round(time.time() - st)
+        update_job.how_long = how_long
+        update_job.end_at = datetime.datetime.now()
+        update_job.status = '2'
+
+        db.session.commit()
+
+    Executor.thread_run(execute_job)
+
+
+
+    return redirect('/job/list')
+
+
+
+        # result,err = Executor.run(id)
+        # if err is None:
+        #     print(result)
+        # else:
+        #     print(err)
+
 
 
 @case.route('/to_edit',methods = ['POST','GET'])

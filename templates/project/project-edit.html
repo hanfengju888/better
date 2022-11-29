@@ -64,7 +64,16 @@
         if(id_list.length == 0){
             alert("至少选择一个用例！")
         }else{
-           window.location.href = "/case/execute?id_list="+id_list
+            $("#before_start").modal({
+                    onConfirm: function(options) {
+                        var job_name = $("#job_name").val()
+                        window.location.href = "/case/execute?project_id={{project.id}}&id_list="+id_list +"&job_name="+job_name
+                    },
+                    onCancel: function() {
+                    }
+
+             });
+
 
         }
     }
@@ -410,6 +419,20 @@
                             <span class="am-modal-btn" data-am-modal-confirm>确定</span>
                         </div>
                     </div>
+                </div>
+
+                <div class="am-modal am-modal-confirm" tabindex="-1" id="before_start">
+                  <div class="am-modal-dialog">
+                    <div class="am-modal-hd">任务名称</div>
+                    <div class="am-modal-bd">
+                      <input class="am-modal-prompt-input" id="job_name" type="text" placeholder="请输入任务名称"/>
+                    </div>
+
+                    <div class="am-modal-footer">
+                      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                      <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+                    </div>
+                  </div>
                 </div>
 
 

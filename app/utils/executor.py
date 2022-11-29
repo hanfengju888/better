@@ -1,4 +1,5 @@
 import json
+import threading
 
 from app.dao.testcase.TestCaseDao import TestCaseDao
 from app.middleware.HttpClient import Request
@@ -19,16 +20,22 @@ class Executor(object):
             if case_info.request_header != "" and case_info.request_header is not None:
                 headers = json.loads(case_info.request_header)
             else:
-                
                 headers = dict()
             if case_info.body != '' and case_info.body is not None:
                 body = case_info.body
             else:
                 body = None
+
             request_obj = Request(case_info.url, headers=headers, data=body)
             method = case_info.request_method.upper()
             response_info = request_obj.request(method)
+            print(response_info)
             return response_info, None
         except Exception as e:
             Executor.log.error(f"执行用例失败: {str(e)}")
             return result, f"执行用例失败: {str(e)}"
+
+    @staticmethod
+    def thread_run(func):
+        t = threading.Thread(target=func,args=())
+        t.start()
