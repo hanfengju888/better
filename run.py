@@ -12,6 +12,7 @@ from app.controllers.database.dataBase import database
 from app.controllers.redis.redis import rediss
 from app.controllers.job.job import job
 from flask import render_template
+from app.controllers.ssh import ssh
 
 
 #注册蓝图
@@ -25,6 +26,7 @@ better.register_blueprint(case)
 better.register_blueprint(database)
 better.register_blueprint(rediss)
 better.register_blueprint(job)
+better.register_blueprint(ssh)
 
 
 import sys

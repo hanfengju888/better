@@ -189,7 +189,7 @@
                             {% endif %}
                         </a>
 
-                            {% if session.get('sign') == 'database' or session.get('sign') == 'redis' %}
+                            {% if session.get('sign') == 'database' or session.get('sign') == 'redis' or session.get('sign') == 'ssh' %}
                                 <ul class="tpl-left-nav-sub-menu" style="display:block">
                             {% else %}
                                 <ul class="tpl-left-nav-sub-menu">
@@ -215,6 +215,18 @@
                                     <i class="am-icon-child"></i>
                                     <span>redis客户端</span>
                                 </a>
+                            </li>
+
+                            <li>
+                                {% if session.get('sign') == 'ssh' %}
+                                    <a href="/ssh/list?sign=ssh" class="active">
+                                {% else %}
+                                    <a href="/ssh/list?sign=ssh">
+                                {% endif %}
+
+                                <i class="am-icon-child"></i>
+                                <span>ssh客户端</span>
+                            </a>
                             </li>
                         </ul>
                     </li>

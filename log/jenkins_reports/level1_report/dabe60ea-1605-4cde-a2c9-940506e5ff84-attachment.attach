@@ -1,0 +1,11 @@
+{
+  "code": "200",
+  "data": {
+    "code": "10601537",
+    "message": "用户名重复",
+    "msg": "用户名重复",
+    "data": null,
+    "ok": false
+  },
+  "message": "操作成功"
+}

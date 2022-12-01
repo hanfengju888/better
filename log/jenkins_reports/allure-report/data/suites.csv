@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Nov 29 15:44:18 CST 2022","Tue Nov 29 15:44:20 CST 2022","2283","","level1_cases","","","","锁定用户",""
+"failed","Tue Nov 29 15:44:17 CST 2022","Tue Nov 29 15:44:18 CST 2022","1389","","level1_cases","","","","添加用户",""
+"passed","Tue Nov 29 15:44:20 CST 2022","Tue Nov 29 15:44:21 CST 2022","873","","level1_cases","","","","解锁用户",""

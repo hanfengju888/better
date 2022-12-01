@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block mainbody %}
+
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        ssh终端管理
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">实用工具</a></li>
+        <li><a href="#">ssh客户端</a></li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="tpl-block">
+            <div class="am-g">
+                <div class="am-u-sm-12 am-u-md-6">
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <button type="button" onclick="window.location.href='/ssh/to_add'" class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span> 新增</button>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                </span>
+            </form>
+                </div>
+            </div>
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                                <tr>
+                                    <!-- <th class="table-id">ID</th> -->
+                                    <th class="table-title">名称</th>
+                                    <th class="table-title">IP</th>
+                                    <th class="table-title">登录名</th>
+                                    <th class="table-author am-hide-sm-only">CPU</th>
+                                    <th class="table-date am-hide-sm-only">MEM</th>
+<!--                                    <th class="table-date am-hide-sm-only">磁盘</th>-->
+                                    <th class="table-date am-hide-sm-only">线程数</th>
+                                    <th class="table-set">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ssh in sshs %}
+                                <tr>
+                                    <td>{{ssh.name}}</td>
+                                    <td>{{ssh.ip}}</td>
+                                    <td>{{ssh.username}}</td>
+                                    <td>
+                                        <div class="am-progress">
+                                          <div class="am-progress-bar am-progress-bar-success" style="width: {{ssh.cpu}}%">{{ssh.cpu}}%</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="am-progress">
+                                          <div class="am-progress-bar am-progress-bar-success" style="width: {{ssh.mem}}%">{{ssh.mem}}%</div>
+                                        </div>
+                                    </td>
+
+                                    <td>{{ssh.process_number}}</td>
+                                    <td>
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span><a href="/ssh/to_edit?id={{ssh.id}}"> 编辑</a></button>
+                                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-play" ></span><a target="_blank" href="http://192.168.10.113:2222/ssh/host/{{ssh.ip}}"> 连接</a></button>
+                                                <button id="aa" onclick="del('{{ssh.id}}')"
+                                                  type="button"
+                                                  class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                  ><span class="am-icon-trash-o" ></span>
+                                                  <a href="#">删除</a>
+                                                </button>
+
+                                                <div class="am-modal am-modal-confirm" tabindex="-1" id="s">
+                                                  <div class="am-modal-dialog">
+                                                    <div class="am-modal-hd">删除</div>
+                                                    <div class="am-modal-bd">
+                                                      你，确定要删除这条记录吗？
+                                                    </div>
+                                                    <div class="am-modal-footer">
+                                                      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                                                      <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                {% endfor %}
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="am-cf">
+
+                            <div class="am-fr">
+                                <!-- <ul class="am-pagination tpl-pagination">
+                                    <li><a href="/ssh/page?page=1">«</a></li>
+
+                                    {% for i in all_page_list %}
+                                        {% if page_info == i %}
+                                            <li class="am-active">
+                                        {% else %}
+                                            <li>
+                                        {% endif %}
+                                                <a href="/ssh/page?page={{i}}">{{i}}</a>
+                                            </li>
+                                    {% endfor %}
+                                    <li><a href="/ssh/page?page={{all_num}}">»</a></li>
+                                </ul>
+                                <ul data-am-widget="pagination" class="am-pagination tpl-pagination">
+
+                                      <li class="am-pagination-prev">
+                                        {% if page_info != 1 %}
+                                            <a href="/ssh/page?page={{page_info}}">上一页</a>
+                                        {% else %}
+                                            <a disabled="disabled">上一页</a>
+                                        {% endif %}
+                                      </li>
+
+
+                                        <li class="am-pagination-select">
+                                          <select id="page_id" onchange="page(this)">
+                                            {% for i in all_page_list %}
+                                                {% if page_info == i %}
+                                                    <option value="{{i}}" selected>{{i}} / {{all_num}}</option>
+                                                {% else %}
+                                                    <option value="{{i}}">{{i}} / {{all_num}}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                              
+                                          </select>
+                                        </li>
+
+
+                                      <li class="am-pagination-next ">
+                                            {% if page_info != all_num %}
+                                                <a href="/ssh/page?page={{page_info}}">下一页</a>
+                                            {% else %}
+                                                <a disabled="disabled">下一页</a>
+                                            {% endif %}
+                                      </li>
+
+                                  </ul>
+                                  <script>
+                                    function page(obj){
+                                        var v = $(obj).val()
+                                        window.location.href="/ssh/page?page=" + v
+                                    }
+                                  </script>
+                            </div>  -->
+                        </div>
+                        <hr>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="tpl-alert"></div>
+    </div>
+</div>
+
+<script>
+    function del(id){
+        $('#s').modal({
+            onConfirm: function(options) {
+              window.location.href = "/ssh/delete?id="+id
+            },
+            onCancel: function() {
+            }
+          });
+    }
+</script>
+
+
+{% endblock %}

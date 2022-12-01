@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block mainbody %}
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        ssh编辑
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">实用工具</a></li>
+        <li><a href="#">ssh客户端</a></li>
+        <li class="am-active">修改</li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> ssh修改
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tpl-block ">
+
+            <div class="am-g tpl-amazeui-form">
+
+
+                <div class="am-u-sm-12 am-u-md-9">
+                     <form class="am-form am-form-horizontal" method="POST" action="/ssh/edit">
+                         <input type="hidden" name="id" value="{{ssh.id}}"/>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">名称</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="user-name" name="name" placeholder="请输入名称" value="{{ssh.name}}"  required>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">ip</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="ip" placeholder="请输入ip" value="{{ssh.ip}}">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label  class="am-u-sm-3 am-form-label">端口号</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="port" placeholder="请输入端口号" value="{{ssh.port}}">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="am-form-group">
+                            <label for="user-QQ" class="am-u-sm-3 am-form-label">登录名</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="username" id="user-QQ" placeholder="请输入登录名" value="{{ssh.username}}">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-weibo" class="am-u-sm-3 am-form-label">密码</label>
+                            <div class="am-u-sm-9">
+                                <input type="password" name="password" id="user-weibo" placeholder="请输入密码" value="{{ssh.password}}">
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

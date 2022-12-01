@@ -320,3 +320,5 @@ WHERE user.username = %s AND user.password = %s AND user.deleted_at IS NULL
 [2022-11-29 17:32:22.078597] INFO: userDao: 有人访问了登录页面
 [2022-11-29 17:32:39.690571] INFO: userDao: 有人访问了登录页面
 [2022-11-29 19:24:05.055954] INFO: userDao: 有人访问了登录页面
+[2022-11-30 17:12:43.379934] INFO: userDao: 有人访问了登录页面
+[2022-11-30 20:25:43.804872] INFO: userDao: 有人访问了登录页面

@@ -1,0 +1,30 @@
+
+url:'https://192.168.4.101/gateway/auth/user/add'
+headers:
+    {
+  "Content-Type": "application/json",
+  "requestType": "1",
+  "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsInVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE2NzIyOTg2MTd9.mDpkNwVSqyJGaZSq6Q2JndOi6TyB8J-m7kqX5pEP2BSJxKw22INP9KudJcOU0iyXlWW7UkDnM9SnS6nUk3Fp7Q"
+}
+body: 
+{
+  "type": 0,
+  "sex": 2,
+  "address": [],
+  "roleIds": [
+    "1"
+  ],
+  "expireTime": "",
+  "periodType": 1,
+  "dataPermissionType": 2,
+  "username": "han16690231474662",
+  "password": "1qaz@WSX",
+  "nickname": "hanuser16690234174662",
+  "email": "123@qq.com",
+  "phone": "17600000000",
+  "deptIds": [
+    1
+  ],
+  "dataPermissionDepts": []
+}
+                
