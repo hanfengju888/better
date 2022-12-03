@@ -13,7 +13,7 @@
     <div class="tpl-portlet-components">
         <div class="portlet-title">
             <div class="caption font-green bold">
-                <span class="am-icon-code"></span> 项目：{{project.name}} --> 编辑用例
+                <span class="am-icon-code"></span> 编辑用例
             </div>
             <div class="tpl-portlet-input tpl-fz-ml">
                 <div class="portlet-input input-small input-inline">
@@ -24,18 +24,17 @@
         <div class="tpl-block ">
             <div class="am-g tpl-amazeui-form">
                 <div class="am-u-sm-12 am-u-md-12">
-                    <form class="am-form am-form-horizontal" method="POST" action="/case/send_http_edit" id="mainForm">
-                        <input type="hidden" name="project_id" value="{{project.id}}"/>
+                    <form class="am-form am-form-horizontal" method="POST" action="/case/case_send_http_edit" id="mainForm">
                         <input type="hidden" name="case_id" value="{{case.id}}"/>
                         <input type="hidden" name="flag" id="flag1" value="1"/>
                         <div class="am-form-group">
-                            <div class="am-u-sm-3">
+                            <div class="am-u-sm-4">
                                 <label class="am-u-sm-3 am-form-label">用例名称</label>
                             </div>
-                            <div class="am-u-sm-3">
+                            <div class="am-u-sm-4">
                                 <input type="text" name="name" placeholder="请输入用例名称" value="{{case.name}}">
                             </div>
-                            <div class="am-u-sm-6">
+                            <div class="am-u-sm-4">
                             </div>
 
                         </div>
@@ -141,18 +140,15 @@
 
             <div class="am-g tpl-amazeui-form">
                 <div class="am-u-sm-12 am-u-md-12">
-                    <form class="am-form am-form-horizontal" method="POST" action="/request/send_http">
+                    <form class="am-form am-form-horizontal">
 
                         <div class="am-form-group">
                             <div class="am-tabs am-margin" data-am-tabs="">
                                 <ul class="am-tabs-nav am-nav am-nav-tabs">
-<!--                                    <li><a href="#other">其他</a></li>-->
                                     <li><a href="#assert">断言</a></li>
                                     <li class="am-active"><a href="#response_result">响应结果</a></li>
                                 </ul>
                                 <div class="am-tabs-bd">
-<!--                                    <div class="am-tab-panel am-fade" id="other">-->
-<!--                                    </div>-->
                                     <div class="am-tab-panel am-fade" id="assert">
                                         期望结果:{{assert_dic.expected}}<br>
                                         实际结果:{{assert_dic.actual}}<br>
@@ -160,7 +156,6 @@
                                     </div>
                                     <div class="am-tab-panel am-fade am-in am-active" id="response_result">
                                         <pre>{{response}}</pre>
-<!--                                        <textarea class="" rows="5" id="res">{{response}}</textarea>-->
                                     </div>
                                 </div>
                             </div>

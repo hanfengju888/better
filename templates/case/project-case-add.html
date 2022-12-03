@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% block mainbody %}
+
+<script>
+    function test(){
+        document.getElementById("flag1").value = "0"
+        $("#mainForm").submit()
+    }
+
+</script>
+<div class="tpl-content-wrapper">
+
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 项目：{{project.name}} --> 添加用例
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                </div>
+            </div>
+        </div>
+
+        <div class="tpl-block ">
+            <div class="am-g tpl-amazeui-form">
+                <div class="am-u-sm-12 am-u-md-12">
+                    <form class="am-form am-form-horizontal" method="POST" action="/case/send_http" id="mainForm">
+                        <input type="hidden" name="project_id" value="{{project.id}}"/>
+                        <input type="hidden" name="flag" id="flag1" value="1"/>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-3">
+                                <label for="user-name" class="am-u-sm-3 am-form-label">用例名称</label>
+                            </div>
+                            <div class="am-u-sm-3">
+                                <input type="text" name="name" placeholder="请输入用例名称">
+                            </div>
+                            <div class="am-u-sm-6">
+                            </div>
+
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-3">
+                                <select name="request_method" data-am-selected>
+                                    {% if method == 'GET' %}
+                                        <option value="GET" selected>GET</option>
+                                    {% else %}
+                                        <option value="GET">GET</option>
+                                    {% endif %}
+
+                                    {% if method == 'POST' %}
+                                        <option value="POST" selected>POST</option>
+                                    {% else %}
+                                        <option value="POST">POST</option>
+                                    {% endif %}
+
+                                    {% if method == 'DELETE' %}
+                                        <option value="DELETE" selected>DELETE</option>
+                                    {% else %}
+                                        <option value="DELETE">DELETE</option>
+                                    {% endif %}
+
+                                    {% if method == 'HEAD' %}
+                                        <option value="HEAD" selected>HEAD</option>
+                                    {% else %}
+                                        <option value="HEAD">HEAD</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                            <div class="am-u-sm-7">
+                                <input type="text" id="url" name="url" placeholder="请输入URL" value="{{url}}" required>
+                            </div>
+                            <div class="am-u-sm-2">
+                                <button type="button" onclick="test()" class="am-btn am-btn-primary"><i class="am-icon-send">send</i></button>
+                                <button type="submit" class="am-btn am-btn-primary">保存</i></button>
+
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
+                            <div class="am-tabs am-margin" data-am-tabs="">
+                                <ul class="am-tabs-nav am-nav am-nav-tabs">
+<!--                                    <li><a href="#tab1">Params</a></li>-->
+<!--                                    <li><a href="#tab2">Headers</a></li>-->
+                                    <li class="am-active"><a href="#tab3">Body</a></li>
+                                    <li><a href="#tab4">断言</a></li>
+                                </ul>
+                                <div class="am-tabs-bd">
+                                    <div class="am-tab-panel am-fade" id="tab1">
+                                        <div class="am-g am-margin-top">
+                                            <div class="am-u-sm-4 am-u-md-2 am-text-right">所属类别</div>
+                                            <div class="am-u-sm-8 am-u-md-10">
+                                                <select data-am-selected="{btnSize: 'sm'}">
+                                                    <option value="option1">选项一...</option>
+                                                    <option value="option2">选项二.....</option>
+                                                    <option value="option3">选项三........</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="am-tab-panel am-fade" id="tab2">
+<!--                                        <form class="am-form">-->
+                                            <div class="am-g am-margin-top">
+                                                <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                                    文章标题
+                                                </div>
+                                                <div class="am-u-sm-8 am-u-md-4">
+                                                    <input type="text" class="am-input-sm">
+                                                </div>
+                                                <div class="am-hide-sm-only am-u-md-6">*必填，不可重复</div>
+                                            </div>
+<!--                                        </form>-->
+                                    </div>
+                                    <div class="am-tab-panel am-fade am-in am-active" id="tab3">
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="male" data-am-ucheck> none-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="female" data-am-ucheck> form-data-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="pig" data-am-ucheck>-->
+<!--                                            x-www-form-urlencoded-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> raw-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> binary-->
+<!--                                        </label>-->
+<!--                                        <label class="am-radio-inline">-->
+<!--                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> GraphQL-->
+<!--                                        </label>-->
+                                        <textarea class="" rows="5" id="payload" name="payload">{{payload}}</textarea>
+                                    </div>
+                                    <div class="am-tab-panel am-fade" id="tab4">
+                                        <div class="am-form-group">
+                                            <label for="user-name" class="am-u-sm-3 am-form-label">期望结果</label>
+                                            <div class="am-u-sm-9">
+                                                <input type="text" name="expected" placeholder="请输入内容">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+         <div class="tpl-block ">
+
+            <div class="am-g tpl-amazeui-form">
+                <div class="am-u-sm-12 am-u-md-12">
+                    <form class="am-form am-form-horizontal" method="POST" action="/request/send_http">
+
+                        <div class="am-form-group">
+                            <div class="am-tabs am-margin" data-am-tabs="">
+                                <ul class="am-tabs-nav am-nav am-nav-tabs">
+<!--                                    <li><a href="#other">其他</a></li>-->
+<!--                                    <li><a href="#assert">断言</a></li>-->
+                                    <li class="am-active"><a href="#response_result">响应结果</a></li>
+                                </ul>
+                                <div class="am-tabs-bd">
+                                    <div class="am-tab-panel am-fade" id="other">
+                                        <div class="am-g am-margin-top">
+                                            <div class="am-u-sm-4 am-u-md-2 am-text-right">所属类别</div>
+                                            <div class="am-u-sm-8 am-u-md-10">
+                                                <select data-am-selected="{btnSize: 'sm'}">
+                                                    <option value="option1">选项一...</option>
+                                                    <option value="option2">选项二.....</option>
+                                                    <option value="option3">选项三........</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="am-tab-panel am-fade" id="assert">
+                                        <form class="am-form">
+                                            <div class="am-form-group">
+                                                <label for="user-name" class="am-u-sm-3 am-form-label">期望结果</label>
+                                                <div class="am-u-sm-9">
+                                                    <input type="text" id="user-name" name="expected" placeholder="请输入内容">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="am-tab-panel am-fade am-in am-active" id="response_result">
+                                        <pre>{{response}}</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

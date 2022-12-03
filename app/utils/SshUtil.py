@@ -27,10 +27,10 @@ class SSHLinux():
             print(e)
             self.ssh.close()
 
-
-hostname = "192.168.4.101"
-port = 22
-username = "root"
-password = "1qaz#EDC"
-ssh = SSHLinux(hostname, port=port, username=username, password=password)
-print(ssh.use_command("ps -ef|wc -l"))
+#
+# hostname = "192.168.4.101"
+# port = 22
+# username = "root"
+# password = "1qaz#EDC"
+# ssh = SSHLinux(hostname, port=port, username=username, password=password)
+# print(ssh.use_command("ps -ef|wc -l"))

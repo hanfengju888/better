@@ -3,6 +3,7 @@ import os
 import time
 
 from flask import Flask, render_template, request, session, redirect, url_for, Blueprint, jsonify
+from sqlalchemy import and_
 
 from app.dao.testcase.TestCaseDao import TestCaseDao
 from app.models.job import Job
@@ -19,12 +20,125 @@ from config import Config
 
 case = Blueprint("case",__name__,url_prefix='/case')
 
+
+#用例库列表
+@case.route('/list',methods = ['GET'])
+def list():
+    sign = request.args.get('sign')
+    if sign is not None:
+        session['sign'] = sign
+    testcases = TestCase.query.filter(and_(TestCase.project_id == 0,TestCase.deleted_at == None)).all()
+    return render_template('case/case.html',cases=testcases)
+
+#用例库--添加
 @case.route('/to_add',methods = ['GET'])
 def case_to_add():
+
+    return render_template('case/case-add.html')
+
+#项目详情--用例列表--添加
+@case.route('/project_to_add',methods = ['GET'])
+def project_to_add():
     project_id = request.args.get('project_id')
     project = Project.query.get(project_id)
 
-    return render_template('case/case-add.html',project=project)
+    return render_template('case/project-case-add.html',project=project)
+
+
+
+#用例库--添加用例
+@case.route("/case_send_http",methods=["POST"])
+@permission()
+def case_send_http(user_info):
+    #flag 标记是点击的请求按钮 0   还是保存按钮 1
+    flag = request.form["flag"]
+    method = request.form["request_method"]
+    url = request.form["url"]
+    payload = request.form["payload"]
+    headers = {}
+    response = None
+
+    print(flag)
+    if flag == "0":
+        if payload is not None and payload != "":
+            payload = payload.replace("'", '"')
+            json_payload = json.loads(payload)
+            r = Request(url, data=json_payload, headers=headers)
+            response = r.request(method)
+
+        else:
+            r = Request(url, headers=headers)
+            response = r.request(method)
+
+
+        return render_template('case/case-add.html', method=method,url=url,payload=payload,response=json.dumps(response,sort_keys=True,indent=2,ensure_ascii=False))
+    else:
+        #保存到数据库
+        expected = request.form["expected"]
+        name = request.form.get("name")
+        test_case =  TestCase(name, 1, url, 0, "", payload,1, expected, user_info.get("id") ,request_method=method)
+        db.session.add(test_case)
+        db.session.commit()
+        return redirect("list")
+
+#用例库--编辑用例
+@case.route('/case_to_edit',methods = ['POST','GET'])
+def case_to_edit():
+    id = request.args.get("id")
+    case = TestCase.query.filter_by(id=id).first()
+    if case.body is not None and case.body != "":
+        case.body = json.dumps(json.loads(case.body),indent=2,ensure_ascii=False)
+    assert_dic = dict(expected=case.expected,acutal='',assert_result='')
+    return render_template('case/case-edit.html',case=case,assert_dic=assert_dic)
+
+#用例库--编辑用例时 请求和更新
+@case.route('/case_send_http_edit',methods = ['POST','GET'])
+def case_send_http_edit():
+    # flag 标记是点击的请求按钮 0   还是保存按钮 1
+    id = request.form["case_id"]
+    flag = request.form["flag"]
+    method = request.form["request_method"]
+    url = request.form["url"]
+    payload = request.form["payload"]
+    #gest
+    if flag == "0":
+        if payload is not None and payload != "":
+            payload = payload.replace("'", '"')
+            json_payload = json.loads(payload)
+            r = Request(url, data=json_payload)
+            response = r.request(method)
+
+        else:
+            r = Request(url)
+            response = r.request(method)
+
+
+        case = TestCase.query.filter_by(id=id).first()
+        if len(case.body) > 3:
+            case.body = json.dumps(json.loads(case.body), indent=2, ensure_ascii=False)
+
+        assert_dic = {}
+        assert_dic['expected'] = case.expected
+        print(response)
+        assert_dic['actual'] = response['response']['error_code']
+        assert_result = str(assert_dic.get("expected")) == str(assert_dic.get('actual'))
+        assert_result = '成功' if assert_result else '失败'
+        assert_dic['assert_result'] = assert_result
+
+        return render_template('case/case-edit.html', assert_dic=assert_dic, case=case,response=json.dumps(response,sort_keys=True,indent=2,ensure_ascii=False))
+    else:
+        # 保存到数据库
+        test_case = TestCase.query.get(id)
+        test_case.name = request.form.get("name")
+        test_case.request_method = method
+        test_case.url = url
+        test_case.body = payload
+        test_case.updated_at = datetime.datetime.now()
+        db.session.commit()
+        return redirect('list')
+
+
+
 
 #添加用例时
 @case.route("/send_http",methods=["POST"])
@@ -35,9 +149,11 @@ def send_http(user_info):
     method = request.form["request_method"]
     url = request.form["url"]
     payload = request.form["payload"]
-    project_id = request.form["project_id"]
-    project = Project.query.get(project_id)
-    headers = {'accessToken': project.accessToken,'requestType':'1'}
+    project_id = "" if request.form.get("project_id") is None else request.form.get("project_id")
+    headers = {}
+    if project_id != "":
+        project = Project.query.get(project_id)
+        headers = {'accessToken': project.accessToken,'requestType':'1'}
 
     if flag == "0":
         if payload is not None and payload != "":
@@ -62,7 +178,7 @@ def send_http(user_info):
 
 
 
-        return render_template('case/case-add.html', method=method,project=project,url=url,payload=payload,response=json.dumps(response,sort_keys=True,indent=2,ensure_ascii=False))
+        return render_template('case/project-case-add.html', method=method,project=project,url=url,payload=payload,response=json.dumps(response,sort_keys=True,indent=2,ensure_ascii=False))
     else:
         #保存到数据库
         expected = request.form["expected"]
@@ -76,11 +192,16 @@ def send_http(user_info):
 @case.route('/delete',methods = ['GET'])
 def case_delete():
     case_id = request.args.get("case_id")
-    project_id = request.args.get("project_id")
+    #用于区分是 用例库列表页面的删除 还是项目下面用例的删除
+    flag = request.args.get("flag")
+
     case = TestCase.query.get(case_id)
     case.deleted_at = datetime.datetime.now()
     db.session.commit()
 
+    if flag == 'cases':
+        return redirect('list')
+    project_id = request.args.get("project_id")
     return redirect(f"/project/to_detail_with_param/{project_id}")
 
 #执行用例
@@ -145,7 +266,7 @@ def execute_case():
 
 
 @case.route('/to_edit',methods = ['POST','GET'])
-def case_to_edit():
+def to_edit():
     id = request.args.get("id")
     project_id = request.args.get("project_id")
     case = TestCase.query.filter_by(id=id).first()
@@ -153,11 +274,11 @@ def case_to_edit():
         case.body = json.dumps(json.loads(case.body),indent=2,ensure_ascii=False)
     project = Project.query.filter_by(id=project_id).first()
     assert_dic = dict(expected=case.expected,acutal='',assert_result='')
-    return render_template('case/case-edit.html',case=case,project=project,assert_dic=assert_dic)
+    return render_template('case/project-case-edit.html',case=case,project=project,assert_dic=assert_dic)
 
 
 @case.route('/send_http_edit',methods = ['POST','GET'])
-def case_edit():
+def send_http_edit():
     # flag 标记是点击的请求按钮 0   还是保存按钮 1
     id = request.form["case_id"]
     flag = request.form["flag"]
@@ -203,7 +324,7 @@ def case_edit():
         assert_result = '成功' if assert_result else '失败'
         assert_dic['assert_result'] = assert_result
 
-        return render_template('case/case-edit.html', assert_dic=assert_dic,project=project, case=case,response=json.dumps(response,sort_keys=True,indent=2,ensure_ascii=False))
+        return render_template('case/project-case-edit.html', assert_dic=assert_dic,project=project, case=case,response=json.dumps(response,sort_keys=True,indent=2,ensure_ascii=False))
     else:
         # 保存到数据库
         test_case = TestCase.query.get(id)

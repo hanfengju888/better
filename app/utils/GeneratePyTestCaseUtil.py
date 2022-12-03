@@ -13,7 +13,7 @@ class GeneratePyTestCase():
         data = data.replace('\n', '').replace(' ', '').replace('\r', '')
         method = case_info.request_method
         expected = case_info.expected
-        attach_info_headers = json.dumps(json.loads(headers), indent=2, ensure_ascii=False)
+        attach_info_headers = '' if headers == None else json.dumps(json.loads(headers), indent=2, ensure_ascii=False)
         attach_info_body = "" if data == "" else json.dumps(json.loads(data), indent=2, ensure_ascii=False)
 
         attach_info = f'''
@@ -32,4 +32,4 @@ body:
         f.writelines(f"    print(res.json()) \n")
 
         f.writelines(f"    allure.attach(json.dumps(res.json(),indent=2,ensure_ascii=False),'响应信息') \n")
-        f.writelines(f"    assert '{expected}' == res.json()['data']['code'] \n")
+        f.writelines(f"    assert '{expected}' == str(res.json().get('error_code')) \n")

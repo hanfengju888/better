@@ -131,13 +131,13 @@
                         <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                             <i class="am-icon-plug" ></i>
                             <span>接口测试</span>
-                                {% if session.get('sign') == 'project' or session.get('sign') == 'module' or session.get('sign') == 'request'%}
+                                {% if session.get('sign') == 'project' or session.get('sign') == 'module' or session.get('sign') == 'request' or session.get('sign') == 'cases'%}
                                 <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
                                 {% else %}
                                     <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
                                 {% endif %}
                         </a>
-                            {% if session.get('sign') == 'project' or session.get('sign') == 'module' or session.get('sign') == 'request'%}
+                            {% if session.get('sign') == 'project' or session.get('sign') == 'module' or session.get('sign') == 'request' or session.get('sign') == 'cases' %}
                                 <ul class="tpl-left-nav-sub-menu" style="display:block">
                             {% else %}
                                 <ul class="tpl-left-nav-sub-menu">
@@ -151,6 +151,16 @@
                                 {% endif %}
                                 <i class="am-icon-desktop" ></i>
                                 <span>HTTP测试</span>
+                                </a>
+                            </li>
+                            <li>
+                                {% if session.get('sign') == 'cases' %}
+                                    <a href="/case/list?sign=cases" class="active">
+                                {% else %}
+                                    <a href="/case/list?sign=cases">
+                                {% endif %}
+                                <i class="am-icon-desktop" ></i>
+                                <span>用例库</span>
                                 </a>
                             </li>
                             <li>
