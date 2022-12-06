@@ -7,6 +7,7 @@ from sqlalchemy import and_
 
 from app.dao.testcase.TestCaseDao import TestCaseDao
 from app.models.job import Job
+from app.models.project_test_case import ProjectTestCase
 from app.utils.GeneratePyTestCaseUtil import GeneratePyTestCase
 from app.utils.executor import Executor
 import json
@@ -183,7 +184,7 @@ def send_http(user_info):
         #保存到数据库
         expected = request.form["expected"]
         name = request.form.get("name")
-        test_case =  TestCase(name, 1, url, project_id, "", payload,1, expected, user_info.get("id") ,request_method=method)
+        test_case =  ProjectTestCase(name, 1, url, project_id, "", payload,1, expected, user_info.get("id") ,request_method=method)
         db.session.add(test_case)
         db.session.commit()
         return redirect(f"/project/to_detail_with_param/{project_id}")
@@ -195,14 +196,19 @@ def case_delete():
     #用于区分是 用例库列表页面的删除 还是项目下面用例的删除
     flag = request.args.get("flag")
 
-    case = TestCase.query.get(case_id)
-    case.deleted_at = datetime.datetime.now()
-    db.session.commit()
-
     if flag == 'cases':
+        case = TestCase.query.get(case_id)
+        case.deleted_at = datetime.datetime.now()
+        db.session.commit()
+
         return redirect('list')
-    project_id = request.args.get("project_id")
-    return redirect(f"/project/to_detail_with_param/{project_id}")
+    else:
+        case = ProjectTestCase.query.get(case_id)
+        case.deleted_at = datetime.datetime.now()
+        db.session.commit()
+
+        project_id = request.args.get("project_id")
+        return redirect(f"/project/to_detail_with_param/{project_id}")
 
 #执行用例
 @case.route("/execute",methods=['GET','POST'])
@@ -269,7 +275,7 @@ def execute_case():
 def to_edit():
     id = request.args.get("id")
     project_id = request.args.get("project_id")
-    case = TestCase.query.filter_by(id=id).first()
+    case = ProjectTestCase.query.filter_by(id=id).first()
     if case.body is not None and case.body != "":
         case.body = json.dumps(json.loads(case.body),indent=2,ensure_ascii=False)
     project = Project.query.filter_by(id=project_id).first()
@@ -312,22 +318,22 @@ def send_http_edit():
         if not response.get("status"):
             return jsonify(dict(code=110, data=response, msg=response.get("msg")))
 
-        case = TestCase.query.filter_by(id=id).first()
+        case = ProjectTestCase.query.filter_by(id=id).first()
         if len(case.body) > 3:
             case.body = json.dumps(json.loads(case.body), indent=2, ensure_ascii=False)
 
         assert_dic = {}
         assert_dic['expected'] = case.expected
         print(response)
-        assert_dic['actual'] = response['response']['code']
-        assert_result = assert_dic.get("expected") == assert_dic.get('actual')
+        assert_dic['actual'] = response['response']['error_code']
+        assert_result = str(assert_dic.get("expected")) == str(assert_dic.get('actual'))
         assert_result = '成功' if assert_result else '失败'
         assert_dic['assert_result'] = assert_result
 
         return render_template('case/project-case-edit.html', assert_dic=assert_dic,project=project, case=case,response=json.dumps(response,sort_keys=True,indent=2,ensure_ascii=False))
     else:
         # 保存到数据库
-        test_case = TestCase.query.get(id)
+        test_case = ProjectTestCase.query.get(id)
         test_case.name = request.form.get("name")
         test_case.request_method = method
         test_case.url = url
@@ -335,47 +341,3 @@ def send_http_edit():
         test_case.updated_at = datetime.datetime.now()
         db.session.commit()
         return redirect(f"/project/to_detail_with_param/{project_id}")
-
-
-
-
-
-#
-# @case.route('/case/add',methods = ['POST'])
-# def case_add():
-#     module_id = request.form['module_id']
-#     module_name = request.form['module_name']
-#     case_name = request.form['case_name']
-#     case_detail = request.form['case_detail']
-#     expect_type = request.form['expect_type']
-#     expect_result = request.form['expect_result']
-#     remark = request.form['remark']
-#
-#     #插入数据
-#     wait_add_case = Case(create_time=utils.get_now_time(),module_id=module_id,module_name=module_name,case_detail=case_detail,case_name=case_name,expect_type=expect_type,expect_result=expect_result,remark=remark,state="1")
-#     DB.session.add(wait_add_case)
-#     DB.session.commit()
-#
-#     #更新下module中的case_count
-#
-#     cases = Case.query.filter(Case.state == '1', Case.module_id == module_id)
-#     module = Module.query.filter_by(id=module_id).first()
-#     module.case_count = cases.count()
-#     DB.session.commit()
-#
-#     cases = Case.query.filter(Case.state == '1', Case.module_id == module_id)
-#
-#     return render_template('case/case.html', cases=cases, module=module)
-#
-#
-#
-
-
-# @case.route('/case/to_detail',methods = ['POST','GET'])
-# def case_to_detail():
-#     id = request.args.get("id")
-#     case = Case.query.filter_by(id=id).first()
-#
-#     return render_template('case/case-detail.html',case=case)
-#
-#

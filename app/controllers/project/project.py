@@ -5,7 +5,9 @@ from app.dao.project.ProjectDao import ProjectDao
 from app.dao.project.ProjectRoleDao import ProjectRoleDao
 from app.handler.factory import ResponseFactory
 from app.handler.page import PageHandler
+from app.models import db
 from app.models.project import Project
+from app.models.project_test_case import ProjectTestCase
 from app.models.role import Role
 from app.models.test_case import TestCase
 from app.models.user import User
@@ -118,7 +120,7 @@ def to_detail(user_info):
     roles = Role.query.filter(Role.state == 1)
 
     #用例信息
-    testcases = TestCase.query.filter_by(project_id=id,deleted_at=None).all()
+    testcases = ProjectTestCase.query.filter_by(project_id=id,deleted_at=None).all()
 
     return render_template("project/project-edit.html",cases=testcases,roles=roles,project_role_id=project_role_id,user_list=ResponseFactory.model_to_dict(user_list),project=project,data=ResponseFactory.model_to_dict(user_objects))
 
@@ -137,7 +139,7 @@ def to_detail_with_param(id):
     roles = Role.query.filter(Role.state == 1)
 
     #用例信息
-    testcases = TestCase.query.filter_by(project_id=id,deleted_at=None).all()
+    testcases = ProjectTestCase.query.filter_by(project_id=id,deleted_at=None).all()
 
     return render_template("project/project-edit.html",cases=testcases,roles=roles,project_role_id=project_role_id,user_list=ResponseFactory.model_to_dict(user_list),project=project,data=ResponseFactory.model_to_dict(user_objects))
 
@@ -156,6 +158,48 @@ def update(user_info):
 
     return redirect("list_ui")
 
+
+#从用例库导入用例到项目下
+@pr.route("/export_from_cases",methods=["GET"])
+@permission()
+def export_from_cases(user_info):
+
+    project_id = request.args.get('project_id')
+    project = Project.query.filter_by(id=project_id).first()
+    user_objects = User.query.all()
+
+    #成员管理tab页
+    #项目绑定的用户
+
+    user_list, project_role_id = ProjectRoleDao.list_user_by_project_id(id)
+    #角色信息
+    roles = Role.query.filter(Role.state == 1)
+
+    #用例信息
+    testcases = db.session.execute(f'''select * from test_case
+                            where id not in(
+                            select case_id
+                            from project_test_case where deleted_at is Null and project_id = {project_id}
+                            )''')
+
+    return render_template("project/export-from-cases.html",cases=testcases,roles=roles,project_role_id=project_role_id,user_list=ResponseFactory.model_to_dict(user_list),project=project,data=ResponseFactory.model_to_dict(user_objects))
+
+#导入用例到项目中
+@pr.route("/save_cases_to_project",methods=["GET"])
+@permission()
+def save_cases_to_project(user_info):
+    project_id = request.args.get("project_id")
+    id_list = request.args.get("id_list")
+
+    for id in id_list.split(","):
+        print(id)
+        testcase = TestCase.query.get(id)
+        if testcase is None:
+            pr = ProjectTestCase(testcase.name,testcase.request_type,testcase.url,project_id,testcase.tag,testcase.body,testcase.status,testcase.expected,testcase.create_user,testcase.request_header,testcase.request_method,case_id=int(id))
+            db.session.add(pr)
+            db.session.commit()
+
+    return redirect(f'/project/to_detail_with_param/{project_id}')
 
 
 

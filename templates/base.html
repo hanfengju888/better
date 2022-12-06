@@ -173,16 +173,7 @@
                                 <span>项目管理</span>
                                 </a>
                             </li>
-                            <li>
-                                {% if session.get('sign') == 'module' %}
-                                <a href="/module/list?sign=module" class="active">
-                                {% else %}
-                                    <a href="/module/list?sign=module">
-                                {% endif %}
-                                    <i class="am-icon-desktop" ></i>
-                                    <span>模块管理</span>
-                                </a>
-                            </li>
+
 
                         </ul>
                     </li>
@@ -192,14 +183,14 @@
                         <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                             <i class="am-icon-users"></i>
                             <span>实用工具</span>
-                            {% if session.get('sign') == 'database' or session.get('sign') == 'redis' %}
+                            {% if session.get('sign') == 'database' or session.get('sign') == 'redis' or session.get('sign') == 'ssh' or session.get('sign') == 'project_scheduler' %}
                                 <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
                             {% else %}
                                 <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
                             {% endif %}
                         </a>
 
-                            {% if session.get('sign') == 'database' or session.get('sign') == 'redis' or session.get('sign') == 'ssh' %}
+                            {% if session.get('sign') == 'database' or session.get('sign') == 'redis' or session.get('sign') == 'ssh' or session.get('sign') == 'project_scheduler' %}
                                 <ul class="tpl-left-nav-sub-menu" style="display:block">
                             {% else %}
                                 <ul class="tpl-left-nav-sub-menu">
@@ -236,7 +227,18 @@
 
                                 <i class="am-icon-child"></i>
                                 <span>ssh客户端</span>
-                            </a>
+                                     </a>
+                            </li>
+
+                            <li>
+                                {% if session.get('sign') == 'project_scheduler' %}
+                                    <a href="/project_scheduler/list?sign=project_scheduler" class="active">
+                                {% else %}
+                                    <a href="/project_scheduler/list?sign=project_scheduler">
+                                {% endif %}
+                                    <i class="am-icon-desktop" ></i>
+                                    <span>定时任务</span>
+                                </a>
                             </li>
                         </ul>
                     </li>

@@ -64,17 +64,7 @@
         if(id_list.length == 0){
             alert("至少选择一个用例！")
         }else{
-            $("#before_start").modal({
-                    onConfirm: function(options) {
-                        var job_name = $("#job_name").val()
-                        window.location.href = "/case/execute?project_id={{project.id}}&id_list="+id_list +"&job_name="+job_name
-                    },
-                    onCancel: function() {
-                    }
-
-             });
-
-
+            window.location.href = "/project/save_cases_to_project?project_id={{project.id}}&id_list="+id_list
         }
     }
 
@@ -130,18 +120,10 @@
                                                 <div class="am-u-sm-12 am-u-md-5">
                                                     <div class="am-btn-toolbar">
                                                         <div class="am-btn-group am-btn-group-xs">
-                                                            <button type="button" onclick="window.location.href='/project/list_ui?sign=project'" class="am-btn am-btn-default"> 返回</button>
-                                                            <button type="button" onclick="window.location.href='/case/project_to_add?project_id={{project.id}}'"
-                                                                    class="am-btn am-btn-default am-btn-success"><span
-                                                                    class="am-icon-plus"></span> 新增
-                                                            </button>
-                                                            <button type="button" onclick="window.location.href='/project/export_from_cases?project_id={{project.id}}'"
-                                                                    class="am-btn am-btn-default am-btn-success"><span
-                                                                    class="am-icon-plus"></span> 用例库导入
-                                                            </button>
+                                                            <button type="button" onclick="window.location.href='/project/to_detail?id={{project.id}}'" class="am-btn am-btn-default"> 返回</button>
                                                             <button type="button" onclick="multi_start()"
                                                                     class="am-btn am-btn-warning"><span
-                                                                    class="am-icon-youtube-play"></span> 批量执行
+                                                                    class="am-icon-youtube-play"></span> 保存
                                                             </button>
                                                         </div>
                                                     </div>
@@ -160,8 +142,6 @@
                                                                 <th class="table-title">用例名称</th>
                                                                 <th class="table-title">创建时间</th>
                                                                 <th class="table-title">更新时间</th>
-                                                                <th class="table-type">状态</th>
-                                                                <th class="table-type">操作</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -175,43 +155,7 @@
                                                                 <td>{{loop.index}}</td>
                                                                 <td><a>{{case.name}}</a></td>
                                                                 <td>{{case.created_at}}</td>
-                                                                <td>{{case.created_at}}</td>
                                                                 <td>{{case.updated_at}}</td>
-
-                                                                <td>
-                                                                    <div class="am-btn-toolbar">
-                                                                        <div class="am-btn-group am-btn-group-xs">
-                                                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary">
-                                                                                <span class="am-icon-pencil-square-o"></span><a
-                                                                                    href="/case/to_edit?id={{case.id}}&project_id={{project.id}}">
-                                                                                编辑</a></button>
-
-                                                                            <button id="case_del_id" onclick="case_del('{{case.id}}')"
-                                                                                    type="button"
-                                                                                    class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                                            ><span class="am-icon-trash-o"></span>
-                                                                                <a href="/case/delete?case_id={{case.id}}&project_id={{project.id}}">删除</a>
-                                                                            </button>
-
-                                                                            <div class="am-modal am-modal-confirm"
-                                                                                 tabindex="-1" id="s">
-                                                                                <div class="am-modal-dialog">
-                                                                                    <div class="am-modal-hd">删除用例</div>
-                                                                                    <div class="am-modal-bd">
-                                                                                        你，确定要删除这条记录吗？
-                                                                                    </div>
-                                                                                    <div class="am-modal-footer">
-                                                                                        <span class="am-modal-btn"
-                                                                                              data-am-modal-cancel>取消</span>
-                                                                                        <span class="am-modal-btn"
-                                                                                              data-am-modal-confirm>确定</span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
                                                             </tr>
                                                             {% endfor %}
 

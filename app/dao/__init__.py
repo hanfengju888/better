@@ -8,5 +8,7 @@ from app.models.database import Database
 from app.models.redis import Redis
 from app.models.job import Job
 from app.models.ssh import Ssh
+from app.models.project_test_case import ProjectTestCase
+from app.models.project_scheduler import ProjectScheduler
 
 db.create_all()

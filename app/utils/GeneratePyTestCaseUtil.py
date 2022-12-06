@@ -1,12 +1,13 @@
 import json
 
 from app.dao.testcase.TestCaseDao import TestCaseDao
+from app.models.project_test_case import ProjectTestCase
 
 
 class GeneratePyTestCase():
     @staticmethod
     def generate_pytest_testcase(id,num,f):
-        case_info, err = TestCaseDao.query_case_by_id(id)
+        case_info = ProjectTestCase.query.get(id)
         headers = case_info.request_header
         url = case_info.url
         data = '' if case_info.body is None else case_info.body

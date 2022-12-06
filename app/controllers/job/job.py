@@ -46,8 +46,15 @@ def execute_jenkins():
         with open(final_py,'w+') as f2:
             f2.write(wait_modify)
 
+from app.utils.SchedulerUtil import scheduler
+@job.route('add_scheduler_job',methods=['GET','POST'])
+def add_scheduler_job():
+    def add_tt():
+        print('add_tt')
 
+    scheduler.add_job(func=add_tt,id='add_tt_job',trigger='cron', second="*/5",minute="*",hour="*" ,day="*",month="*",week="*")
 
+    return {'code':200}
 
 '''
 @job.route('/to_add',methods = ['GET'])

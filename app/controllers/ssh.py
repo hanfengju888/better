@@ -7,8 +7,11 @@ from app.models import db
 from app.models.role import Role
 from app.models.ssh import Ssh
 from app.utils.SshUtil import SSHLinux
+from app.utils.logger import Log
 
 ssh = Blueprint("ssh",__name__,url_prefix='/ssh')
+
+log = Log("ssh")
 
 #进入列表页
 @ssh.route('/list',methods = ['POST','GET'])
@@ -21,18 +24,18 @@ def to_list():
 
     sshs = Ssh.query.filter(Ssh.deleted_at == None)
     for every in sshs:
-        print(every.id)
-        ssh = SSHLinux(every.ip, port=every.port, username=every.username, password=every.password)
-        cpu_leave = ssh.use_command("vmstat|tail -1|awk '{print $(NF-2)}'")
-        mem_info = ssh.use_command("""free -h|grep Me|awk '{print $2","$NF}'""")
-        proecess_number = ssh.use_command("ps -ef|wc -l")
+        try:
+            ssh = SSHLinux(every.ip, port=every.port, username=every.username, password=every.password)
+            cpu_leave = ssh.use_command("vmstat|tail -1|awk '{print $(NF-2)}'")
+            mem_info = ssh.use_command("""free -h|grep Me|awk '{print $2","$NF}'""")
+            proecess_number = ssh.use_command("ps -ef|wc -l")
 
-        mem_info = mem_info.strip().replace('G','').split(',')
-        every.mem = str(round(float(mem_info[1])/float(mem_info[0])*100))
-        every.cpu = cpu_leave.strip()
-        every.process_number = proecess_number
-        # db.session.commit()
-    # sshs = Ssh.query.filter(Ssh.deleted_at == None)
+            mem_info = mem_info.strip().replace('G','').split(',')
+            every.mem = str(round(float(mem_info[1])/float(mem_info[0])*100))
+            every.cpu = cpu_leave.strip()
+            every.process_number = proecess_number
+        except Exception as e:
+            log.error(f'连接 {every.ip} 异常：{str(e)}')
 
     return render_template('ssh/ssh.html',sshs=sshs)
 

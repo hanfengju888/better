@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block mainbody %}
+
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        定时任务管理
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">定时任务中心</a></li>
+        <li><a href="#">定时任务管理</a></li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="tpl-block">
+            <div class="am-g">
+                <div class="am-u-sm-12 am-u-md-6">
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <button type="button" onclick="window.location.href='/project_scheduler/to_add'"
+                                    class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span> 新增
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+                </span>
+                </form>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-sm-12">
+                <form class="am-form">
+                    <table class="am-table am-table-striped am-table-hover table-main">
+                        <thead>
+                        <tr>
+                            <th class="table-title">项目名称</th>
+                            <th class="table-title">任务名称</th>
+                            <th class="table-title">任务id</th>
+                            <th class="table-author am-hide-sm-only">规则</th>
+                            <th class="table-author am-hide-sm-only">执行次数</th>
+                            <th class="table-author am-hide-sm-only">创建人</th>
+                            <th class="table-date am-hide-sm-only">状态</th>
+                            <th class="table-set">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for project_scheduler in project_schedulers %}
+                        <tr>
+                            <td>{{project_scheduler.project_name}}</td>
+                            <td>{{project_scheduler.name}}</td>
+                            <td>{{project_scheduler.ps_id}}</td>
+                            <td>{{project_scheduler.rule}}</td>
+                            <td>{{project_scheduler.execute_count}}</td>
+                            <td>{{project_scheduler.username}}</td>
+
+
+                            {% if project_scheduler.status == '1' %}
+                            <td class="am-hide-sm-only">启用中</td>
+                            <td>
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                                class="am-icon-pencil-square-o"></span><a
+                                                href="/project_scheduler/to_edit?id={{project_scheduler.id}}"> 编辑</a>
+                                        </button>
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                                class="am-icon-pencil-square-o"></span><a
+                                                href="/project_scheduler/stop?id={{project_scheduler.id}}"> 暂停</a>
+                                        </button>
+
+
+                                    </div>
+                                </div>
+                            </td>
+                            {% else %}
+                            <td class="am-hide-sm-only">暂停中</td>
+                            <td>
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                                class="am-icon-pencil-square-o"></span><a
+                                                href="/project_scheduler/to_edit?id={{project_scheduler.id}}"> 编辑</a>
+                                        </button>
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                                class="am-icon-eye"></span><a
+                                                href="/project_scheduler/resume?id={{project_scheduler.id}}"> 恢复</a>
+                                        </button>
+
+                                        <button id="aa" onclick="del('{{project_scheduler.id}}')"
+                                                type="button"
+                                                class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                        ><span class="am-icon-trash-o"></span>
+                                            <a href="#">删除</a>
+                                        </button>
+
+                                        <div class="am-modal am-modal-confirm" tabindex="-1" id="s">
+                                            <div class="am-modal-dialog">
+                                                <div class="am-modal-hd">删除定时任务</div>
+                                                <div class="am-modal-bd">
+                                                    你，确定要删除这条记录吗？
+                                                </div>
+                                                <div class="am-modal-footer">
+                                                    <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                                                    <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            {% endif %}
+
+                        </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    function del(id){
+        $('#s').modal({
+            onConfirm: function(options) {
+              window.location.href = "/project_scheduler/delete?id="+id
+            },
+            onCancel: function() {
+            }
+          });
+    }
+
+</script>
+
+
+{% endblock %}

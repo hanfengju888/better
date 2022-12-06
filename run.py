@@ -13,6 +13,8 @@ from app.controllers.redis.redis import rediss
 from app.controllers.job.job import job
 from flask import render_template
 from app.controllers.ssh import ssh
+from app.utils.SchedulerUtil import scheduler
+from app.controllers.ProjectSecheduler import project_scheduler
 
 
 #注册蓝图
@@ -27,10 +29,31 @@ better.register_blueprint(database)
 better.register_blueprint(rediss)
 better.register_blueprint(job)
 better.register_blueprint(ssh)
+better.register_blueprint(project_scheduler)
 
 
 import sys
 sys.path.append('./')
+
+#定时任务
+scheduler.init_app(better)
+scheduler.start()
+#将数据库中状态为1的任务添加到定时任务中，因为重启会清空
+from app.controllers.ProjectSecheduler import ProjectScheduler
+projectSchedulers = ProjectScheduler.query.filter(ProjectScheduler.status != '0',ProjectScheduler.deleted_at == None).all()
+#先全部启动
+for projectScheduler in projectSchedulers:
+    rules = projectScheduler.rule.split(' ')
+    def add_scheduler():
+        print("restart_" + str(projectScheduler.id))
+    scheduler.add_job(func=add_scheduler, id=projectScheduler.ps_id, trigger='cron', second=rules[0], minute=rules[1],
+                      hour=rules[2], day=rules[3], month=rules[4], week=rules[5])
+    #为暂停状态的暂停
+    if projectScheduler.status == '2':
+        scheduler.pause_job(projectScheduler.ps_id)
+
+
+
 
 @better.route('/')
 def login_page():
