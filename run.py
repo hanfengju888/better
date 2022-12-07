@@ -1,4 +1,7 @@
+
 from app import better
+from app.models import db
+from app.models.job import Job
 from app.utils.logger import Log
 from app import dao
 from app.controllers.auth.user import auth
@@ -40,13 +43,14 @@ scheduler.init_app(better)
 scheduler.start()
 #将数据库中状态为1的任务添加到定时任务中，因为重启会清空
 from app.controllers.ProjectSecheduler import ProjectScheduler
+from app.utils.SchedulerUtil import execute_cases_by_project_id
+
 projectSchedulers = ProjectScheduler.query.filter(ProjectScheduler.status != '0',ProjectScheduler.deleted_at == None).all()
 #先全部启动
 for projectScheduler in projectSchedulers:
     rules = projectScheduler.rule.split(' ')
-    def add_scheduler():
-        print("restart_" + str(projectScheduler.id))
-    scheduler.add_job(func=add_scheduler, id=projectScheduler.ps_id, trigger='cron', second=rules[0], minute=rules[1],
+
+    scheduler.add_job(func=execute_cases_by_project_id, args=(projectScheduler.project_id,projectScheduler.id),id=projectScheduler.ps_id, trigger='cron', second=rules[0], minute=rules[1],
                       hour=rules[2], day=rules[3], month=rules[4], week=rules[5])
     #为暂停状态的暂停
     if projectScheduler.status == '2':

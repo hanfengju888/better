@@ -1,16 +1,13 @@
-import time
-
-from flask import Flask,render_template,request,session,redirect,url_for,Blueprint
-from flask import render_template
 from datetime import datetime
 
-from app.dao.project.ProjectRoleDao import ProjectRoleDao
+from flask import render_template
+from flask import request, session, redirect, Blueprint
+
 from app.models import db
 from app.models.project import Project
-from app.models.role import Role
 from app.models.project_scheduler import ProjectScheduler
+from app.utils.SchedulerUtil import scheduler, execute_cases_by_project_id
 from app.utils.SingletonDecorator import permission
-from app.utils.SchedulerUtil import scheduler
 from app.utils.logger import Log
 
 project_scheduler = Blueprint("project_scheduler",__name__,url_prefix='/project_scheduler')
@@ -52,16 +49,12 @@ def add(user_info):
     db.session.commit()
 
 
+
     #添加定时任务
-    def add_scheduler():
-        update_p = ProjectScheduler.query.get(wait_add_project_scheduler.id)
-        update_p.execute_count += 1
-        db.session.commit()
-
     rules = rule.split(' ')
-
-    scheduler.add_job(func=add_scheduler,id=wait_add_project_scheduler.ps_id,trigger='cron', second=rules[0],minute=rules[1],hour=rules[2] ,day=rules[3],month=rules[4],week=rules[5])
-
+    scheduler.add_job(func=execute_cases_by_project_id, args=(project_id, wait_add_project_scheduler.id),
+                      id=wait_add_project_scheduler.ps_id, trigger='cron', second=rules[0], minute=rules[1],
+                      hour=rules[2], day=rules[3], month=rules[4], week=rules[5])
 
 
     return redirect('list')
@@ -93,13 +86,6 @@ def edit():
     edit_scheduler.execute_count = 0
     db.session.commit()
 
-    # 修改定时任务
-    def add_scheduler():
-        update_p = ProjectScheduler.query.get(edit_scheduler.id)
-        update_p.execute_count += 1
-        db.session.commit()
-        print('update_'+str(round(time.time())))
-
     rules = rule.split(' ')
 
 
@@ -110,7 +96,8 @@ def edit():
         log.error(f'删除定时任务时出错：str(e)')
 
     #再添加定时任务
-    scheduler.add_job(func=add_scheduler, id=edit_scheduler.ps_id, trigger='cron', second=rules[0], minute=rules[1],
+    scheduler.add_job(func=execute_cases_by_project_id, args=(project_id, edit_scheduler.id),
+                      id=edit_scheduler.ps_id, trigger='cron', second=rules[0], minute=rules[1],
                       hour=rules[2], day=rules[3], month=rules[4], week=rules[5])
 
 

@@ -1,1 +1,0 @@
-{"ee5456b62c32375a8eddf4ce8346b50c":{"statistic":{"failed":0,"broken":1,"skipped":0,"passed":0,"unknown":0,"total":1},"items":[{"uid":"4f517d4bf83688bd","status":"broken","statusDetails":"KeyError: 'data'","time":{"start":1670056743796,"stop":1670056744344,"duration":548}}]}}
