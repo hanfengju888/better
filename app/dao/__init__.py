@@ -10,5 +10,6 @@ from app.models.job import Job
 from app.models.ssh import Ssh
 from app.models.project_test_case import ProjectTestCase
 from app.models.project_scheduler import ProjectScheduler
+from app.models.mock import Mock
 
 db.create_all()

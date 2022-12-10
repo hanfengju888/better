@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block mainbody %}
+<div class="tpl-content-wrapper">
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 编辑
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tpl-block ">
+
+            <div class="am-g tpl-amazeui-form">
+                <div class="am-u-sm-12 am-u-md-9">
+                    <form class="am-form am-form-horizontal" method="POST" action="/mock/edit">
+                        <input type="hidden" name="id" value="{{mock.id}}"/>
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">名称</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="user-name" name="name" value="{{mock.name}}"  required>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">路径</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="path" value="{{mock.path}}">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label  class="am-u-sm-3 am-form-label">请求类型</label>
+                            <div class="am-u-sm-9">
+                                <select name="method" data-am-selected="{btnSize: 'sm'}">
+                                    {% if mock.method == 'GET' %}
+                                         <option value="GET" selected>GET</option>
+                                    {% else %}
+                                         <option value="GET">GET</option>
+                                    {% endif %}
+
+                                    {% if mock.method == 'POST' %}
+                                         <option value="POST" selected>POST</option>
+                                    {% else %}
+                                         <option value="POST">POST</option>
+                                    {% endif %}
+
+                                    {% if mock.method == 'PUT' %}
+                                         <option value="PUT" selected>PUT</option>
+                                    {% else %}
+                                         <option value="PUT">PUT</option>
+                                    {% endif %}
+
+                                    {% if mock.method == 'DELETE' %}
+                                         <option value="DELETE" selected>DELETE</option>
+                                    {% else %}
+                                         <option value="DELETE">DELETE</option>
+                                    {% endif %}
+
+                                    {% if mock.method == 'HEAD' %}
+                                         <option value="HEAD" selected>HEAD</option>
+                                    {% else %}
+                                         <option value="HEAD">HEAD</option>
+                                    {% endif %}
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">请求头</label>
+                            <div class="am-u-sm-9">
+                                <select name="header" data-am-selected="{btnSize: 'sm'}">
+                                    {% if mock.method == 'application/json' %}
+                                         <option value="application/json" selected>application/json</option>
+                                    {% else %}
+                                         <option value="application/json">application/json</option>
+                                    {% endif %}
+
+                                    {% if mock.method == 'application/xml' %}
+                                         <option value="application/xml" selected>application/xml</option>
+                                    {% else %}
+                                         <option value="application/xml">application/xml</option>
+                                    {% endif %}
+
+                                    {% if mock.method == 'application/x-www-form-urlencoded' %}
+                                         <option value="application/x-www-form-urlencoded" selected>application/x-www-form-urlencoded</option>
+                                    {% else %}
+                                         <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
+                                    {% endif %}
+
+                                    {% if mock.method == 'multipart/form-data' %}
+                                         <option value="multipart/form-data" selected>multipart/form-data</option>
+                                    {% else %}
+                                         <option value="multipart/form-data">multipart/form-data</option>
+                                    {% endif %}
+
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">请求体</label>
+                            <div class="am-u-sm-9">
+                                <textarea class="" rows="5" name="body">{{mock.body}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">响应信息</label>
+                            <div class="am-u-sm-9">
+                                <textarea class="" rows="5" name="response_data">{{mock.response_data}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -13,6 +13,8 @@ ssh = Blueprint("ssh",__name__,url_prefix='/ssh')
 
 log = Log("ssh")
 
+
+
 #进入列表页
 @ssh.route('/list',methods = ['POST','GET'])
 def to_list():

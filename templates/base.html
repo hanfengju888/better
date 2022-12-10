@@ -183,14 +183,14 @@
                         <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
                             <i class="am-icon-users"></i>
                             <span>实用工具</span>
-                            {% if session.get('sign') == 'database' or session.get('sign') == 'redis' or session.get('sign') == 'ssh' or session.get('sign') == 'project_scheduler' %}
+                            {% if session.get('sign') == 'mock' or session.get('sign') == 'database' or session.get('sign') == 'redis' or session.get('sign') == 'ssh' or session.get('sign') == 'project_scheduler' %}
                                 <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
                             {% else %}
                                 <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
                             {% endif %}
                         </a>
 
-                            {% if session.get('sign') == 'database' or session.get('sign') == 'redis' or session.get('sign') == 'ssh' or session.get('sign') == 'project_scheduler' %}
+                            {% if session.get('sign') == 'mock' or session.get('sign') == 'database' or session.get('sign') == 'redis' or session.get('sign') == 'ssh' or session.get('sign') == 'project_scheduler' %}
                                 <ul class="tpl-left-nav-sub-menu" style="display:block">
                             {% else %}
                                 <ul class="tpl-left-nav-sub-menu">
@@ -227,6 +227,17 @@
 
                                 <i class="am-icon-child"></i>
                                 <span>ssh客户端</span>
+                                     </a>
+                            </li>
+                            <li>
+                                {% if session.get('sign') == 'mock' %}
+                                    <a href="/mock/list?sign=mock" class="active">
+                                {% else %}
+                                    <a href="/mock/list?sign=mock">
+                                {% endif %}
+
+                                <i class="am-icon-child"></i>
+                                <span>mock服务</span>
                                      </a>
                             </li>
 

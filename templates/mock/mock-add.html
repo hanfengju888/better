@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block mainbody %}
+<div class="tpl-content-wrapper">
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 添加
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tpl-block ">
+
+            <div class="am-g tpl-amazeui-form">
+                <div class="am-u-sm-12 am-u-md-9">
+                    <form class="am-form am-form-horizontal" method="POST" action="/mock/add">
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">名称</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" id="user-name" name="name" placeholder="请输入名称"  required>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">路径</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="path" placeholder="请输入路径" placeholder="/xx">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label  class="am-u-sm-3 am-form-label">请求类型</label>
+                            <div class="am-u-sm-9">
+                                <select name="method" data-am-selected="{btnSize: 'sm'}">
+                                  <option value="GET">GET</option>
+                                  <option value="POST" selected>POST</option>
+                                  <option value="PUT">PUT</option>
+                                  <option value="DELETE">DELETE</option>
+                                  <option value="HEAD">HEAD</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">请求头</label>
+                            <div class="am-u-sm-9">
+                                <select name="header" data-am-selected="{btnSize: 'sm'}">
+                                  <option value="application/json">application/json</option>
+                                  <option value="application/xml">application/xml</option>
+                                  <option value="application/x-www-form-urlencoded">application/x-www-form-urlencoded</option>
+                                  <option value="multipart/form-data<">multipart/form-data</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">请求体</label>
+                            <div class="am-u-sm-9">
+                                <textarea class="" rows="5" name="body"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">响应信息</label>
+                            <div class="am-u-sm-9">
+                                <textarea class="" rows="5" name="response_data"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="submit" class="am-btn am-btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

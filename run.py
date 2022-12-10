@@ -18,7 +18,7 @@ from flask import render_template
 from app.controllers.ssh import ssh
 from app.utils.SchedulerUtil import scheduler
 from app.controllers.ProjectSecheduler import project_scheduler
-
+from app.controllers.mock import mock
 
 #注册蓝图
 better.register_blueprint(auth)
@@ -33,6 +33,7 @@ better.register_blueprint(rediss)
 better.register_blueprint(job)
 better.register_blueprint(ssh)
 better.register_blueprint(project_scheduler)
+better.register_blueprint(mock)
 
 
 import sys
