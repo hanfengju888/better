@@ -49,7 +49,7 @@
 
 
                             {% if project_scheduler.status == '1' %}
-                            <td class="am-hide-sm-only">启用中</td>
+                            <td class="am-hide-sm-only"><a class="am-badge am-badge-success am-round">运行中</a></td>
                             <td>
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
@@ -67,7 +67,7 @@
                                 </div>
                             </td>
                             {% else %}
-                            <td class="am-hide-sm-only">暂停中</td>
+                            <td class="am-hide-sm-only"><a class="am-badge am-badge-warning am-round">暂停中</a></td>
                             <td>
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">

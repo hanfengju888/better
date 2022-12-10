@@ -39,9 +39,28 @@
                                     <td>{{mock.name}}</td>
                                     <td>{{mock.path}}</td>
                                     <td>{{mock.method}}</td>
-                                    <td>{{mock.use_count}}</td>
+                                    <td><span class="am-badge am-badge-success am-round">{{mock.use_count}}</span></td>
 
-                                    <td>{{mock.status}}</td>
+                                    <td>
+                                        {% if mock.status == '1' %}
+                                            <div class="tpl-switch">
+                                                <input type="checkbox" class="ios-switch bigswitch tpl-switch-btn" onclick="change(this,{{mock.id}})" checked>
+                                                <div class="tpl-switch-btn-view">
+                                                    <div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="tpl-switch">
+                                                <input type="checkbox"  class="ios-switch bigswitch tpl-switch-btn" onclick="change(this,{{mock.id}})">
+                                                <div class="tpl-switch-btn-view">
+                                                    <div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </td>
+
                                     <td>
                                         <div class="am-btn-toolbar">
                                             <div class="am-btn-group am-btn-group-xs">
@@ -94,6 +113,15 @@
             onCancel: function() {
             }
           });
+    }
+
+    function change(obj,mock_id){
+        var stat = obj.checked
+        if(stat == false){
+            window.location.href = "/mock/change_status?id=" + mock_id +"&status=2"
+        }else{
+            window.location.href = "/mock/change_status?id=" + mock_id +"&status=1"
+        }
     }
 </script>
 

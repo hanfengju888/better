@@ -1,0 +1,2 @@
+{'headers': None, 'data': '', 'verify': False}
+{'reason': 'success', 'result': {'text': ' 等待，只为与你的相遇，也许没有人会相信在你我相遇的刹那间，能够绽放出彼此的光芒，我在那盛开的.兰花瓣上为你写下无尽的祝福与思念!'}, 'error_code': 0}

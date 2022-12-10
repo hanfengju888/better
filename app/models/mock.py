@@ -9,7 +9,7 @@ class Mock(db.Model):
     header = db.Column(db.String(6400))
     body = db.Column(db.String(6400))
     response_data = db.Column(db.String(6400))
-    status = db.Column(db.String(16),comment="0:删除  1：使用中  2：暂停")
+    status = db.Column(db.String(16),comment="1：开启  2：关闭")
     use_count = db.Column(db.INT)
     created_at = db.Column(db.DATETIME, nullable=False)
     updated_at = db.Column(db.DATETIME, nullable=False)

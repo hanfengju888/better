@@ -142,25 +142,26 @@ def edit():
 
     return redirect('list')
 
-'''
+
 @mock.route('/delete',methods = ['GET'])
 def delete():
     id = request.args.get("id")
-    Mock = Mock.query.get(id)
-    Mock.deleted_at = datetime.now()
+    mock = Mock.query.get(id)
+    mock.deleted_at = datetime.now()
 
     db.session.commit()
 
     return redirect('list')
 
-@mock.route('/to_detail',methods = ['POST','GET'])
-def to_detail():
+@mock.route('/change_status',methods = ['POST','GET'])
+def change_status():
     id = request.args.get("id")
-    Mock = Mock.query.filter_by(id=id).first()
-    roles = Role.query.filter(Role.state == 1)
-    return render_template('mock/mock-detail.html',Mock=Mock,roles=roles)
+    status = request.args.get("status")
+    mock = Mock.query.filter_by(id=id).first()
+    mock.status = status
+    db.session.commit()
+    return redirect('list')
 
 
 
 
-'''

@@ -60,7 +60,13 @@
                                     <td>{{database.port}}</td>
                                     <td>{{database.username}}</td>
                                     <td>{{database.password}}</td>
-                                    <td>{{database.connect_status}}</td>
+                                    <td>
+                                        {% if database.connect_status == 'success' %}
+                                        <a class="am-badge am-badge-success am-round">{{database.connect_status}}</a>
+                                        {% else %}
+                                        <a class="am-badge am-badge-warning am-round">{{database.connect_status}}</a>
+                                        {% endif %}
+                                    </td>
                                     <td>
                                         <div class="am-btn-toolbar">
                                             <div class="am-btn-group am-btn-group-xs">

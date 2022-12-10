@@ -1,0 +1,2 @@
+{'headers': None, 'data': '', 'verify': False}
+{'reason': 'success', 'result': {'text': ' 学习，就象是一场战争，有时你觉得在这拼命撕杀的战场上，你是孤独与无助的，但你殊不知，你其实并不是孤身奋战的!'}, 'error_code': 0}

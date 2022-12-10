@@ -342,3 +342,6 @@ WHERE user.username = %s AND user.password = %s AND user.deleted_at IS NULL
 [2022-12-08 23:34:55.967567] INFO: userDao: 有人访问了登录页面
 [2022-12-10 11:37:42.124231] INFO: userDao: 有人访问了登录页面
 [2022-12-10 15:30:53.230937] INFO: userDao: 有人访问了登录页面
+[2022-12-10 23:08:10.814274] ERROR: userDao: 连接数据库192.168.1.62失败: (2003, "Can't connect to MySQL server on '192.168.1.62' (timed out)")
+[2022-12-10 23:10:24.748496] ERROR: userDao: 连接 192.168.1.61 异常：[WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+[2022-12-10 23:48:20.514656] INFO: userDao: 有人访问了登录页面

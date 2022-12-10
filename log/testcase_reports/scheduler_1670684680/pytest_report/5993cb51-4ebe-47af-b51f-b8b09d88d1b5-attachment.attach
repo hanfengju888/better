@@ -1,0 +1,113 @@
+{
+  "resultcode": "200",
+  "reason": "查询成功",
+  "result": {
+    "sk": {
+      "temp": "0",
+      "wind_direction": "北风",
+      "wind_strength": "3级",
+      "humidity": "29%",
+      "time": "22:54"
+    },
+    "today": {
+      "temperature": "-5℃~5℃",
+      "weather": "晴",
+      "weather_id": {
+        "fa": "00",
+        "fb": "00"
+      },
+      "wind": "北风微风",
+      "week": "星期六",
+      "city": "北京",
+      "date_y": "2022年12月10日",
+      "dressing_index": "冷",
+      "dressing_advice": "天气冷，建议着棉服、羽绒服、皮夹克加羊毛衫等冬季服装。年老体弱者宜着厚棉衣、冬大衣或厚羽绒服。",
+      "uv_index": "中等",
+      "comfort_index": "",
+      "wash_index": "较适宜",
+      "travel_index": "较不宜",
+      "exercise_index": "较不宜",
+      "drying_index": ""
+    },
+    "future": {
+      "day_20221210": {
+        "temperature": "-5℃~5℃",
+        "weather": "晴",
+        "weather_id": {
+          "fa": "00",
+          "fb": "00"
+        },
+        "wind": "北风微风",
+        "week": "星期六",
+        "date": "20221210"
+      },
+      "day_20221211": {
+        "temperature": "-4℃~4℃",
+        "weather": "多云",
+        "weather_id": {
+          "fa": "01",
+          "fb": "01"
+        },
+        "wind": "西南风微风",
+        "week": "星期日",
+        "date": "20221211"
+      },
+      "day_20221212": {
+        "temperature": "-6℃~5℃",
+        "weather": "晴",
+        "weather_id": {
+          "fa": "00",
+          "fb": "00"
+        },
+        "wind": "西北风微风",
+        "week": "星期一",
+        "date": "20221212"
+      },
+      "day_20221213": {
+        "temperature": "-10℃~-1℃",
+        "weather": "晴",
+        "weather_id": {
+          "fa": "00",
+          "fb": "00"
+        },
+        "wind": "西北风微风",
+        "week": "星期二",
+        "date": "20221213"
+      },
+      "day_20221214": {
+        "temperature": "-9℃~-1℃",
+        "weather": "晴",
+        "weather_id": {
+          "fa": "00",
+          "fb": "00"
+        },
+        "wind": "西北风3-5级",
+        "week": "星期三",
+        "date": "20221214"
+      },
+      "day_20221215": {
+        "temperature": "-10℃~-1℃",
+        "weather": "晴",
+        "weather_id": {
+          "fa": "00",
+          "fb": "00"
+        },
+        "wind": "西北风微风",
+        "week": "星期四",
+        "date": "20221215"
+      },
+      "day_20221216": {
+        "temperature": "-6℃~5℃",
+        "weather": "晴",
+        "weather_id": {
+          "fa": "00",
+          "fb": "00"
+        },
+        "wind": "西北风微风",
+        "week": "星期五",
+        "date": "20221216"
+      }
+    }
+  },
+  "error_code": 0
+}

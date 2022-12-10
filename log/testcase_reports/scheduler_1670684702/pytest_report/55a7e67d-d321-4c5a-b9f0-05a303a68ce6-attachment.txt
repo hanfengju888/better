@@ -1,0 +1,2 @@
+{'headers': None, 'data': '', 'verify': False}
+{'error_code': 0, 'reason': 'success', 'result': {'data': {'conclusion': '万宝集门，天降幸运，立志奋发，得成大功', 'analysis': '主人性格类型：[不善表达/疑心大型]，其具体表现为：在乎身边各人对自己的评价及观感，不善表达个人情感，是个先考虑别人感受，再作出相应配合的内敛一族。对于爱侣，经常存有怀疑之心。'}}}
