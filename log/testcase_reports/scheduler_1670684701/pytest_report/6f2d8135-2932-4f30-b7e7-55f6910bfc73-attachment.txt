@@ -1,2 +1,0 @@
-{'headers': None, 'data': '', 'verify': False}
-{'reason': 'success', 'result': {'text': '我不愿让你一个人，你却宁肯一个人。'}, 'error_code': 0}

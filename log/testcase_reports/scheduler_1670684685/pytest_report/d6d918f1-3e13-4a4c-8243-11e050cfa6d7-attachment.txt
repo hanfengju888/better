@@ -1,2 +1,0 @@
-{'headers': None, 'data': '', 'verify': False}
-{'reason': 'success', 'result': {'text': ' 多想牵着你的手，徜徉在莲塘的小路上;多想坐在你的身旁，共把满池的莲花欣赏;多想温情的晚风，伴着花香悄悄地为你我歌唱!'}, 'error_code': 0}

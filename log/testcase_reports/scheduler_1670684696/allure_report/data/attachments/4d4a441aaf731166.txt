@@ -1,2 +1,0 @@
-{'headers': None, 'data': '', 'verify': False}
-{'reason': 'success', 'result': {'text': '这世上并不缺善良的人，缺的是经历挫折打击背叛之后仍然善良的人。'}, 'error_code': 0}

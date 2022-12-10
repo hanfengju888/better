@@ -1,2 +1,0 @@
-{'headers': None, 'data': '', 'verify': False}
-{'reason': 'success', 'result': {'content': '1kmwm1C3Fsqf4Q3p'}, 'error_code': 0}

@@ -1,2 +1,0 @@
-{'headers': None, 'data': '', 'verify': False}
-{'reason': 'success', 'result': {'text': '人生是美好的，因为我们可以从中悟出很多道理。我的人生，我自己走，我的命运，我自己掌握，我一定会通过自己让我的人生更加精彩，更加美好！'}, 'error_code': 0}

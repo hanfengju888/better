@@ -1,2 +1,0 @@
-{'headers': None, 'data': '', 'verify': False}
-{'reason': 'success', 'result': {'text': '小说的结局，可以重写，一遍一遍又一遍，想写几遍写几遍——但人生不行。'}, 'error_code': 0}

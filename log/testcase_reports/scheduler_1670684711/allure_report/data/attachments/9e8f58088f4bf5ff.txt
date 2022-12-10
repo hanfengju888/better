@@ -1,2 +1,0 @@
-{'headers': None, 'data': '', 'verify': False}
-{'reason': 'success', 'result': {'text': '我望着外面的雨，不知不觉的睡着了。在梦里，有爱我的爸爸和妈妈，还有疼我的哥哥，也许只有在梦里，我才能开心的笑一次，真希望自己一直都在做梦，不想醒来。'}, 'error_code': 0}

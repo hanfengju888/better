@@ -1,2 +1,0 @@
-{'headers': None, 'data': '', 'verify': False}
-{'reason': 'success', 'result': {'text': ' 原来，人只是拥抱着时间洗涤不去的记忆。爱也好，恨也好，不会全部留着。'}, 'error_code': 0}
