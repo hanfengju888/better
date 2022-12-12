@@ -45,11 +45,17 @@ def http_ui():
 def send_http(user_info):
     method = request.form["method"]
     url = request.form["url"]
-    payload = request.form["payload"]
-    # headers = {"Content-Type":"application/json"}
+    payload = request.form.get('payload')
     headers = {}
-    payload = payload.replace("'",'"')
-    json_payload = json.loads(payload)
+    content_type = request.form.get('content_type')
+    if content_type is not None and content_type != "":
+        headers = {"Content-Type":content_type}
+
+    json_payload = {}
+    if payload != '':
+        payload = payload.replace("'",'"')
+        json_payload = json.loads(payload)
+
     #上传资源特殊处理
     if json_payload.get('modeFile') is not None:
         file_path = json_payload.get('modeFile')
@@ -58,10 +64,14 @@ def send_http(user_info):
         r = Request(url, data=json_payload, headers=None,files=files,verify=False)
         response = r.request(method)
     else:
-        r = Request(url, data=payload, headers=headers)
-        response = r.request(method)
+        if method == "GET":
+            r = Request(url)
 
+        elif method == "POST":
+            r = Request(url,headers=headers,json=json_payload)
+        response = r.request(method)
     if not response.get("status"):
         print("未通过。。。")
         return jsonify(dict(code=110, data=response, msg=response.get("msg")))
-    return render_template("http/http.html",url=url,payload=payload,response=response)
+    response = json.dumps(response,indent=4,ensure_ascii=False)
+    return render_template("http/http.html",url=url,payload=payload,response=response,method=method)

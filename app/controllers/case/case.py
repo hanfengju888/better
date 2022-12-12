@@ -1,22 +1,20 @@
 import datetime
+import json
 import os
 import time
 
-from flask import Flask, render_template, request, session, redirect, url_for, Blueprint, jsonify
+from flask import render_template, request, session, redirect, Blueprint, jsonify
 from sqlalchemy import and_
-
-from app.dao.testcase.TestCaseDao import TestCaseDao
-from app.models.job import Job
-from app.models.project_test_case import ProjectTestCase
-from app.utils.GeneratePyTestCaseUtil import GeneratePyTestCase
-from app.utils.executor import Executor
-import json
 
 from app.middleware.HttpClient import Request
 from app.models import db
+from app.models.job import Job
 from app.models.project import Project
+from app.models.project_test_case import ProjectTestCase
 from app.models.test_case import TestCase
+from app.utils.GeneratePyTestCaseUtil import GeneratePyTestCase
 from app.utils.SingletonDecorator import permission
+from app.utils.executor import Executor
 from config import Config
 
 case = Blueprint("case",__name__,url_prefix='/case')
@@ -47,6 +45,42 @@ def project_to_add():
 
 
 
+# #用例库--添加用例
+# @case.route("/case_send_http",methods=["POST"])
+# @permission()
+# def case_send_http(user_info):
+#     #flag 标记是点击的请求按钮 0   还是保存按钮 1
+#     flag = request.form["flag"]
+#     method = request.form["request_method"]
+#     url = request.form["url"]
+#     payload = request.form["payload"]
+#     headers = {}
+#     response = None
+#
+#     print(flag)
+#     if flag == "0":
+#         if payload is not None and payload != "":
+#             payload = payload.replace("'", '"')
+#             json_payload = json.loads(payload)
+#             r = Request(url, data=json_payload, headers=headers)
+#             response = r.request(method)
+#
+#         else:
+#             r = Request(url, headers=headers)
+#             response = r.request(method)
+#
+#
+#         return render_template('case/case-add.html', method=method,url=url,payload=payload,response=json.dumps(response,sort_keys=True,indent=2,ensure_ascii=False))
+#     else:
+#         #保存到数据库
+#         expected = request.form["expected"]
+#         name = request.form.get("name")
+#         test_case =  TestCase(name, 1, url, 0, "", payload,1, expected, user_info.get("id") ,request_method=method)
+#         db.session.add(test_case)
+#         db.session.commit()
+#         return redirect("list")
+
+
 #用例库--添加用例
 @case.route("/case_send_http",methods=["POST"])
 @permission()
@@ -55,23 +89,22 @@ def case_send_http(user_info):
     flag = request.form["flag"]
     method = request.form["request_method"]
     url = request.form["url"]
-    payload = request.form["payload"]
+    payload = request.form.get('payload')
     headers = {}
+    content_type = request.form.get('content_type')
+    if content_type is not None and content_type != "":
+        headers = {"Content-Type":content_type}
     response = None
 
-    print(flag)
     if flag == "0":
         if payload is not None and payload != "":
             payload = payload.replace("'", '"')
             json_payload = json.loads(payload)
-            r = Request(url, data=json_payload, headers=headers)
-            response = r.request(method)
-
+            r = Request(url, json=json_payload, headers=headers)
         else:
-            r = Request(url, headers=headers)
-            response = r.request(method)
+            r = Request(url)
 
-
+        response = r.request(method)
         return render_template('case/case-add.html', method=method,url=url,payload=payload,response=json.dumps(response,sort_keys=True,indent=2,ensure_ascii=False))
     else:
         #保存到数据库
@@ -81,6 +114,8 @@ def case_send_http(user_info):
         db.session.add(test_case)
         db.session.commit()
         return redirect("list")
+
+
 
 #用例库--编辑用例
 @case.route('/case_to_edit',methods = ['POST','GET'])
@@ -100,18 +135,21 @@ def case_send_http_edit():
     flag = request.form["flag"]
     method = request.form["request_method"]
     url = request.form["url"]
-    payload = request.form["payload"]
+    payload = request.form.get('payload')
+    headers = {}
+    content_type = request.form.get('content_type')
+    if content_type is not None and content_type != "":
+        headers = {"Content-Type": content_type}
     #gest
     if flag == "0":
         if payload is not None and payload != "":
             payload = payload.replace("'", '"')
             json_payload = json.loads(payload)
-            r = Request(url, data=json_payload)
-            response = r.request(method)
-
+            r = Request(url, json=json_payload,headers=headers)
         else:
             r = Request(url)
-            response = r.request(method)
+
+        response = r.request(method)
 
 
         case = TestCase.query.filter_by(id=id).first()
@@ -120,7 +158,6 @@ def case_send_http_edit():
 
         assert_dic = {}
         assert_dic['expected'] = case.expected
-        print(response)
         assert_dic['actual'] = response['response']['error_code']
         assert_result = str(assert_dic.get("expected")) == str(assert_dic.get('actual'))
         assert_result = '成功' if assert_result else '失败'
@@ -141,7 +178,7 @@ def case_send_http_edit():
 
 
 
-#添加用例时
+#项目详情--用例添加
 @case.route("/send_http",methods=["POST"])
 @permission()
 def send_http(user_info):
@@ -152,27 +189,21 @@ def send_http(user_info):
     payload = request.form["payload"]
     project_id = "" if request.form.get("project_id") is None else request.form.get("project_id")
     headers = {}
+    content_type = request.form.get("content_type")
+    headers = {'Content-Type':content_type}
     if project_id != "":
         project = Project.query.get(project_id)
-        headers = {'accessToken': project.accessToken,'requestType':'1'}
+    #     headers = {'accessToken': project.accessToken,'requestType':'1'}
 
     if flag == "0":
         if payload is not None and payload != "":
             payload = payload.replace("'", '"')
             json_payload = json.loads(payload)
-            # 上传资源特殊处理
-            if json_payload.get('modeFile') is not None:
-                file_path = json_payload.get('modeFile')
-                files = [('modeFile', (file_path.split("/")[-1], open(file_path, 'rb'), 'text/csv'))]
-                del json_payload['modeFile']
-                r = Request(url, data=json_payload, headers=headers, files=files, verify=False)
-                response = r.request(method)
-            else:
-                r = Request(url, data=payload, headers=headers)
-                response = r.request(method)
+            r = Request(url, json=json_payload, headers=headers)
         else:
-            r = Request(url, data=payload, headers=headers)
-            response = r.request(method)
+            r = Request(url)
+
+        response = r.request(method)
 
         if not response.get("status"):
             return jsonify(dict(code=110, data=response, msg=response.get("msg")))
@@ -290,33 +321,55 @@ def send_http_edit():
     flag = request.form["flag"]
     method = request.form["request_method"]
     url = request.form["url"]
-    payload = request.form["payload"]
+    payload = request.form.get('payload')
+    headers = {}
+    content_type = request.form.get("content_type")
+    headers = {"Content-Type":content_type}
+
     #gest
     project_id = request.form["project_id"]
     project = Project.query.get(project_id)
-    headers = {'accessToken': project.accessToken,'requestType':'1'}
+    # headers = {'accessToken': project.accessToken,'requestType':'1'}
+    # if flag == "0":
+    #     if len(payload) > 3:
+    #         payload = payload.replace("'", '"')
+    #         json_payload = json.loads(payload)
+    #         # 上传资源特殊处理
+    #         if json_payload.get('modeFile') is not None:
+    #             file_path = json_payload.get('modeFile')
+    #             files = [('modeFile', (file_path.split("/")[-1], open(file_path, 'rb'), 'text/csv'))]
+    #             del json_payload['modeFile']
+    #             r = Request(url, data=json_payload, headers=headers, files=files, verify=False)
+    #             response = r.request(method)
+    #         else:
+    #             headers['Content-Type'] = 'application/json'
+    #             r = Request(url, data=payload, headers=headers)
+    #             response = r.request(method)
+    #     else:
+    #         headers['Content-Type'] = 'application/json'
+    #         r = Request(url, data=payload, headers=headers)
+    #         response = r.request(method)
+
+
     if flag == "0":
-        if len(payload) > 3:
+        if payload is not None and payload != "":
             payload = payload.replace("'", '"')
             json_payload = json.loads(payload)
-            # 上传资源特殊处理
-            if json_payload.get('modeFile') is not None:
-                file_path = json_payload.get('modeFile')
-                files = [('modeFile', (file_path.split("/")[-1], open(file_path, 'rb'), 'text/csv'))]
-                del json_payload['modeFile']
-                r = Request(url, data=json_payload, headers=headers, files=files, verify=False)
-                response = r.request(method)
-            else:
-                headers['Content-Type'] = 'application/json'
-                r = Request(url, data=payload, headers=headers)
-                response = r.request(method)
+            r = Request(url, json=json_payload, headers=headers)
         else:
-            headers['Content-Type'] = 'application/json'
-            r = Request(url, data=payload, headers=headers)
-            response = r.request(method)
+            r = Request(url)
+
+        response = r.request(method)
+
+
+
 
         if not response.get("status"):
             return jsonify(dict(code=110, data=response, msg=response.get("msg")))
+
+
+
+
 
         case = ProjectTestCase.query.filter_by(id=id).first()
         if len(case.body) > 3:

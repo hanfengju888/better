@@ -1,16 +1,7 @@
 {% extends "base.html" %}
 {% block mainbody %}
 <div class="tpl-content-wrapper">
-    <!--
-    <div class="tpl-content-page-title">
-        用户添加
-    </div>
-    <ol class="am-breadcrumb">
-        <li><a href="#" class="am-icon-home">用户中心</a></li>
-        <li><a href="#">用户管理</a></li>
-        <li class="am-active">添加</li>
-    </ol>
-    -->
+
     <div class="tpl-portlet-components">
         <div class="portlet-title">
             <div class="caption font-green bold">
@@ -31,14 +22,35 @@
                         <div class="am-form-group">
                             <div class="am-u-sm-3">
                                 <select name="method" data-am-selected>
-                                    <option value="GET">GET</option>
-                                    <option value="POST" selected>POST</option>
-                                    <option value="DELETE">DELETE</option>
-                                    <option value="HEAD">HEAD</option>
+                                    {% if method == 'GET' %}
+                                        <option value="GET" selected>GET</option>
+                                    {% else %}
+                                        <option value="GET">GET</option>
+                                    {% endif %}
+                                    {% if method == 'POST' %}
+                                        <option value="POST" selected>POST</option>
+                                    {% else %}
+                                        <option value="POST">POST</option>
+                                    {% endif %}
+                                    {% if method == 'DELETE' %}
+                                        <option value="DELETE" selected>DELETE</option>
+                                    {% else %}
+                                        <option value="DELETE">DELETE</option>
+                                    {% endif %}
+                                    {% if method == 'HEAD' %}
+                                        <option value="HEAD" selected>HEAD</option>
+                                    {% else %}
+                                        <option value="HEAD">HEAD</option>
+                                    {% endif %}
                                 </select>
                             </div>
                             <div class="am-u-sm-7">
-                                <input type="text" id="url" name="url" placeholder="请输入URL" value="https://192.168.4.103/iof/base/resource/addResourceBf" required>
+                                {% if url == '' %}
+                                    <input type="text" name="url" placeholder="请输入URL" value="{{url}}" required>
+                                {% else %}
+                                    <input type="text" name="url" placeholder="请输入URL" value="http://localhost:7788/mock/update?id=3" required>
+                                {% endif %}
+
                             </div>
                             <div class="am-u-sm-2">
                                 <button type="submit" class="am-btn am-btn-primary"><i class="am-icon-send">send</i>
@@ -97,23 +109,23 @@
                                     </div>
                                     <div class="am-tab-panel am-fade am-in am-active" id="tab3">
                                         <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="male" data-am-ucheck> none
+                                            <input type="radio" name="content_type" value="" data-am-ucheck> none
                                         </label>
                                         <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="female" data-am-ucheck> form-data
+                                            <input type="radio" name="content_type" value="form-data" data-am-ucheck> form-data
                                         </label>
                                         <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="pig" data-am-ucheck>
+                                            <input type="radio" name="content_type" value="x-www-form-urlencoded" data-am-ucheck>
                                             x-www-form-urlencoded
                                         </label>
                                         <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> raw
+                                            <input type="radio" name="content_type" value="application/json" checked> application/json
                                         </label>
                                         <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> binary
+                                            <input type="radio" name="content_type" value="binary" data-am-ucheck> binary
                                         </label>
                                         <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="pig" data-am-ucheck> GraphQL
+                                            <input type="radio" name="content_type" value="GraphQL"> GraphQL
                                         </label>
 
 
@@ -142,8 +154,8 @@
                         <div class="am-form-group">
                             <div class="am-tabs am-margin" data-am-tabs="">
                                 <ul class="am-tabs-nav am-nav am-nav-tabs">
-                                    <li><a href="#other">其他</a></li>
-                                    <li><a href="#assert">断言</a></li>
+<!--                                    <li><a href="#other">其他</a></li>-->
+<!--                                    <li><a href="#assert">断言</a></li>-->
                                     <li class="am-active"><a href="#response_result">响应结果</a></li>
                                 </ul>
                                 <div class="am-tabs-bd">
@@ -174,7 +186,8 @@
                                         </form>
                                     </div>
                                     <div class="am-tab-panel am-fade am-in am-active" id="response_result">
-                                        <textarea class="" rows="5">{{response}}</textarea>
+                                        <pre>{{response}}</pre>
+                                    </div>
                                     </div>
                                 </div>
                             </div>

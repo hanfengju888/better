@@ -16,8 +16,10 @@ log = Log("mock")
 
 
 #mock测试
+#原理：路由匹配，将请求的header,method,body与数据库中比对，其中body经过排序和压缩处理，一致则返回数据库中response内容
 @mock.route('/<string:path>',methods=['POST','GET'])
 def mockk(path,id=0):
+
     method = request.method
     path = '/' + path
     header = request.headers.get('Content-Type')
@@ -43,7 +45,7 @@ def mockk(path,id=0):
             db.session.commit()
             return mock.response_data
 
-    return {'code':0,'data':'未找到记录'}
+    return {'error_code':400,'data':'未找到记录'}
 
 #进入列表页
 @mock.route('/list',methods = ['POST','GET'])
@@ -82,7 +84,7 @@ def add():
         body = re.sub(r' |\r|\n|\t','',body)
 
         if response_data is None or response_data == "":
-            json_esponse_data = {'code':200,'data':sorted_json_body}
+            json_esponse_data = {'error_code':0,'data':sorted_json_body}
             response_data = json.dumps(json_esponse_data,indent=4,ensure_ascii=False)
 
     #插入数据
@@ -130,9 +132,9 @@ def edit():
         body = json.dumps(sorted_json_body)
         mock.body  = re.sub(r' |\r|\n|\t', '', body)
 
-        #如果不填写返回结果，则返回{'code':200,'data':body}
+        #如果不填写返回结果，则返回{'error_code':200,'data':body}
         if response_data is None or response_data == "":
-            json_esponse_data = {'code':200,'data':sorted_json_body}
+            json_esponse_data = {'error_code':0,'data':sorted_json_body}
             response_data = json.dumps(json_esponse_data,indent=4,ensure_ascii=False)
 
     mock.response_data = response_data
