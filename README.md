@@ -1,4 +1,3 @@
-[English](https://github.com/wuranxu/pity/blob/main/README_EN.md)
 
 ![png](https://img.shields.io/badge/Python-3.6+-green)
 ![png](https://img.shields.io/badge/amazeui+-blue)
@@ -6,10 +5,10 @@
 
 ### 🎉 技术栈
 
-- [x] 🎨 FastApi(前期Flask，所以教程初期也是Flask)
-- [x] 🎶 SQLAlchemy(你可以看到很多sqlalchemy的用法) 
+- [x] 🎨 FastApi
+- [x] 🎶 SQLAlchemy
 - [x] 🎉 Apscheduler(定时任务框架) 
-- [x] 🎃 mitmproxy(mock，用例录制生成) 
+- [x] 🎃 mitmproxy(mock) 
 - [x] 🔒 Redis
 - [x] 🏐 Gunicorn(内含uvicorn，部署服务)
 - [x] 🎲 Nginx(反向代理，https配置等)
@@ -245,32 +244,3 @@ $ python pity.py
 - [ ] 🌛 支持dubbo/grpc
 - [ ] 🐛 打通yapi
 - [ ] 🌽 等等等等
-
-### 赞助
-
-如果您觉得这个项目对你`有所帮助`，可以请我吃根辣条哦~或者帮忙点个star，让我创作更有动力！！！谢谢大家啦！
-
-![](http://oss.pity.fun/picture/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220513224046.jpg
-)
-
-![](http://oss.pity.fun/picture/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220513224054.jpg)
-
-### 🏅️ 金牌赞助商（排名不分先后）
-
-- All Fiction
-- Vic
-- 老虎哥
-- 晴天
-- 方总
-- 榜一大哥
-- 汤总
-- 我去热饭
-- Bluesqiang
-- 全国知名气人代练
-- 鸡哥
-
-## 🎨 微信交流群
-
-二维码会经常过期，可以加我个人微信: `wuranxu`，我拉你到群聊。
-
-![](https://static.pity.fun/picture/2022-1-2/1641097484952-ddff5bf23bdccaaf23fa227aa2e9957.jpg)
