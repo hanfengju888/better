@@ -377,7 +377,6 @@ def send_http_edit():
 
         assert_dic = {}
         assert_dic['expected'] = case.expected
-        print(response)
         assert_dic['actual'] = response['response']['error_code']
         assert_result = str(assert_dic.get("expected")) == str(assert_dic.get('actual'))
         assert_result = '成功' if assert_result else '失败'
