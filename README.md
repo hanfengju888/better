@@ -2,7 +2,7 @@
 ![png](https://img.shields.io/badge/Python-3.6+-green)
 ![png](https://img.shields.io/badge/amazeui+-blue)
 
-
+  
 ### 🎉 技术栈
 
 - [x] 🎨 FastApi
