@@ -8,12 +8,9 @@
 - [x] 🎨 FastApi
 - [x] 🎶 SQLAlchemy
 - [x] 🎉 Apscheduler(定时任务框架) 
-- [x] 🎃 mitmproxy(mock) 
+- [x] 🎃 mocker服务 
 - [x] 🔒 Redis
-- [x] 🏐 Gunicorn(内含uvicorn，部署服务)
-- [x] 🎲 Nginx(反向代理，https配置等)
-- [x] 💎 七牛云oss(用于文件上传时接口测试文件存储)
-- [x] 👟 asyncio(几乎全异步写法，值得参考)
+
 
 
 ### ⚽ 前端地址
