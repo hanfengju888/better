@@ -49,6 +49,15 @@
 #### mock服务
 ![图片](https://user-images.githubusercontent.com/116870381/212638035-9b5674ff-d663-436e-8e70-08b32c6fc313.png)
 
+#### 定时任务
+![图片](https://user-images.githubusercontent.com/116870381/212646100-3dd99bf4-59e9-4341-b9c2-744e3b17c50d.png)
+
+#### 任务中心
+![图片](https://user-images.githubusercontent.com/116870381/212646476-809db0f5-eb4b-4271-9eac-94f31463befd.png)
+
+##### 任务中心--查看任务
+![图片](https://user-images.githubusercontent.com/116870381/212647116-b0528b5a-e978-48cc-8505-357b08b73da0.png)
+
 
 ## ☕ 说明
 
