@@ -41,6 +41,16 @@
 #### 数据库管理客户端
 ![图片](https://user-images.githubusercontent.com/116870381/212631623-b68a6a70-6f4c-4c97-9513-ee642e953d9f.png)
 
+#### redis客户端
+![图片](https://user-images.githubusercontent.com/116870381/212648256-a1478915-f848-413c-970c-271162d4f71a.png)
+
+##### redis客户端--key
+![图片](https://user-images.githubusercontent.com/116870381/212648542-4353b90c-0226-4463-9f2e-a7fd3be1116a.png)
+
+##### redis客户端--命令行
+![图片](https://user-images.githubusercontent.com/116870381/212649362-6b43d8ca-74f9-43ef-aee3-ac6d977525b3.png)
+
+
 #### ssh客户端
 ![图片](https://user-images.githubusercontent.com/116870381/212636727-d7485733-824b-425e-acdf-11657988e682.png)
 ##### ssh客户端--连接客户端
@@ -72,13 +82,12 @@
 | 功能点      | 敬请期待             |
 |:---------|:-----------------|
 | 数据工厂     | 🍔🍔🍔🍔         |
-| Locust结合 | 🍔🍔🍔🍔🍔 |
-| Mock     | 🍔             |
+| Locust接口性能测试 | 🍔🍔🍔🍔🍔 |
+
 
 </details>
 
 
-[在线体验 🍍](https://pity.fun/)
 
 <details open="open">
 <summary>🌙 已有功能</summary>
