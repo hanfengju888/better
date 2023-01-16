@@ -5,19 +5,31 @@
   
 ### 🎉 技术栈
 
-- [x] 🎨 FastApi
 - [x] 🎶 SQLAlchemy
 - [x] 🎉 Apscheduler(定时任务框架) 
 - [x] 🎃 mocker服务 
 - [x] 🔒 Redis
+- [x] 🔒 SSH连接工具
 
 
+### ⚽ 平台功能
 
-### ⚽ 前端地址
 
-  [🎁 快点我](https://github.com/wuranxu/pityWeb)
+#### 用户管理
 
-![](https://static.pity.fun/picture/20220807220041.png)
+![图片](https://user-images.githubusercontent.com/116870381/212624781-fe31ef6c-801e-485a-a4fd-94db80e645e8.png)
+
+#### 角色管理
+![图片](https://user-images.githubusercontent.com/116870381/212625131-afabf8ae-003f-4778-b12c-b2b51a24b837.png)
+
+#### HTTP测试
+![图片](https://user-images.githubusercontent.com/116870381/212628282-65051c4a-5559-45ba-92d2-1b68c72ca152.png)
+#### 用例库
+![图片](https://user-images.githubusercontent.com/116870381/212629139-2ae349e4-fb85-4592-8ac1-c8d24c799a0e.png)
+
+#### 项目管理
+![图片](https://user-images.githubusercontent.com/116870381/212630490-fe0c29f7-602f-444b-b353-76a3e2257249.png)
+
 
 
 ## ☕ 说明
